@@ -23,7 +23,12 @@
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
 
-        gtag('config', 'UA-72571847-2');
+        @if('local' === getenv('APP_ENV'))
+            gtag('config', 'UA-72571847-2');
+        @else
+            gtag('config', 'UA-72571847-1');
+        @endif
+
     </script>
 </head>
 
@@ -38,7 +43,7 @@
 
     <!-- Portfolio Item Heading -->
     <h1 class="my-4">Project Home
-        <small>Welcome</small>
+        <small>Welcome to {{getenv('APP_ENV')}}</small>
     </h1>
 
     <!-- Portfolio Item Row -->
