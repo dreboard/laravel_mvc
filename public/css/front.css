@@ -13,3 +13,8 @@ body {
         padding-top: 56px;
     }
 }
+
+.frontFormDiv {
+    margin: 30px auto;
+    padding: 56px 0px;
+}

@@ -27,13 +27,13 @@ class HomeController extends Controller
         return view('admin.dash');
     }
     /**
-     * Show the application dashboard.
+     * Show the front page.
      *
      * @return \Illuminate\Http\Response
      */
     public function frontPage()
     {
-        return view('home');
+        return view('front.home');
     }
     /**
      * Show the application dashboard.
