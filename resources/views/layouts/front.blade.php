@@ -32,7 +32,6 @@
     </script>
 </head>
 
-
 <body>
 
 <!-- Navigation -->
@@ -43,22 +42,8 @@
 
     @yield('content')
 
-
 </div>
 <!-- /.container -->
 
 <!-- Footer -->
-<footer class="py-5 bg-dark">
-    <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Dev-PHP <?php echo date('Y'); ?> | {{\Tremby\LaravelGitVersion\GitVersionHelper::getNameAndVersion()}}</p>
-    </div>
-    <!-- /.container -->
-</footer>
-
-<!-- Bootstrap core JavaScript -->
-<script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
-<script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-
-</body>
-
-</html>
+@include('partials.footer')
