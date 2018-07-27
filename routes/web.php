@@ -11,9 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('front.home');
-});
+/**
+ * Separate routes for the front end and back end
+ * The folder routes/front contains the front end routes
+ * The folder routes admin contains the auth protected routes
+ */
+require_once __DIR__.'/admin/web.php';
+require_once __DIR__.'/front/web.php';
 
 //Auth::routes();
 // Authentication Routes...

@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'My Laravel MVC') }}</title>
 
     <link href={{asset("vendor/bootstrap/css/bootstrap.min.css")}} rel="stylesheet">
     <!-- Custom fonts for this template-->
@@ -43,13 +43,14 @@
 
     @yield('content')
 
+
 </div>
 <!-- /.container -->
 
 <!-- Footer -->
 <footer class="py-5 bg-dark">
     <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website <?php echo date('Y'); echo exec('git rev-parse HEAD'); ?></p>
+        <p class="m-0 text-center text-white">Copyright &copy; Dev-PHP <?php echo date('Y'); ?> | {{\Tremby\LaravelGitVersion\GitVersionHelper::getNameAndVersion()}}</p>
     </div>
     <!-- /.container -->
 </footer>
