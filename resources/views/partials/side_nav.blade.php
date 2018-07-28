@@ -8,34 +8,45 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="{{route('home')}}">
                     <i class="fa fa-fw fa-dashboard"></i>
                     <span class="nav-link-text">Dashboard</span>
                 </a>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                <a class="nav-link" href="charts.html">
-                    <i class="fa fa-fw fa-area-chart"></i>
-
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
+                    <i class="fa fa-fw fa-sitemap"></i>
+                    <span class="nav-link-text">New</span>
                 </a>
+                <ul class="sidenav-second-level collapse" id="collapseMulti">
+                    <li>
+                        <a href="{{route('home')}}">Ticket</a>
+                    </li>
+                    <li>
+                        <a href="{{route('home')}}">Project</a>
+                    </li>
+                    <li>
+                        <a href="{{route('showCycleForm')}}">Cycle</a>
+                    </li>
+                </ul>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="{{route('home')}}">
                     <i class="fa fa-fw fa-table"></i>
-                    <span class="nav-link-text">Tables</span>
+                    <span class="nav-link-text">Projects</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
                     <i class="fa fa-fw fa-wrench"></i>
-                    <span class="nav-link-text">Components</span>
+                    <span class="nav-link-text">Cycles</span>
                 </a>
                 <ul class="sidenav-second-level collapse" id="collapseComponents">
                     <li>
-                        <a href="navbar.html">Navbar</a>
+                        <a href="{{route('home')}}">Current</a>
                     </li>
                     <li>
-                        <a href="cards.html">Cards</a>
+                        <a href="{{route('allCycle')}}">All</a>
                     </li>
                 </ul>
             </li>
