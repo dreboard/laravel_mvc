@@ -476,3 +476,7 @@ footer.sticky-footer {
     width: calc(100% - 55px);
   }
 }
+
+.cycleTabPane{
+  padding: 40px 0px;
+}

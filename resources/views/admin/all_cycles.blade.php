@@ -33,7 +33,7 @@
                 @foreach($allCycles as $ticket)
                     <tr>
                         <td>#{{ $ticket->id }}</td>
-                        <td>{{ $ticket->title }}</td>
+                        <td><a href="{{url("/viewCycleById/$ticket->id")}}"> {{ $ticket->title }}</a></td>
                         <td>{{ $ticket->start_date }}</td>
                         <td>{{ $ticket->end_date }}</td>
                     </tr>

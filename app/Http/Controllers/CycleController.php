@@ -65,4 +65,11 @@ class CycleController extends Controller
         $allCycles = Cycle::all();
         return view("admin.all_cycles", ["allCycles" => $allCycles]);
     }
+
+    public function viewCycleById($id)
+    {
+
+        $cycleInfo = Cycle::where('id', '=', $id)->first();
+        return view("admin.view_cycle", ["cycleInfo" => $cycleInfo]);
+    }
 }
