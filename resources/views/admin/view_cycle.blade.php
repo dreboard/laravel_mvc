@@ -28,15 +28,15 @@
 
             data.addRows([
                 ['Research', 'Find sources',
-                    new Date(2015, 0, 1), new Date(2015, 0, 5), null, 100, null],
+                    new Date({{\App\Helpers\DateHelper::formatJsDate($cycleInfo->start_date)}}), new Date({{\App\Helpers\DateHelper::formatJsDate($cycleInfo->end_date)}}), null, 100, null],
                 ['Write', 'Write paper',
-                    null, new Date(2015, 0, 9), daysToMilliseconds(3), 25, 'Research,Outline'],
+                    new Date(2018, 7, 9), new Date(2018, 8, 9), daysToMilliseconds(3), 25, 'Research,Outline'],
                 ['Cite', 'Create bibliography',
-                    null, new Date(2015, 0, 7), daysToMilliseconds(1), 20, 'Research'],
+                    new Date(2018, 8, 9), new Date(2018, 9, 7), daysToMilliseconds(1), 20, 'Research'],
                 ['Complete', 'Hand in paper',
-                    null, new Date(2015, 0, 10), daysToMilliseconds(1), 0, 'Cite,Write'],
+                    new Date(2018, 7, 9), new Date(2018, 8, 29), daysToMilliseconds(1), 0, 'Cite,Write'],
                 ['Outline', 'Outline paper',
-                    null, new Date(2015, 0, 6), daysToMilliseconds(1), 100, 'Research']
+                    new Date(2018, 8, 9), new Date(2018, 9, 6), daysToMilliseconds(1), 100, 'Research']
             ]);
 
             var options = {
@@ -91,10 +91,11 @@
                     <div id="chart_div"></div>
                 </div>
                 <div class="tab-pane fade cycleTabPane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                    <form id="cycleForm" method="POST" action="{{route('saveNewCycle')}}">
+                    <form id="cycleForm" method="POST" action="{{route('updateCycle')}}">
                         @csrf
                         {{ method_field('post') }}
                         <input type="hidden" name="created_by" value="{{$cycleInfo->created_by}}">
+                        <input type="hidden" name="id" value="{{$cycleInfo->id}}">
                         <div class="form-group row">
                             <label for="title" class="col-sm-2 col-form-label">Title</label>
                             <div class="col-sm-10">
@@ -125,7 +126,7 @@
                             <label for="git_tag" class="col-sm-2 col-form-label">Git Tag</label>
                             <div class="col-sm-10">
                                 <input name="git_tag" type="text" class="form-control" placeholder="v0.0.0"
-                                       value="{{old('git_tag')}}" id="git_tag">
+                                       value="{{$cycleInfo->git_tag}}" id="git_tag">
                             </div>
                         </div>
 

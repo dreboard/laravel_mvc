@@ -35,9 +35,14 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
+            'name' => 'local',
             'channels' => ['single'],
         ],
-
+        'cycle' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/cycles/log.log'),
+            'level' => 'info',
+        ],
         'single' => [
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),

@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\User;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -18,8 +19,9 @@ class CycleTest extends TestCase
      */
     public function testAllCyclesRoute()
     {
-        //$response = $this->get('allCycle');
-        $response = $this->action('GET', 'CycleController@getAllCycles');
+        $user = new User(array('email' => 'dre.board@gmail.com'));
+        $this->be($user); //You are now authenticated
+        $response = $this->get('allCycle');
         $response->assertStatus(200);
     }
 
@@ -30,6 +32,8 @@ class CycleTest extends TestCase
      */
     public function testShowCycleForm()
     {
+        $user = new User(array('email' => 'dre.board@gmail.com'));
+        $this->be($user); //You are now authenticated
         $response = $this->get('showCycleForm');
         $response->assertStatus(200);
     }

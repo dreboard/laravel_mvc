@@ -19,6 +19,10 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\UserLoginEvent' => [
             'App\Listeners\LogLoginListener',
         ],
+        'App\Events\NewCycleEvent' => [
+            'App\Listeners\LogNewCycleListener',
+            'App\Listeners\MailNewCycleListener',
+        ],
     ];
 
     /**

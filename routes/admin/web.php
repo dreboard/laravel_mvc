@@ -6,4 +6,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('viewCycle', 'CycleController@viewCycle')->name('viewCycle');
     Route::get('allCycle', 'CycleController@getAllCycles')->name('allCycle');
     Route::get('viewCycleById/{id}', 'CycleController@viewCycleById')->name('viewCycleById');
+
+
+    Route::post('updateCycle', 'CycleController@updateCycle')->name('updateCycle');
+
 });

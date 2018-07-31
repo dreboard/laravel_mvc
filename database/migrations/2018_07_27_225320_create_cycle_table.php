@@ -13,7 +13,7 @@ class CreateCycleTable extends Migration
      */
     public function up()
     {
-        Schema::create('cycle', function (Blueprint $table) {
+        Schema::create('cycles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
             $table->date('start_date');
