@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Cycle;
+use App\Events\NewCycleEvent;
 use App\Helpers\DateHelper;
 use Illuminate\Http\Request;
 
@@ -23,6 +24,9 @@ class CycleService
         $cycle->git_tag = $request->git_tag ?? 'v0.0.0';
         $cycle->created_by = $request->created_by;
         $cycle->save();
+
+        event(new NewCycleEvent($cycle));
+
         $insertedId = $cycle->id;
         $cycleInfo = Cycle::where('id', '=', $insertedId)->first();
 

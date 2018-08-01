@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Cycle;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -15,13 +16,20 @@ class NewCycleEvent
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
+     * The cycle instance.
+     *
+     * @var Cycle
+     */
+    public $cycle;
+
+    /**
      * Create a new event instance.
      *
-     * @return void
+     * @param Cycle $cycle
      */
-    public function __construct()
+    public function __construct(Cycle $cycle)
     {
-        //
+        $this->cycle = $cycle;
     }
 
     /**

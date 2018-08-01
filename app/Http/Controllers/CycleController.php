@@ -51,11 +51,11 @@ class CycleController extends Controller
         }
         try{
             $cycleInfo = $this->cycleService->processNewCycle($request);
-            event(new NewCycleEvent());
+
             return view("admin.view_cycle", ["cycleInfo" => $cycleInfo]);
 
         }catch (\Throwable $e){
-            if(getenv('APP_ENV') !== 'local'){
+            if(getenv('APP_ENV') === 'production'){
                 \Log::error($e->getMessage());
                 return back()->withErrors(['field_name' => ['Your data could not be saved.']]);
             }

@@ -20,6 +20,8 @@
                 <li>Cycle Form Request & Manually Created Validators (CycleSaveRequest)</li>
                 <li>Helper classes to validate and format dates</li>
                 <li>Custom Monolog channel - Log::channel('cycle')</li>
+                <li>Route Grouping</li>
+                <li>Route unit testing</li>
             </ul>
         </div>
         @include('partials.links')

@@ -3,9 +3,11 @@
 namespace App\Listeners;
 
 use App\Events\NewCycleEvent;
+use App\Mail\CycleCreatedMailable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\Mail;
 
 class MailNewCycleListener
 {
@@ -27,6 +29,6 @@ class MailNewCycleListener
      */
     public function handle(NewCycleEvent $event)
     {
-        \Log::channel('cycle')->info('A new cycle was created on'.date('Y-m-d h:i:s').' by '.Auth::user( )->email);
+        Mail::to(Auth::user( )->email)->send(new CycleCreatedMailable($event->cycle));
     }
 }
