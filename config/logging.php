@@ -43,15 +43,20 @@ return [
             'path' => storage_path('logs/cycles/log.log'),
             'level' => 'info',
         ],
+        'project' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/projects/log.log'),
+            'level' => 'info',
+        ],
         'single' => [
             'driver' => 'single',
-            'path' => storage_path('logs/laravel.log'),
+            'path' => storage_path('logs/'.date('Ymd').'laravel.log'),
             'level' => 'debug',
         ],
 
         'daily' => [
             'driver' => 'daily',
-            'path' => storage_path('logs/laravel.log'),
+            'path' => storage_path('logs/'.date('Ymd').'laravel.log'),
             'level' => 'debug',
             'days' => 7,
         ],
