@@ -1,12 +1,11 @@
 <?php
-
-namespace Tests\Feature;
+namespace Tests;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use \Illuminate\Foundation\Testing\Concerns;
+use \Illuminate\Foundation\Testing\Concerns\InteractsWithPages;
 
 class RouteTest extends TestCase
 {

@@ -106,4 +106,11 @@ class CycleController extends Controller
         $cycleInfo = Cycle::where('id', '=', $id)->first();
         return view("admin.view_cycle", ["cycleInfo" => $cycleInfo]);
     }
+
+    public function show(Cycle $id)
+    {
+        //dd(compact('cycle'));
+        //return response()->json(compact($cycle));
+        return view("admin.cycle_show", ['cycle' => $id]);
+    }
 }

@@ -7,6 +7,10 @@ use App\Events\NewCycleEvent;
 use App\Helpers\DateHelper;
 use Illuminate\Http\Request;
 
+/**
+ * Class CycleService
+ * @package App\Services
+ */
 class CycleService
 {
 

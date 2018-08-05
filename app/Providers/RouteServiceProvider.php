@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Cycle;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -23,9 +24,12 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-
         parent::boot();
+        Route::model('cycle', Cycle::class);
+        Route::bind('cycle', function ($value) {
+            return App\Cycle::where('id', '=', $value)->first()
+                ->first();
+        });
     }
 
     /**

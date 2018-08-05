@@ -9,6 +9,10 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Mail;
 
+/**
+ * Class MailNewCycleListener
+ * @package App\Listeners
+ */
 class MailNewCycleListener
 {
     /**

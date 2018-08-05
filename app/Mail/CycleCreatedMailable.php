@@ -8,6 +8,10 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
+/**
+ * Class CycleCreatedMailable
+ * @package App\Mail
+ */
 class CycleCreatedMailable extends Mailable
 {
     use Queueable, SerializesModels;
