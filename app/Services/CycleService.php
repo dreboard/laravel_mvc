@@ -37,4 +37,13 @@ class CycleService
         return $cycleInfo;
     }
 
+    public function cycleList()
+    {
+        $cycleList = Cycle::all();
+        return $cycleList;
+        if($cycleList->isEmpty()){
+            return [];
+        }
+    }
+
 }

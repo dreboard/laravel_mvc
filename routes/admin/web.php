@@ -13,7 +13,16 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('updateCycle', 'CycleController@updateCycle')->name('updateCycle');
 
+
+
+    Route::get('project_home', 'ProjectController@index')->name('project_home');
+
+    Route::get('project_new/{id?}', 'ProjectController@create')->name('project_new');
+
+
 });
+
+
 
 
 Route::get('/mailable', function () {

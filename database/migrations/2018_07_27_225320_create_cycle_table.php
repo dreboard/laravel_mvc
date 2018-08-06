@@ -16,6 +16,7 @@ class CreateCycleTable extends Migration
         Schema::create('cycles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
+            $table->text('description');
             $table->date('start_date');
             $table->date('end_date');
             $table->string('git_tag');
