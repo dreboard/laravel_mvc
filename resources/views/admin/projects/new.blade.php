@@ -31,10 +31,8 @@
                 </div>
             @endif
 
-            <form id="cycleForm" method="POST" action="{{route('saveNewCycle')}}">
+            <form id="newProjectForm" method="POST" action="{{route('project_save')}}">
                 @csrf
-                {{ method_field('post') }}
-                <input type="hidden" name="created_by" value="{{$created_by = 1}}">
                 <div class="form-group row">
                     <label for="title" class="col-sm-2 col-form-label">Title</label>
                     <div class="col-sm-10">

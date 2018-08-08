@@ -18,6 +18,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('project_home', 'ProjectController@index')->name('project_home');
 
     Route::get('project_new/{id?}', 'ProjectController@create')->name('project_new');
+    Route::post('project_save', 'ProjectController@save')->name('project_save');
+    Route::get('project_view/{id?}', 'ProjectController@show')->name('project_view');
 
 
 });
