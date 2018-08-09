@@ -73,10 +73,19 @@ class ProjectController extends Controller
 
     public function show($id)
     {
-        $project = Project::where('id', '=', $id)->first();
+        //$project = Project::where('id', '=', $id)->first();
+        $project = Project::find($id)->cycle;
+        //$cycleTitle = $project->cycle()->title;
+        //dd($project);
         if($project === null){
             return redirect('project_new')->with('error', 'Please create a project');
         }
         return view('admin.projects.view')->with(['project' => $project]);
+    }
+
+    public function all()
+    {
+        $projects = Project::all();
+        return view('admin.projects.all', ['projects' => $projects]);
     }
 }

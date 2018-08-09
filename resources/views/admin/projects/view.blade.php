@@ -6,13 +6,14 @@
         <li class="breadcrumb-item">
             <a href="{{route('home')}}">Home</a>
         </li>
-        <li class="breadcrumb-item"><a href="{{route('allCycle')}}">All</a></li>
+        <li class="breadcrumb-item"><a href="{{route('project_all')}}">All</a></li>
         <li class="breadcrumb-item active">{{$project->title}}</li>
     </ol>
     <div class="row">
 
         <div class="col-9">
             <h2>#{{$project->id}} {{$project->title}}</h2>
+            <small>{{-- $project->cycle()->title --}}</small>
             @if($errors->any())
                 <div class="alert alert-danger">
                     <ul>

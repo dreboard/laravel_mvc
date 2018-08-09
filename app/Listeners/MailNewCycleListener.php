@@ -33,6 +33,12 @@ class MailNewCycleListener
      */
     public function handle(NewCycleEvent $event)
     {
-        Mail::to(Auth::user( )->email)->send(new CycleCreatedMailable($event->cycle));
+        if(getenv('APP_ENV') === 'production'){
+            Mail::to(Auth::user( )->email)->send(new CycleCreatedMailable($event->cycle));
+
+        } else {
+            \Log::info('Cycle created');
+        }
+
     }
 }

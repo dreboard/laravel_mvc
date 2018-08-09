@@ -13,13 +13,17 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('updateCycle', 'CycleController@updateCycle')->name('updateCycle');
 
-
+    Route::get('cycle_home', 'CycleController@index')->name('cycle_home');
+    Route::get('cycle_new/{id?}', 'CycleController@create')->name('cycle_new');
+    Route::post('cycle_save', 'CycleController@save')->name('cycle_save');
+    Route::get('cycle_view/{id?}', 'CycleController@show')->name('cycle_view');
+    Route::get('cycle_all', 'CycleController@all')->name('cycle_all');
 
     Route::get('project_home', 'ProjectController@index')->name('project_home');
-
     Route::get('project_new/{id?}', 'ProjectController@create')->name('project_new');
     Route::post('project_save', 'ProjectController@save')->name('project_save');
     Route::get('project_view/{id?}', 'ProjectController@show')->name('project_view');
+    Route::get('project_all', 'ProjectController@all')->name('project_all');
 
 
 });

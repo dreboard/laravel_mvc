@@ -10,6 +10,6 @@ class Cycle extends Model
 
     public function projects()
     {
-        $this->hasMany('App\Projects');
+        return $this->hasMany('App\Project');
     }
 }

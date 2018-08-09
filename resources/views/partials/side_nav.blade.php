@@ -26,7 +26,7 @@
                         <a href="{{route('project_new')}}">Project</a>
                     </li>
                     <li>
-                        <a href="{{route('showCycleForm')}}">Cycle</a>
+                        <a href="{{route('cycle_new')}}">Cycle</a>
                     </li>
                 </ul>
             </li>
@@ -40,7 +40,7 @@
                         <a href="{{route('project_home')}}">Current</a>
                     </li>
                     <li>
-                        <a href="{{route('project_home')}}">All</a>
+                        <a href="{{route('project_all')}}">All</a>
                     </li>
                     <li>
                     @if (Route::has('project_new'))
@@ -59,7 +59,7 @@
                         <a href="{{route('home')}}">Current</a>
                     </li>
                     <li>
-                        <a href="{{route('allCycle')}}">All</a>
+                        <a href="{{route('cycle_all')}}">All</a>
                     </li>
                 </ul>
             </li>

@@ -24,10 +24,10 @@ class CycleController extends Controller
         $this->cycleService = $cycleService;
     }
 
-    public function showCycleForm()
+    public function create()
     {
         $id = Auth::user( )->id;
-        return view('admin.new_cycle', ['created_by' => $id]);
+        return view('admin.cycles.new', ['created_by' => $id]);
     }
 
     /**
@@ -38,21 +38,21 @@ class CycleController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function saveNewCycle(Request $request)
+    public function save(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:191',
         ]);
 
         if ($validator->fails()){
-            return redirect('showCycleForm')
+            return redirect('cycle_new')
                 ->withErrors($validator)
                 ->withInput();
         }
         try{
             $cycleInfo = $this->cycleService->processNewCycle($request);
 
-            return view("admin.view_cycle", ["cycleInfo" => $cycleInfo]);
+            return view("admin.cycles.view", ["cycleInfo" => $cycleInfo]);
 
         }catch (\Throwable $e){
             if(getenv('APP_ENV') === 'production'){
@@ -88,29 +88,29 @@ class CycleController extends Controller
         );
 
         $cycleInfo = Cycle::where('id', '=', $request->input('id'))->first();
-        return view("admin.view_cycle", ["cycleInfo" => $cycleInfo]);
+        return view("admin.cycles.view", ["cycleInfo" => $cycleInfo]);
     }
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getAllCycles()
+    public function all()
     {
         $allCycles = Cycle::all();
-        return view("admin.all_cycles", ["allCycles" => $allCycles]);
+        return view("admin.cycles.all", ["allCycles" => $allCycles]);
     }
 
-    public function viewCycleById($id)
+    public function show($id)
     {
 
         $cycleInfo = Cycle::where('id', '=', $id)->first();
         return view("admin.view_cycle", ["cycleInfo" => $cycleInfo]);
     }
 
-    public function show(Cycle $id)
+    public function show2(Cycle $id)
     {
         //dd(compact('cycle'));
         //return response()->json(compact($cycle));
-        return view("admin.cycle_show", ['cycle' => $id]);
+        return view("admin.cycles.view", ['cycle' => $id]);
     }
 }
