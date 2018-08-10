@@ -6,48 +6,7 @@
 @push('scripts')
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="{{asset('js/datepickers.js')}}"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-        google.charts.load('current', {'packages': ['gantt']});
-        google.charts.setOnLoadCallback(drawChart);
 
-        function daysToMilliseconds(days) {
-            return days * 24 * 60 * 60 * 1000;
-        }
-
-        function drawChart() {
-
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Task ID');
-            data.addColumn('string', 'Task Name');
-            data.addColumn('date', 'Start Date');
-            data.addColumn('date', 'End Date');
-            data.addColumn('number', 'Duration');
-            data.addColumn('number', 'Percent Complete');
-            data.addColumn('string', 'Dependencies');
-
-            data.addRows([
-                ['Research', 'Find sources',
-                    new Date({{\App\Helpers\DateHelper::formatJsDate($cycleInfo->start_date)}}), new Date({{\App\Helpers\DateHelper::formatJsDate($cycleInfo->end_date)}}), null, 100, null],
-                ['Write', 'Write paper',
-                    new Date(2018, 7, 9), new Date(2018, 8, 9), daysToMilliseconds(3), 25, 'Research,Outline'],
-                ['Cite', 'Create bibliography',
-                    new Date(2018, 8, 9), new Date(2018, 9, 7), daysToMilliseconds(1), 20, 'Research'],
-                ['Complete', 'Hand in paper',
-                    new Date(2018, 7, 9), new Date(2018, 8, 29), daysToMilliseconds(1), 0, 'Cite,Write'],
-                ['Outline', 'Outline paper',
-                    new Date(2018, 8, 9), new Date(2018, 9, 6), daysToMilliseconds(1), 100, 'Research']
-            ]);
-
-            var options = {
-                height: 275
-            };
-
-            var chart = new google.visualization.Gantt(document.getElementById('chart_div'));
-
-            chart.draw(data, options);
-        }
-    </script>
 @endpush
 
 @section('content')
@@ -138,7 +97,27 @@
                         </div>
                     </form>
                 </div>
-                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Number</th>
+                            <th>Status</th>
+                            <th>Created</th>
+                            <th>Due</th>
+                        </tr>
+
+                        @foreach($cycleInfo->projects as $project)
+                            <tr>
+                                <td>#{{ $project->id }}</td>
+                                <td><a href="{{route('project_view', ['id' => $project->id])}}"> {{ $project->title }}</a></td>
+                                <td>{{ $project->create_date }}</td>
+                                <td>{{ $project->due_date }}</td>
+                            </tr>
+                        @endforeach
+
+                    </table>
+                </div>
             </div>
         </div>
 

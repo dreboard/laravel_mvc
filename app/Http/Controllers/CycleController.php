@@ -9,6 +9,7 @@ use App\Http\Requests\CycleSaveRequest;
 use App\Services\CycleService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 
 class CycleController extends Controller
@@ -102,9 +103,11 @@ class CycleController extends Controller
 
     public function show($id)
     {
-
-        $cycleInfo = Cycle::where('id', '=', $id)->first();
-        return view("admin.view_cycle", ["cycleInfo" => $cycleInfo]);
+        Cache::flush();
+        $cycleInfo = Cycle::find($id)->first();
+        //dd($cycleInfo);
+        //$cycleInfo = Cycle::where('id', '=', $id)->projects;
+        return view("admin.cycles.view", ["cycleInfo" => $cycleInfo]);
     }
 
     public function show2(Cycle $id)

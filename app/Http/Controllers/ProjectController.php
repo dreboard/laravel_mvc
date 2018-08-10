@@ -74,7 +74,7 @@ class ProjectController extends Controller
     public function show($id)
     {
         //$project = Project::where('id', '=', $id)->first();
-        $project = Project::find($id)->cycle;
+        $project = Project::find($id);
         //$cycleTitle = $project->cycle()->title;
         //dd($project);
         if($project === null){
