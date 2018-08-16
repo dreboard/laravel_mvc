@@ -25,6 +25,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('project_view/{id?}', 'ProjectController@show')->name('project_view');
     Route::get('project_all', 'ProjectController@all')->name('project_all');
 
+    // Ticket routes
+    require_once __DIR__.'/tickets.php';
 
 });
 

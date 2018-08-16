@@ -65,6 +65,31 @@
 
         </div>
 
+        <hr />
+        <div class="col-9">
+            <h3>Project Tickets <a href="{{route('ticket_new')}}" class="btn btn-primary">New</a> </h3>
+            <table class="table table-bordered">
+                <tr>
+                    <th>Number</th>
+                    <th>Status</th>
+                    <th>Created</th>
+                    <th>Due</th>
+                </tr>
+
+                @foreach($project->tickets as $ticket)
+                    <tr>
+                        <td>#{{ $ticket->id }}</td>
+                        <td><a href="{{route('ticket_view', ['id' => $ticket->id])}}"> {{ $ticket->title }}</a></td>
+                        <td>{{ $ticket->create_date }}</td>
+                        <td>{{ $ticket->due_date }}</td>
+                    </tr>
+                @endforeach
+
+            </table>
+
+
+        </div>
+
 
     </div>
 @endsection

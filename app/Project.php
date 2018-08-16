@@ -15,4 +15,9 @@ class Project extends Model
     {
         return $this->belongsTo('App\Cycle', 'cycle_id');
     }
+
+    public function tickets()
+    {
+        return $this->hasMany('App\Ticket');
+    }
 }
