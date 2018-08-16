@@ -27,4 +27,10 @@ class ProjectService
         $projectInfo = Project::findOrFail($id);
         return $projectInfo;
     }
+
+    public function getOpenProjects()
+    {
+        $projects = Project::all();
+        return $projects;
+    }
 }

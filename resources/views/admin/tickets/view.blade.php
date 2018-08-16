@@ -6,7 +6,13 @@
 @push('scripts')
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="{{asset('js/datepickers.js')}}"></script>
-
+    <script>
+        var ticket = {
+            url: "{{ route('ticket_edit_status') }}",
+            token: "{!! csrf_token() !!}"
+        };
+    </script>
+    <script src="{{ asset('js/admin/ticket_update.js') }}"></script>
 @endpush
 
 @section('content')
@@ -22,7 +28,9 @@
 
         <div class="col-9">
             <h2>#{{$ticket->id}} {{$ticket->title}}</h2>
-            <p>Project: <a href="{{route('project_view', ['id' => $ticket->project->id])}}"> {{$ticket->project->title}}</a></p>
+            <p>Project: <a
+                        href="{{route('project_view', ['id' => $ticket->project->id])}}"> {{$ticket->project->title}}</a>
+            </p>
             @if($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -32,6 +40,7 @@
                     </ul>
                 </div>
             @endif
+            <div class="edited"></div>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
@@ -48,8 +57,29 @@
             </ul>
             <div class="tab-content cycleTabContent" id="myTabContent">
 
-                <div class="tab-pane fade show active cycleTabPane" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="tab-pane fade show active cycleTabPane" id="home" role="tabpanel"
+                     aria-labelledby="home-tab">
                     <p>{{$ticket->description}}</p>
+                    <form id="ticketStatusForm" method="POST" action="{{route('updateCycle')}}">
+                        @csrf
+                        {{ method_field('post') }}
+                        <input type="hidden" id="created_by" name="created_by" value="{{$ticket->created_by}}">
+                        <input type="hidden" id="ticket_id" name="ticket_id" value="{{$ticket->id}}">
+                        <div class="form-group row">
+                            <label for="title" class="col-sm-2 col-form-label">Status</label>
+                            <div class="col-sm-4">
+                                <select id="status" name="status" class="form-control">
+                                    <option value="new" @if($ticket->status == 'new') selected @endif>New</option>
+                                    <option value="working" @if($ticket->status == 'working') selected @endif>Working</option>
+                                    <option value="complete" @if($ticket->status == 'complete') selected @endif>Complete</option>
+                                    <option value="closed" @if($ticket->status == 'closed') selected @endif>Closed</option>
+                                </select>
+
+                            </div>
+                        </div>
+                    </form>
+
+
                 </div>
 
                 <div class="tab-pane fade cycleTabPane" id="profile" role="tabpanel" aria-labelledby="profile-tab">

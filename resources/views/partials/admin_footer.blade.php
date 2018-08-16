@@ -18,8 +18,9 @@
 <!-- Custom scripts for all pages-->
 <script src={{asset("js/admin.js")}}></script>
 <script src={{asset("js/ga.js")}}></script>
-@stack('scripts')
-</div>
-</body>
 
-</html>
+<script>
+    var ENVIRONMENT = "{{ getenv('APP_ENV') }}";
+</script>
+
+@stack('scripts')

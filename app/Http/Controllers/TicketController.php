@@ -4,27 +4,42 @@ namespace App\Http\Controllers;
 
 use App\Cycle;
 use App\Project;
-use App\Services\CycleService;
 use App\Services\ProjectService;
+use App\Services\TicketService;
 use App\Ticket;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
+/**
+ * Class TicketController
+ * @package App\Http\Controllers
+ */
 class TicketController extends Controller
 {
+    /**
+     * @var ProjectService
+     */
     protected $projectService;
-    protected $cycleService;
+    /**
+     * @var TicketService
+     */
+    protected $ticketService;
 
     /**
      * CycleController constructor.
      * @param ProjectService $projectService
+     * @param TicketService $ticketService
      */
-    public function __construct(ProjectService $projectService, CycleService $cycleService)
+    public function __construct(ProjectService $projectService, TicketService $ticketService)
     {
         $this->projectService = $projectService;
-        $this->cycleService = $cycleService;
+        $this->ticketService = $ticketService;
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function index()
     {
         $projects = Project::all();
@@ -34,17 +49,25 @@ class TicketController extends Controller
         return view('admin.projects.index');
     }
 
+    /**
+     * @param int $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create($id = 0)
     {
         if($id !== 0){
-            $cycle = Cycle::find($id);
+            $project = Project::find($id);
         } else {
-            $cycle = null;
+            $project = null;
         }
-        $cycleListAll = $this->cycleService->cycleList();
-        return view('admin.projects.new', ['cycleListAll' => $cycleListAll, 'cycle' => $cycle]);
+        $projects = Project::all();
+        return view('admin.tickets.new', ['projects' => $projects, 'project' => $project]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
     public function save(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -53,15 +76,14 @@ class TicketController extends Controller
         ]);
 
         if($validator->fails()){
-            return redirect('project_new')
+            return redirect('ticket_new')
                 ->withErrors($validator)
                 ->withInput();
         }
 
         try{
-            $projectSave = $this->projectService->processNewProject($request);
-            $project = $this->projectService->getProjectDetails($projectSave->id);
-            return view('admin.projects.view')->with(['project' => $project]);
+            $ticket = $this->ticketService->processNewTicket($request);
+            return view('admin.tickets.view')->with(['ticket' => $ticket]);
 
         }catch (\Throwable $e){
             if(getenv('APP_ENV') === 'production'){
@@ -85,9 +107,25 @@ class TicketController extends Controller
         return view('admin.tickets.view')->with(['ticket' => $ticket]);
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function all()
     {
         $projects = Project::all();
         return view('admin.projects.all', ['projects' => $projects]);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function changeStatus(Request $request)
+    {
+        DB::table('tickets')
+            ->where('id', $request->ticket_id)
+            ->update(['status' => $request->status]);
+
+        return response()->json(['success'=>'Data is successfully added']);
     }
 }

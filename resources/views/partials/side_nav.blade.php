@@ -20,7 +20,7 @@
                 </a>
                 <ul class="sidenav-second-level collapse" id="cycleMulti">
                     <li>
-                        <a href="{{route('home')}}">Ticket</a>
+                        <a href="{{route('ticket_new')}}">Ticket</a>
                     </li>
                     <li>
                         <a href="{{route('project_new')}}">Project</a>

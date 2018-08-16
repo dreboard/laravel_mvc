@@ -15,16 +15,25 @@
     <!-- Custom styles for this template-->
     <link href={{asset("css/sb-admin.css")}} rel="stylesheet">
 
-    @stack('css')
+@stack('css')
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72571847-2"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
         gtag('js', new Date());
 
+        @if('local' === getenv('APP_ENV'))
         gtag('config', 'UA-72571847-2');
+        @else
+        gtag('config', 'UA-72571847-1');
+        @endif
+
     </script>
 </head>
 
@@ -37,6 +46,8 @@
     <div class="container-fluid">
         @yield('content')
     </div>
-    <!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
-@include('partials.admin_footer')
+
+    @include('partials.admin_footer')
+</div>
+</body>
+</html>
