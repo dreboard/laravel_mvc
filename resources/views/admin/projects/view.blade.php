@@ -12,9 +12,11 @@
     <div class="row">
 
         <div class="col-9">
-            <h2>#{{$project->id}} {{$project->title}}</h2>
+
+            <h2>Project #{{$project->id}} </h2>
+            <small>{{$project->title}}</small>
             <p>
-                <a href="{{route("cycle_view", ['id' => $project->cycle->id])}}"> {{ $project->cycle->title }}</a>
+                <a href="{{route("site_view", ['id' => $project->site->id])}}"> {{ $project->site->title }}</a>
             </p>
             @if($errors->any())
                 <div class="alert alert-danger">

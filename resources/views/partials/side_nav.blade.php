@@ -15,7 +15,7 @@
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#cycleMulti" data-parent="#exampleAccordion">
-                    <i class="fa fa-fw fa-sitemap"></i>
+                    <i class="fa fa-fw fa-plus"></i>
                     <span class="nav-link-text">New</span>
                 </a>
                 <ul class="sidenav-second-level collapse" id="cycleMulti">
@@ -26,7 +26,7 @@
                         <a href="{{route('project_new')}}">Project</a>
                     </li>
                     <li>
-                        <a href="{{route('cycle_new')}}">Cycle</a>
+                        <a href="{{route('site_new')}}">Site</a>
                     </li>
                 </ul>
             </li>
@@ -49,26 +49,30 @@
                     </li>
                 </ul>
             </li>
+
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
+                <a class="nav-link" href="{{route('site_all')}}">
+                    <i class="fa fa-fw fa-link"></i>
+                    <span class="nav-link-text">Sites</span>
+                </a>
+            </li>
+
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
                     <i class="fa fa-fw fa-wrench"></i>
-                    <span class="nav-link-text">Cycles</span>
+                    <span class="nav-link-text">Tools</span>
                 </a>
                 <ul class="sidenav-second-level collapse" id="collapseComponents">
                     <li>
                         <a href="{{route('home')}}">Current</a>
                     </li>
                     <li>
-                        <a href="{{route('cycle_all')}}">All</a>
+                        <a href="{{route('site_all')}}">All</a>
                     </li>
                 </ul>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
-                <a class="nav-link" href="#">
-                    <i class="fa fa-fw fa-link"></i>
-                    <span class="nav-link-text">Link</span>
-                </a>
-            </li>
+
+
         </ul>
         <ul class="navbar-nav sidenav-toggler">
             <li class="nav-item">

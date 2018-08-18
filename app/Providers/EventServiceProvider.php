@@ -23,6 +23,10 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\LogNewCycleListener',
             'App\Listeners\MailNewCycleListener',
         ],
+        'App\Events\NewSiteEvent' => [
+            'App\Listeners\LogNewSiteListner',
+            'App\Listeners\MailNewSiteListener'
+        ]
     ];
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Ticket;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,7 +25,8 @@ class HomeController extends Controller
     public function index()
     {
         //return view('home');
-        return view('admin.dash');
+        $tasks = Ticket::all();
+        return view('admin.dash', ['tasks' => $tasks]);
     }
     /**
      * Show the front page.

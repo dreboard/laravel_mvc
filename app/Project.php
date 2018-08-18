@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
-    protected $fillable = ['title', 'description', 'create_date', 'due_date', 'cycle_id', 'created_by'];
+    protected $fillable = ['title', 'description', 'create_date', 'due_date', 'cycle_id', 'site_id', 'created_by'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -14,6 +14,11 @@ class Project extends Model
     public function cycle()
     {
         return $this->belongsTo('App\Cycle', 'cycle_id');
+    }
+
+    public function site()
+    {
+        return $this->belongsTo('App\Site', 'site_id');
     }
 
     public function tickets()

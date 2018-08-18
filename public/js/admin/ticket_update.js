@@ -1,6 +1,11 @@
+/*!
+ * Ticket Update
+ * Docs & License: https://github.com/dreboard
+ * (c) 2018 Dev-PHP
+ */
 jQuery(document).ready(function(){
 
-    jQuery('#status').change(function(e){
+    jQuery('#status').on( "change", function( event ) {
         $( "div.edited" ).hide();
         e.preventDefault();
         $.ajax({
@@ -12,11 +17,11 @@ jQuery(document).ready(function(){
             data: {
                 ticket_id: $("#ticket_id").val(),
                 created_by: $("#created_by").val(),
-                status: $("#status").val()},
-            _token: ticket.token,
+                status: $("#status").val(),
+                _token: ticket.token,
+            },
 
             type: "POST",
-
             dataType : "json",
         })
 

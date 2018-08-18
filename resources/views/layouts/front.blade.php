@@ -32,7 +32,7 @@
     </script>
 </head>
 
-<body>
+<body class="front">
 
 <!-- Navigation -->
 @include('partials.main_nav')

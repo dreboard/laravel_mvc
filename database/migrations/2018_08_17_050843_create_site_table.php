@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProjectsTable extends Migration
+class CreateSiteTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateProjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('projects', function (Blueprint $table) {
+        Schema::create('site', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title', 100);
+            $table->string('title');
             $table->text('description');
-            $table->date('create_date');
-            $table->date('due_date');
-            $table->integer('cycle_id');
-            $table->integer('site_id');
+            $table->string('url', 100);
+            $table->string('ga', 20);
+            $table->integer('submitted');
+            $table->string('git_url');
             $table->integer('created_by');
             $table->timestamps();
         });
@@ -33,6 +33,6 @@ class CreateProjectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('projects');
+        Schema::dropIfExists('site');
     }
 }
