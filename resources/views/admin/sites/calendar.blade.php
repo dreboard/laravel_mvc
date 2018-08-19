@@ -1,7 +1,8 @@
 @extends('layouts.admin_dash')
 @push('css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.print.css" media="print">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.print.css"
+          media="print">
 @endpush
 
 @push('scripts')
@@ -9,17 +10,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
     <script src="{{ asset('js/admin/calendar.js') }}"></script>
     <script>
-        $(document).ready(function() {
-            // page is now ready, initialize the calendar...
+        $(document).ready(function () {
+
             $('#calendar2').fullCalendar({
-                // put your options and callbacks here
-                events : [
+                // options and callbacks
+                events: [
                         @foreach($siteInfo->projects as $s)
                     {
-                        title : '{{ $s->title }}',
-                        start : '{{ date('Y-m-d', strtotime($s->create_date)) }}',
+                        title: '{{ $s->title }}',
+                        start: '{{ date('Y-m-d', strtotime($s->create_date)) }}',
+
+                        @if($s->create_date != $s->due_date)
                         end: '{{ date('Y-m-d', strtotime($s->due_date)) }}',
-                        url : "{{route('project_view', ['id' => $s->id])}}"
+                        @endif
+
+                        url: "{{route('project_view', ['id' => $s->id])}}"
                     },
                     @endforeach
                 ]
@@ -43,7 +48,7 @@
             <h2>#{{$siteInfo->id}} {{$siteInfo->title}}</h2>
             <div id='calendar2'></div>
         </div>
-
+        <!-- shared site links-->
         @include('admin.sites.side')
 
     </div>

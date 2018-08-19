@@ -52,8 +52,7 @@ class SiteController extends Controller
                 ->withInput();
         }
         try{
-            $siteInfo = $this->siteService->processNewCycle($request);
-
+            $siteInfo = $this->siteService->processNewSite($request);
             return view("admin.sites.view", ["siteInfo" => $siteInfo]);
 
         }catch (\Throwable $e){
@@ -106,25 +105,19 @@ class SiteController extends Controller
      */
     public function projects(int $id)
     {
-        $siteInfo = Site::find($id)->first();
+        $siteInfo = Site::find($id);
         return view("admin.sites.projects", ["siteInfo" => $siteInfo]);
     }
 
     public function calendar(int $id)
     {
-        $siteInfo = Site::find($id)->first();
+        $siteInfo = Site::find($id);
         return view("admin.sites.calendar", ["siteInfo" => $siteInfo]);
     }
     public function show($id)
     {
-        $siteInfo = Site::find($id)->first();
+        $siteInfo = Site::find($id);
         return view("admin.sites.view", ["siteInfo" => $siteInfo]);
     }
 
-    public function show2(Cycle $id)
-    {
-        //dd(compact('cycle'));
-        //return response()->json(compact($cycle));
-        return view("admin.sites.view", ['cycle' => $id]);
-    }
 }

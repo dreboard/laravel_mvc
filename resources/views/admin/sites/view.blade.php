@@ -1,13 +1,4 @@
 @extends('layouts.admin_dash')
-@push('css')
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-@endpush
-
-@push('scripts')
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script src="{{asset('js/datepickers.js')}}"></script>
-
-@endpush
 
 @section('content')
     <!-- Breadcrumbs-->
@@ -15,7 +6,7 @@
         <li class="breadcrumb-item">
             <a href="{{route('home')}}">Home</a>
         </li>
-        <li class="breadcrumb-item"><a href="{{route('allCycle')}}">All</a></li>
+        <li class="breadcrumb-item"><a href="{{route('site_all')}}">All</a></li>
         <li class="breadcrumb-item active">{{$siteInfo->title}}</li>
     </ol>
     <div class="row">
