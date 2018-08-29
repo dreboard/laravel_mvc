@@ -31,6 +31,8 @@ Route::middleware(['auth'])->group(function () {
     // Sites routes
     require_once __DIR__.'/sites.php';
 
+    // Task routes
+    require_once __DIR__.'/tasks.php';
 });
 
 

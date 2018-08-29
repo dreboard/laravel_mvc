@@ -18,7 +18,7 @@
     </ol>
     <div class="row">
         <div class="col-9">
-            <h2>All Sites</h2>
+            <h2>All Sites ({{ $count }})</h2>
             <p><a href="{{route("site_new")}}">Create New</a></p>
 
 

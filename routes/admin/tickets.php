@@ -7,3 +7,4 @@ Route::post('ticket_save', 'TicketController@save')->name('ticket_save');
 Route::get('ticket_view/{id?}', 'TicketController@show')->name('ticket_view');
 Route::get('ticket_all', 'TicketController@all')->name('ticket_all');
 Route::post('ticket_edit_status', 'TicketController@changeStatus')->name('ticket_edit_status');
+Route::post('ticket_edit_complete', 'TicketController@changeCompleted')->name('ticket_edit_complete');

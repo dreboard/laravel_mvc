@@ -22,4 +22,9 @@ class Ticket extends Model
     {
         return $this->belongsTo('App\Project');
     }
+
+    public function tasks()
+    {
+        return $this->hasMany('App\Task');
+    }
 }

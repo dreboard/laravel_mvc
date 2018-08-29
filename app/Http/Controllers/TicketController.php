@@ -113,6 +113,7 @@ class TicketController extends Controller
     public function all()
     {
         $projects = Project::all();
+        $count = Project::count();
         return view('admin.projects.all', ['projects' => $projects]);
     }
 
@@ -127,5 +128,14 @@ class TicketController extends Controller
             ->update(['status' => $request->status]);
 
         return response()->json(['success'=>'Data is successfully added']);
+    }
+
+    public function changeCompleted(Request $request)
+    {
+        DB::table('tickets')
+            ->where('id', $request->ticket_id)
+            ->update(['completed' => $request->completed]);
+
+        return response()->json(['completed' => $request->completed]);
     }
 }

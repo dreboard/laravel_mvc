@@ -98,7 +98,8 @@ class SiteController extends Controller
     public function all()
     {
         $allSites = Site::all();
-        return view("admin.sites.all", ["allSites" => $allSites]);
+        $count = Site::count();
+        return view("admin.sites.all", ["allSites" => $allSites, 'count' => $count]);
     }
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
