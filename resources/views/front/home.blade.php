@@ -10,13 +10,14 @@
 <div class="row">
     <div class="col-md-9">
         <h3 class="my-3">Laravel MVC Portfolio</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
+        <p>Loremenim.</p>
         <h3 class="my-3">Project Details</h3>
+        <p>Loremenim.</p>
         <ul>
-            <li>Lorem Ipsum</li>
-            <li>Dolor Sit Amet</li>
+            <li>Loresum</li>
+            <li>Doloet</li>
             <li>Consectetur</li>
-            <li>Adipiscing Elit</li>
+            <li>Adipisclit</li>
         </ul>
     </div>
     @include('partials.links')

@@ -24,10 +24,10 @@ class TaskController extends Controller
      * TaskController constructor.
      * @param Model $task
      */
-    public function __construct(Model $task)
+    /*public function __construct(Task $task)
     {
         $this->model = new Repository($task);
-    }
+    }*/
 
     /**
      * Display a listing of the resource.
@@ -36,7 +36,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        return $this->model->all();
+        //return $this->model->all();
     }
 
     /**
@@ -90,19 +90,16 @@ class TaskController extends Controller
      */
     public function update(Request $request)
     {
-        //$task = $this->model->findOrFail($request->task_id);
-
         try{
-            DB::table('tasks')
-                ->where('id', $request->task_id)
-                ->update(['complete' => $request->task_complete]);
-            return response()->json(['updated'=>'Data is successfully added']);
+            $task = Task::find($request->task_id);
+            $task->complete = $request->task_complete;
+            $task->save();
+            return response()->json(['complete' => $request->task_complete]);
         }catch (\Throwable $e){
-            return response()->json(['error'=>$e->getMessage()]);
+            return response()->json(['complete'=>$e->getMessage()]);
         }
 
     }
-
     /**
      * Remove the specified resource from storage.
      *

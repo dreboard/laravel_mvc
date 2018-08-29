@@ -5,6 +5,11 @@
  */
 $(document).ready(function(){
 
+    $("input:checked").each(function () {
+        var id = $(this).data("task");
+        $( "#taskText" +  id).addClass('taskDone');
+    });
+
     $('#status').on( "change", function(e) {
         $( "div.edited" ).hide();
         e.preventDefault();
@@ -41,11 +46,12 @@ $(document).ready(function(){
             });
     });
 
-    $('.status_check').on( "click", function(e) {
+    $('.task_check').on( "click", function(e) {
         $( "div.edited" ).hide();
-
+        var task_id = $(this).data("task");
         var task_complete = 0;
-        if ($(this).prop('checked')) {
+
+        if ($(this).prop('checked')=== true) {
             task_complete = 1;
         }
 
@@ -53,7 +59,7 @@ $(document).ready(function(){
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: ticket.url,
+            url: ticket.task_url,
 
             data: {
                 task_id: $(this).data("task"),
@@ -66,8 +72,12 @@ $(document).ready(function(){
         })
 
             .done(function( json ) {
-                console.log(json);
-                $( ".edited" ).text( json.toString() ).show();
+                $( ".edited" ).text( "Tasks Updated" ).show();
+                if (json.complete == 0) {
+                    $( "#taskText" +  task_id).removeClass('taskDone');
+                } else {
+                    $( "#taskText" +  task_id).addClass('taskDone');
+                }
             })
 
             .fail(function( xhr, status, errorThrown ) {
@@ -78,22 +88,8 @@ $(document).ready(function(){
             })
 
             .always(function( xhr, status, json ) {
-                console.log( status );
+                //console.log( status );
             });
-    });
-
-
-    $('.status_check2').on( "click", function(e) {
-        $( "div.edited" ).hide();
-
-        var task_complete = 0;
-        if ($(this).prop('checked')) {
-            task_complete = 1;
-        }
-
-        console.log(this.id);
-        console.log(task_complete);
-
     });
 
     $('#completed').on('change', function(){

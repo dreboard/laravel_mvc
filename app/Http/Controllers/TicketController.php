@@ -117,6 +117,14 @@ class TicketController extends Controller
         return view('admin.projects.all', ['projects' => $projects]);
     }
 
+    public function edit(int $id)
+    {
+        $ticket = Ticket::find($id);
+        return view('admin.tickets.edit', ['ticket' => $ticket]);
+
+
+    }
+
     /**
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
@@ -127,7 +135,7 @@ class TicketController extends Controller
             ->where('id', $request->ticket_id)
             ->update(['status' => $request->status]);
 
-        return response()->json(['success'=>'Data is successfully added']);
+        return response()->json(['status' => $request->status]);
     }
 
     public function changeCompleted(Request $request)

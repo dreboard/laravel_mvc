@@ -1,6 +1,14 @@
 @extends('layouts.admin_dash')
 @push('css')
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <style>
+        td.completeCheck {
+            width: 20px;
+        }
+        .taskDone {
+            text-decoration: line-through;
+        }
+    </style>
 @endpush
 
 @push('scripts')
@@ -15,7 +23,7 @@
             token: "{!! csrf_token() !!}"
         };
     </script>
-    <script src="{{ asset('js/admin/ticket_update.js?v=echo') }}"></script>
+    <script src="{{ asset('js/admin/ticket_update.js?v=7f6') }}"></script>
 @endpush
 
 @section('content')
@@ -44,220 +52,189 @@
                 </div>
             @endif
             <p class="edited"></p>
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
-                       aria-controls="home" aria-selected="true">Overview</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                       aria-controls="profile" aria-selected="false">Edit</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
-                       aria-controls="contact" aria-selected="false">Files</a>
-                </li>
-            </ul>
+
+            @include('admin.tickets.edit_links')
 
 
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <p>{{$ticket->description}}</p>
+            <div class="row">
+                <div class="col-sm-12">
+                    <p>{{$ticket->description}}</p>
+                </div>
+                <div class="col-sm-6">
+                    <form id="ticketStatusForm" method="POST" action="{{route('updateCycle')}}">
+                        @csrf
+                        {{ method_field('post') }}
+                        <input type="hidden" id="created_by" name="created_by" value="{{$ticket->created_by}}">
+                        <input type="hidden" id="ticket_id" name="ticket_id" value="{{$ticket->id}}">
+                        <div class="form-group row">
+                            <label for="title" class="col-sm-2 col-form-label">Status</label>
+                            <div class="col-sm-4">
+                                <select id="status" name="status" class="form-control">
+                                    <option value="new" @if($ticket->status == 'new') selected @endif>New</option>
+                                    <option value="working" @if($ticket->status == 'working') selected @endif>Working
+                                    </option>
+                                    <option value="complete" @if($ticket->status == 'complete') selected @endif>
+                                        Complete
+                                    </option>
+                                    <option value="closed" @if($ticket->status == 'closed') selected @endif>Closed
+                                    </option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="col-sm-6">
-                            <form id="ticketStatusForm" method="POST" action="{{route('updateCycle')}}">
-                                @csrf
-                                {{ method_field('post') }}
-                                <input type="hidden" id="created_by" name="created_by" value="{{$ticket->created_by}}">
-                                <input type="hidden" id="ticket_id" name="ticket_id" value="{{$ticket->id}}">
-                                <div class="form-group row">
-                                    <label for="title" class="col-sm-2 col-form-label">Status</label>
-                                    <div class="col-sm-4">
-                                        <select id="status" name="status" class="form-control">
-                                            <option value="new" @if($ticket->status == 'new') selected @endif>New</option>
-                                            <option value="working" @if($ticket->status == 'working') selected @endif>Working
-                                            </option>
-                                            <option value="complete" @if($ticket->status == 'complete') selected @endif>
-                                                Complete
-                                            </option>
-                                            <option value="closed" @if($ticket->status == 'closed') selected @endif>Closed
-                                            </option>
-                                        </select>
-
-                                    </div>
+                    </form>
+                </div>
+                <div class="col-sm-6">
+                    <form id="ticketStatusForm" method="POST" action="{{route('updateCycle')}}">
+                        @csrf
+                        {{ method_field('post') }}
+                        <input type="hidden" id="created_by" name="created_by" value="{{$ticket->created_by}}">
+                        <input type="hidden" id="ticket_id" name="ticket_id" value="{{$ticket->id}}">
+                        <div class="form-group row">
+                            <label for="title" class="col-sm-2 col-form-label">Completed</label>
+                            <div class="col-sm-4">
+                                <select id="completed" name="completed" class="form-control">
+                                    {{ $i = 0 }}
+                                    @php
+                                        for ($i = 0; $i <= 100; $i=$i+10) {
+                                            echo '<option value="'.$i.'" '; if($i == $ticket->completed){echo 'selected';} echo '>'.$i.'%</option>';
+                                        }
+                                    @endphp
+                                </select>
+                            </div>
+                            <div class="col-sm-4 progress" style="height: 40px;">
+                                <div class="progress-bar" role="progressbar" style="width: {{$ticket->completed}}%;"
+                                     aria-valuenow="{{$ticket->completed}}" aria-valuemin="0" aria-valuemax="100">
+                                    <span id="progressbarText">{{$ticket->completed}}%</span>
                                 </div>
-                            </form>
+                            </div>
                         </div>
-                        <div class="col-sm-6">
-                            <form id="ticketStatusForm" method="POST" action="{{route('updateCycle')}}">
-                                @csrf
-                                {{ method_field('post') }}
-                                <input type="hidden" id="created_by" name="created_by" value="{{$ticket->created_by}}">
-                                <input type="hidden" id="ticket_id" name="ticket_id" value="{{$ticket->id}}">
-                                <div class="form-group row">
-                                    <label for="title" class="col-sm-2 col-form-label">Completed</label>
-                                    <div class="col-sm-4">
-                                        <select id="completed" name="completed" class="form-control">
-                                            {{ $i = 0 }}
-                                            @php
-                                                for ($i = 0; $i <= 100; $i=$i+10) {
-                                                    echo '<option value="'.$i.'" '; if($i == $ticket->completed){echo 'selected';} echo '>'.$i.'%</option>';
-                                                }
-                                            @endphp
-                                        </select>
+                    </form>
+                </div>
 
-                                    </div>
-                                    <div class="col-sm-4 progress" style="height: 40px;">
-                                        <div class="progress-bar" role="progressbar" style="width: {{$ticket->completed}}%;" aria-valuenow="{{$ticket->completed}}" aria-valuemin="0" aria-valuemax="100">
-                                            <span id="progressbarText">{{$ticket->completed}}%</span>
+
+            </div>
+
+
+            <hr/>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <h4>Tasks</h4>
+                    <table class="table table-bordered">
+                        @foreach($ticket->tasks as $t)
+                            <tr>
+                                <td class="completeCheck">
+                                    <form class="form-inline" method="POST" action="{{route('task_update')}}">
+                                        @csrf
+                                        <div class="form-check mb-2 mr-sm-2">
+                                            <input
+                                                    class="task_check"
+                                                    type="checkbox"
+                                                    id="taskStatus{{$t->id}}"
+                                                    name="taskStatus"
+                                                    data-task="{{$t->id}}"
+                                                    value="{{ $t->complete }}"
+                                                    @if($t->complete == 1) checked @endif
+                                            >
                                         </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+                                    </form>
+                                </td>
+                                <td><span id="taskText{{$t->id}}" class="taskTitle"> {{ $t->title }}</span></td>
+                            </tr>
+                        @endforeach
+
+                    </table>
+                </div>
+
+                <div class="col-sm-8">
+                    <h4>Notes</h4>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Number</th>
+                            <th>Name</th>
+                            <th>URL</th>
+                            <th>created_by</th>
+                        </tr>
+
+                        @foreach($ticket->tasks as $t)
+                            <tr>
+                                <td>#{{ $t->id }}</td>
+                                <td>{{ $t->title }}</td>
+                                <td>{{ $t->assigned }}</td>
+                                <td>
+                                    <form class="form-inline" method="POST" action="{{route('task_update')}}">
+                                        @csrf
+                                        <div class="form-check mb-2 mr-sm-2">
+                                            <input
+                                                    class="status_check"
+                                                    type="checkbox"
+                                                    id="taskStatus{{$t->id}}"
+                                                    name="taskStatus"
+                                                    data-task="{{$t->id}}"
+                                                    value="{{ $t->complete }}"
+                                                    @if($t->complete == 1) checked @endif
+                                            >
+                                            <label class="form-check-label" for="taskStatus">
+                                                Complete
+                                            </label>
+                                        </div>
+                                    </form>
 
 
-                    </div>
+                                </td>
+
+                            </tr>
+                        @endforeach
+
+                    </table>
+                </div>
+            </div>
+
+            <h4>History</h4>
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Number</th>
+                            <th>Name</th>
+                            <th>URL</th>
+                            <th>created_by</th>
+                        </tr>
+
+                        @foreach($ticket->tasks as $t)
+                            <tr>
+                                <td>#{{ $t->id }}</td>
+                                <td>{{ $t->title }}</td>
+                                <td>{{ $t->assigned }}</td>
+                                <td>
+                                    <form class="form-inline" method="POST" action="{{route('task_update')}}">
+                                        @csrf
+                                        <div class="form-check mb-2 mr-sm-2">
+                                            <input
+                                                    class="status_check"
+                                                    type="checkbox"
+                                                    id="taskStatus{{$t->id}}"
+                                                    name="taskStatus"
+                                                    data-task="{{$t->id}}"
+                                                    value="{{ $t->complete }}"
+                                                    @if($t->complete == 1) checked @endif
+                                            >
+                                            <label class="form-check-label" for="taskStatus">
+                                                Complete
+                                            </label>
+                                        </div>
+                                    </form>
 
 
+                                </td>
 
+                            </tr>
+                        @endforeach
 
-                    <hr/>
+                    </table>
 
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <h4>Tasks</h4>
-                            <table class="table table-bordered">
-                                <tr>
-                                    <th>Number</th>
-                                    <th>Name</th>
-                                    <th>URL</th>
-                                    <th>created_by</th>
-                                </tr>
-
-                                @foreach($ticket->tasks as $t)
-                                    <tr>
-                                        <td>#{{ $t->id }}</td>
-                                        <td>{{ $t->title }}</td>
-                                        <td>{{ $t->assigned }}</td>
-                                        <td>
-                                            <form class="form-inline" method="POST" action="{{route('task_update')}}">
-                                                @csrf
-                                                <div class="form-check mb-2 mr-sm-2">
-                                                    <input
-                                                            class="status_check"
-                                                            type="checkbox"
-                                                            id="taskStatus{{$t->id}}"
-                                                            name="taskStatus"
-                                                            data-task="{{$t->id}}"
-                                                            value="{{ $t->complete }}"
-                                                            @if($t->complete == 1) checked @endif
-                                                    >
-                                                    <label class="form-check-label" for="taskStatus">
-                                                        Complete
-                                                    </label>
-                                                </div>
-                                            </form>
-
-
-                                        </td>
-
-                                    </tr>
-                                @endforeach
-
-                            </table>
-                        </div>
-                        <div class="col-sm-8">
-                            <h4>Notes</h4>
-                            <table class="table table-bordered">
-                                <tr>
-                                    <th>Number</th>
-                                    <th>Name</th>
-                                    <th>URL</th>
-                                    <th>created_by</th>
-                                </tr>
-
-                                @foreach($ticket->tasks as $t)
-                                    <tr>
-                                        <td>#{{ $t->id }}</td>
-                                        <td>{{ $t->title }}</td>
-                                        <td>{{ $t->assigned }}</td>
-                                        <td>
-                                            <form class="form-inline" method="POST" action="{{route('task_update')}}">
-                                                @csrf
-                                                <div class="form-check mb-2 mr-sm-2">
-                                                    <input
-                                                            class="status_check"
-                                                            type="checkbox"
-                                                            id="taskStatus{{$t->id}}"
-                                                            name="taskStatus"
-                                                            data-task="{{$t->id}}"
-                                                            value="{{ $t->complete }}"
-                                                            @if($t->complete == 1) checked @endif
-                                                    >
-                                                    <label class="form-check-label" for="taskStatus">
-                                                        Complete
-                                                    </label>
-                                                </div>
-                                            </form>
-
-
-                                        </td>
-
-                                    </tr>
-                                @endforeach
-
-                            </table>
-                        </div>
-                    </div>
-
-                    <h4>History</h4>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <table class="table table-bordered">
-                                <tr>
-                                    <th>Number</th>
-                                    <th>Name</th>
-                                    <th>URL</th>
-                                    <th>created_by</th>
-                                </tr>
-
-                                @foreach($ticket->tasks as $t)
-                                    <tr>
-                                        <td>#{{ $t->id }}</td>
-                                        <td>{{ $t->title }}</td>
-                                        <td>{{ $t->assigned }}</td>
-                                        <td>
-                                            <form class="form-inline" method="POST" action="{{route('task_update')}}">
-                                                @csrf
-                                                <div class="form-check mb-2 mr-sm-2">
-                                                    <input
-                                                            class="status_check"
-                                                            type="checkbox"
-                                                            id="taskStatus{{$t->id}}"
-                                                            name="taskStatus"
-                                                            data-task="{{$t->id}}"
-                                                            value="{{ $t->complete }}"
-                                                            @if($t->complete == 1) checked @endif
-                                                    >
-                                                    <label class="form-check-label" for="taskStatus">
-                                                        Complete
-                                                    </label>
-                                                </div>
-                                            </form>
-
-
-                                        </td>
-
-                                    </tr>
-                                @endforeach
-
-                            </table>
-
-                        </div>
-                    </div>
-
-
+                </div>
+            </div>
 
 
         </div>
