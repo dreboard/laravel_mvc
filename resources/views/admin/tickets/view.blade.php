@@ -20,10 +20,11 @@
             task_url: "{{ route('task_update') }}",
             url_completed: "{{ route('ticket_edit_complete') }}",
             url_status: "{{ route('ticket_edit_status') }}",
+            task_new_url: "{{ route('task_new') }}",
             token: "{!! csrf_token() !!}"
         };
     </script>
-    <script src="{{ asset('js/admin/ticket_update.js?v=7f6') }}"></script>
+    <script src="{{ asset('js/admin/ticket_update.js?v=ii6') }}"></script>
 @endpush
 
 @section('content')
@@ -120,7 +121,18 @@
             <div class="row">
                 <div class="col-sm-4">
                     <h4>Tasks</h4>
-                    <table class="table table-bordered">
+                    <form class="form-inline" method="POST" action="{{route('task_update')}}" id="new_task_form">
+                        <input type="hidden" id="task_user_id" name="user_id" value="{{$ticket->user_id}}">
+                        <input type="hidden" id="task_ticket_id" name="ticket_id" value="{{$ticket->id}}">
+                        @csrf
+                        <div class="form-group mx-sm-3 mb-2">
+                            <label for="newTaskText" class="sr-only">New</label>
+                            <input type="text" class="form-control" id="task_title" placeholder="new task" value="">
+                        </div>
+                        <button type="submit" class="btn btn-primary mb-2">Save</button>
+                    </form>
+
+                    <table id="taskListTable" class="table table-bordered">
                         @foreach($ticket->tasks as $t)
                             <tr>
                                 <td class="completeCheck">

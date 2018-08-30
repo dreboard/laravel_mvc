@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Cycle;
+use App\Http\Traits\TicketTrait;
 use App\Project;
 use App\Services\ProjectService;
 use App\Services\TicketService;
 use App\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 
 /**
@@ -17,6 +19,8 @@ use Illuminate\Support\Facades\Validator;
  */
 class TicketController extends Controller
 {
+
+    use TicketTrait;
     /**
      * @var ProjectService
      */
@@ -25,6 +29,8 @@ class TicketController extends Controller
      * @var TicketService
      */
     protected $ticketService;
+
+
 
     /**
      * CycleController constructor.
@@ -131,19 +137,27 @@ class TicketController extends Controller
      */
     public function changeStatus(Request $request)
     {
-        DB::table('tickets')
-            ->where('id', $request->ticket_id)
-            ->update(['status' => $request->status]);
-
-        return response()->json(['status' => $request->status]);
+        $ticket = Ticket::find($request->ticket_id);
+        if(Gate::allows('edit-ticket', $ticket)){
+            $ticket->status = $request->status;
+            $ticket->save();
+            $this->allowed = 'Ticket Status Updated';
+        }
+        return response()->json([
+            'status' => $request->status,
+            'allowed' => $this->allowed,
+            'completed' => $ticket->completed
+        ], 200);
     }
 
     public function changeCompleted(Request $request)
     {
-        DB::table('tickets')
-            ->where('id', $request->ticket_id)
-            ->update(['completed' => $request->completed]);
-
-        return response()->json(['completed' => $request->completed]);
+        $ticket = Ticket::find($request->ticket_id);
+        if(Gate::allows('edit-ticket', $ticket)){
+            $ticket->completed = $request->completed;
+            $ticket->save();
+            $this->allowed = 'Ticket Status Updated';
+        }
+        return response()->json(['completed' => $request->completed, 'allowed' => $this->allowed], 200);
     }
 }

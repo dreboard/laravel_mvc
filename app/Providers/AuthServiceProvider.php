@@ -14,6 +14,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         'App\Model' => 'App\Policies\ModelPolicy',
+        'App\Ticket' => 'App\Policies\TicketPolicy',
     ];
 
     /**
@@ -28,5 +29,12 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('edit-task', function ($user, $task) {
             return $user->id == $task->user_id;
         });
+
+        Gate::define('edit-ticket', 'App\Policies\TicketPolicy@edit');
+
+        Gate::define('new-task', function ($user, $ticket) {
+            return $user->id == $ticket->user_id;
+        });
+
     }
 }
