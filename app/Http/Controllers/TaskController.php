@@ -115,11 +115,17 @@ class TaskController extends Controller
      */
     public function update(Request $request)
     {
+        $task = Task::find($request->task_id);
         try{
-            $task = Task::find($request->task_id);
-
             if(Gate::allows('edit-task', $task)){
-                $task->complete = $request->task_complete;
+                if($request->has('task_complete')){
+                    $task->complete = $request->task_complete;
+                }
+                if($request->has('task_title')){
+                    throw_unless($request->filled('task_title'), \InvalidArgumentException::class);
+                    $task->title = $request->task_title;
+                }
+
                 $task->save();
                 return response()->json(['complete' => $request->task_complete, 'allowed' => 'Task Updated'], 200);
             }
@@ -127,7 +133,8 @@ class TaskController extends Controller
 
 
         }catch (\Throwable $e){
-            return response()->json(['complete'=>$e->getMessage()]);
+            error_log($e->getMessage());
+            return response()->json(['complete'=> $task->complete, 'allowed' => 'Task Not Updated']);
         }
 
     }

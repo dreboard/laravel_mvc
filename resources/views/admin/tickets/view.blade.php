@@ -8,6 +8,12 @@
         .taskDone {
             text-decoration: line-through;
         }
+        .table-wrapper {
+            height: 370px; overflow: auto;
+        }
+        .taskDescPara {
+            margin: 20px 10px;
+                 }
     </style>
 @endpush
 
@@ -17,14 +23,14 @@
     <script>
         var ticket = {
             url: "{{ route('ticket_edit_status') }}",
-            task_url: "{{ route('task_update') }}",
             url_completed: "{{ route('ticket_edit_complete') }}",
             url_status: "{{ route('ticket_edit_status') }}",
             task_new_url: "{{ route('task_new') }}",
+            task_url: "{{ route('task_update') }}",
             token: "{!! csrf_token() !!}"
         };
     </script>
-    <script src="{{ asset('js/admin/ticket_update.js?v=ii6') }}"></script>
+    <script src="{{ asset('js/admin/ticket_update.js?v=1001') }}"></script>
 @endpush
 
 @section('content')
@@ -40,8 +46,7 @@
 
         <div class="col-12">
             <h2>#{{$ticket->id}} {{$ticket->title}}</h2>
-            <p>Project: <a
-                        href="{{route('project_view', ['id' => $ticket->project->id])}}"> {{$ticket->project->title}}</a>
+            <p>Project: <a href="{{route('project_view', ['id' => $ticket->project->id])}}"> {{$ticket->project->title}}</a>
             </p>
             @if($errors->any())
                 <div class="alert alert-danger">
@@ -52,14 +57,14 @@
                     </ul>
                 </div>
             @endif
-            <p class="edited"></p>
+
 
             @include('admin.tickets.edit_links')
 
 
             <div class="row">
                 <div class="col-sm-12">
-                    <p>{{$ticket->description}}</p>
+                    <p class="taskDescPara">{{$ticket->description}}</p>
                 </div>
                 <div class="col-sm-6">
                     <form id="ticketStatusForm" method="POST" action="{{route('updateCycle')}}">
@@ -119,7 +124,7 @@
             <hr/>
 
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-4 table-wrapper">
                     <h4>Tasks</h4>
                     <form class="form-inline" method="POST" action="{{route('task_update')}}" id="new_task_form">
                         <input type="hidden" id="task_user_id" name="user_id" value="{{$ticket->user_id}}">
@@ -151,7 +156,10 @@
                                         </div>
                                     </form>
                                 </td>
-                                <td><span id="taskText{{$t->id}}" class="taskTitle"> {{ $t->title }}</span></td>
+                                <td id="taskEditArea">
+                                    <span data-task="{{$t->id}}" id="taskText{{$t->id}}" class="taskTitle editable">{{ $t->title }}</span>
+                                    <input class="editTaskInputs" id="editTaskInput{{$t->id}}" style="display:none" type="text" data-task_id="{{$t->id}}" value="{{ $t->title }}" />
+                                </td>
                             </tr>
                         @endforeach
 
@@ -160,11 +168,21 @@
 
                 <div class="col-sm-8">
                     <h4>Notes</h4>
+                    <form>
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Title">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary mb-2">Save</button>
+                        </div>
+                    </form>
                     <table class="table table-bordered">
                         <tr>
-                            <th>Number</th>
-                            <th>Name</th>
-                            <th>URL</th>
+                            <th>Title</th>
+                            <th>Created</th>
                             <th>created_by</th>
                         </tr>
 
@@ -172,7 +190,6 @@
                             <tr>
                                 <td>#{{ $t->id }}</td>
                                 <td>{{ $t->title }}</td>
-                                <td>{{ $t->assigned }}</td>
                                 <td>
                                     <form class="form-inline" method="POST" action="{{route('task_update')}}">
                                         @csrf

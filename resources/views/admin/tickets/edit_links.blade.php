@@ -9,4 +9,5 @@
     <li class="nav-item">
         <a class="nav-link @if(Route::currentRouteName() == 'ticket_files') active @endif" href="{{ route('ticket_view', ['id' => $ticket->id]) }}">Files</a>
     </li>
+    <li><span class="edited"></span></li>
 </ul>

@@ -11,7 +11,9 @@
 </a>
 
 <!-- Bootstrap core JavaScript-->
-
+<script async>
+    var ENVIRONMENT = "{{ App::environment() }}";
+</script>
 <script src={{asset("vendor/jquery/jquery.min.js")}}></script>
 <script src="{{ asset('js/libs/moment.js') }}"></script>
 <script src={{asset("vendor/bootstrap/js/bootstrap.bundle.min.js")}}></script>
@@ -20,9 +22,5 @@
 <!-- Custom scripts for all pages-->
 <script src={{asset("js/admin.js")}}></script>
 <script src={{asset("js/ga.js")}}></script>
-
-<script>
-    var ENVIRONMENT = "{{ getenv('APP_ENV') }}";
-</script>
 
 @stack('scripts')

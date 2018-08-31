@@ -3,17 +3,17 @@
  * Docs & License: https://github.com/dreboard
  * (c) 2018 Dev-PHP
  */
-$(document).ready(function(){
+$(document).ready(function () {
 
-    $( ".edited" ).removeClass('text-danger');
+    $(".edited").removeClass('text-danger');
 
     $("input:checked").each(function () {
         var id = $(this).data("task");
-        $( "#taskText" +  id).addClass('taskDone');
+        $("#taskText" + id).addClass('taskDone');
     });
 
-    $('#status').on( "change", function(e) {
-        $( "div.edited" ).hide();
+    $('#status').on("change", function (e) {
+        $("div.edited").hide();
         e.preventDefault();
         $.ajax({
             headers: {
@@ -29,52 +29,55 @@ $(document).ready(function(){
             },
 
             type: "POST",
-            dataType : "json",
+            dataType: "json",
         })
 
-            .done(function( json ) {
-                $( ".edited" ).text( json.allowed ).show();
-                if($("#status").val() == 'complete'){
+            .done(function (json) {
+                $(".edited").text(json.allowed).show();
+                if ($("#status").val() == 'complete') {
                     $('.progress-bar').css('width', '100%').attr('aria-valuenow', 100);
                     $('#progressbarText').text(100);
-                    $('#completed').prop( "disabled", true );
+                    $('#completed').prop("disabled", true);
                     $("#completed").val("100").change();
 
                 } else {
-                    $('.progress-bar').css('width', json.completed+'%').attr('aria-valuenow', json.completed);
+                    $('.progress-bar').css('width', json.completed + '%').attr('aria-valuenow', json.completed);
                     $('#progressbarText').text(json.completed);
-                    $('#completed').prop( "disabled", false );
+                    $('#completed').prop("disabled", false);
                 }
             })
 
-            .fail(function( xhr, status, errorThrown ) {
-                $( "div.edited" ).text( "Sorry, there was a problem!" ).show();
-                console.log( "Error: " + errorThrown );
-                console.log( "Status: " + status );
-                console.dir( xhr );
+            .fail(function (xhr, status, errorThrown) {
+                $("div.edited").text("Sorry, there was a problem!").show();
+                if (ENVIRONMENT === "local") {
+                    console.log("Error: " + errorThrown);
+                    console.log("Status: " + status);
+                    console.dir(xhr);
+                }
             })
 
-            .always(function( xhr, status ) {
+            .always(function (xhr, status) {
                 //alert( data );
             });
     });
 
-    $('.task_check').on( "click", function(e) {
+    $('.task_check').on("click", function (e) {
         var el = $(this);
         taskChecked(el);
     });
 
-    $('#completed').on('change', function(){
-        ajaxCompleteStatus(percent=100);
+    $('#completed').on('change', function () {
+        ajaxCompleteStatus(percent = 100);
     });
 
 
-
-
-
-    $('#new_task_form').on( "submit", function(e) {
+    $('#new_task_form').on("submit", function (e) {
         e.preventDefault();
-        $( "div.edited" ).hide();
+
+        if ($("#task_title").val() === '') {
+            return false;
+        }
+        $(".edited").hide();
 
         var taskAjax = $.ajax({
             headers: {
@@ -90,16 +93,16 @@ $(document).ready(function(){
             },
 
             type: "POST",
-            dataType : "json",
+            dataType: "json",
         })
 
-            .done(function( json ) {
-                $( ".edited" ).text( json.allowed ).show();
+            .done(function (json) {
+                $(".edited").text(json.allowed).show();
 
-                if(json.allowed == 'Not assigned this task'){
-                    $( ".edited" ).addClass('text-danger');
+                if (json.allowed == 'Not assigned this task') {
+                    $(".edited").addClass('text-danger');
                 } else {
-                    $( ".edited" ).removeClass('text-danger');
+                    $(".edited").removeClass('text-danger');
                 }
 
                 var form = $(
@@ -107,39 +110,109 @@ $(document).ready(function(){
                     '<td class="completeCheck">' +
                     '<form class="form-inline">' +
                     '<div class="form-check mb-2 mr-sm-2">' +
-                    '<input class="task_check" type="checkbox" id="taskStatus'+json.task_id+' " name="taskStatus" data-task="'+json.task_id+'" value="0">' +
+                    '<input class="task_check" type="checkbox" id="taskStatus' + json.task_id + ' " name="taskStatus" data-task="' + json.task_id + '" value="0">' +
                     '</div></form></td>' +
-                    '<td><span id="taskText'+json.task_id+'" class="taskTitle"> '+json.title+'</span></td>'+
+                    '<td><span id="taskText' + json.task_id + '" class="taskTitle"> ' + json.title + '</span></td>' +
                     '</tr>'
                 );
 
                 $('#taskListTable').append(form);
-                $(form).on('click','.task_check',function(e){
+                $(form).on('click', '.task_check', function (e) {
                     var el = $(this);
                     taskChecked(el);
                 });
             })
 
-            .fail(function( xhr, status, errorThrown ) {
-                $( "div.edited" ).text( "Sorry, there was a problem!" ).show();
-                console.log( "Error: " + errorThrown );
-                console.log( "Status: " + status );
-                console.dir( xhr );
+            .fail(function (xhr, status, errorThrown) {
+                $("div.edited").text("Sorry, there was a problem!").show();
+                if (ENVIRONMENT === "local") {
+                    console.log("Error: " + errorThrown);
+                    console.log("Status: " + status);
+                    console.dir(xhr);
+                }
             })
 
-            .always(function( xhr, status, json ) {
-                //console.log( status );
+            .always(function (xhr, status, json) {
+                if (ENVIRONMENT === "local") {
+                    console.log(status);
+                }
             });
     });
 
 
+    $("span.editable").on('dblclick', function () {
+        var task_id = $(this).data("task");
+        if ($('#taskStatus' + task_id).prop('checked') === true) {
+            return false;
+        }
+        $('#editTaskInput' + task_id).html($(this).html()).show().focus();
+        $(this).hide();
+    });
 
-    function taskChecked(element){
-        $( "div.edited" ).hide();
+    $(".editTaskInputs").blur(function () {
+        var task_id = $(this).data("task_id");
+        var new_task_title = $(this).val();
+        console.log(task_id);
+        console.log(new_task_title);
+        $('span#taskText' + task_id).html($(this).val()).show();
+        $(this).hide();
+        saveTaskData(task_id, new_task_title);
+    });
+
+    function saveTaskData(id, val) {
+        $("div.edited").hide();
+
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: ticket.task_url,
+
+            data: {
+                task_id: id,
+                task_title: val,
+                _token: ticket.token,
+            },
+
+            type: "POST",
+            dataType: "json",
+        })
+
+            .done(function (json) {
+
+                $(".edited").text(json.allowed).show();
+
+                if (json.allowed == 'Not assigned this task') {
+                    $(".edited").addClass('text-danger');
+
+                } else {
+                    $(".edited").removeClass('text-danger');
+                }
+
+            })
+
+            .fail(function (xhr, status, errorThrown) {
+                $("div.edited").text("Sorry, there was a problem!").show();
+                if (ENVIRONMENT === "local") {
+                    console.log("Error: " + errorThrown);
+                    console.log("Status: " + status);
+                    console.dir(xhr);
+                }
+
+            })
+
+            .always(function (xhr, status, json) {
+                if (ENVIRONMENT === "local") {
+                    console.log(status);
+                }
+            });
+    }
+    function taskChecked(element) {
+        $("div.edited").hide();
         var task_id = $(element).data("task");
         var task_complete = 0;
 
-        if ($(element).prop('checked')=== true) {
+        if ($(element).prop('checked') === true) {
             task_complete = 1;
         }
 
@@ -156,39 +229,44 @@ $(document).ready(function(){
             },
 
             type: "POST",
-            dataType : "json",
+            dataType: "json",
         })
 
-            .done(function( json ) {
+            .done(function (json) {
 
-                $( ".edited" ).text( json.allowed ).show();
+                $(".edited").text(json.allowed).show();
 
-                if(json.allowed == 'Not assigned this task'){
-                    $( ".edited" ).addClass('text-danger');
+                if (json.allowed == 'Not assigned this task') {
+                    $(".edited").addClass('text-danger');
                 } else {
-                    $( ".edited" ).removeClass('text-danger');
+                    $(".edited").removeClass('text-danger');
                 }
 
                 if (json.complete == 0) {
-                    $( "#taskText" +  task_id).removeClass('taskDone');
+                    $("#taskText" + task_id).removeClass('taskDone');
                 } else {
-                    $( "#taskText" +  task_id).addClass('taskDone');
+                    $("#taskText" + task_id).addClass('taskDone');
                 }
             })
 
-            .fail(function( xhr, status, errorThrown ) {
-                $( "div.edited" ).text( "Sorry, there was a problem!" ).show();
-                console.log( "Error: " + errorThrown );
-                console.log( "Status: " + status );
-                console.dir( xhr );
+            .fail(function (xhr, status, errorThrown) {
+                $("div.edited").text("Sorry, there was a problem!").show();
+                if (ENVIRONMENT === "local") {
+                    console.log("Error: " + errorThrown);
+                    console.log("Status: " + status);
+                    console.dir(xhr);
+                }
+
             })
 
-            .always(function( xhr, status, json ) {
-                //console.log( status );
+            .always(function (xhr, status, json) {
+                if (ENVIRONMENT === "local") {
+                    console.log(status);
+                }
             });
     }
 
-    function ajaxCompleteStatus(percent){
+    function ajaxCompleteStatus(percent) {
 
         $.ajax({
             headers: {
@@ -203,24 +281,29 @@ $(document).ready(function(){
             },
 
             type: "POST",
-            dataType : "json",
+            dataType: "json",
         })
 
-            .done(function( json ) {
-                $('.progress-bar').css('width', json.completed+'%').attr('aria-valuenow', json.completed);
+            .done(function (json) {
+                $('.progress-bar').css('width', json.completed + '%').attr('aria-valuenow', json.completed);
                 $('#progressbarText').text(json.completed);
-                $( ".edited" ).text( json.allowed ).show();
+                $(".edited").text(json.allowed).show();
             })
 
-            .fail(function( xhr, status, errorThrown ) {
-                $( "div.edited" ).text( "Sorry, there was a problem!" ).show();
-                console.log( "Error: " + errorThrown );
-                console.log( "Status: " + status );
-                console.dir( xhr );
+            .fail(function (xhr, status, errorThrown) {
+                $("div.edited").text("Sorry, there was a problem!").show();
+                if (ENVIRONMENT === "local") {
+                    console.log("Error: " + errorThrown);
+                    console.log("Status: " + status);
+                    console.dir(xhr);
+                }
             })
 
-            .always(function( xhr, status, json ) {
-                //console.log( status );
+            .always(function (xhr, status, json) {
+                if (ENVIRONMENT === "local") {
+                    console.log(status);
+                }
             });
     }
+
 });
