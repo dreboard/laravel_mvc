@@ -73,7 +73,7 @@
                     @if($cycle)
                         <input name="cycle_id" type="text" class="form-control" placeholder="title" value="{{$cycle->title}}" id="cycle_id" disabled>
                     @else
-                        <select class="form-control" name="cycle_id">
+                        <select class="form-control" name="site_id">
                             @foreach($cycleListAll as $cycleList)
                                 <option value="{{$cycleList->id}}">{{$cycleList->title}}</option>
                             @endforeach

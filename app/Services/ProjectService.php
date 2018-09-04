@@ -25,6 +25,7 @@ class ProjectService
         $project->due_date = DateHelper::formatStartDate($request->input('due_date'));
         $project->create_date = DateHelper::formatStartDate($request->input('due_date'));
         $project->cycle_id = $request->cycle_id ?? 0;
+        $project->site_id = $request->site_id ?? 0;
         $project->created_by = Auth::user( )->id;
         $project->save();
 

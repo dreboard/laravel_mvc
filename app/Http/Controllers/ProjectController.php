@@ -60,7 +60,7 @@ class ProjectController extends Controller
         } else {
             $cycle = null;
         }
-        $cycleListAll = $this->cycleService->cycleList();
+        $cycleListAll = $this->projectService->getOpenProjects();
         return view('admin.projects.new', ['cycleListAll' => $cycleListAll, 'cycle' => $cycle]);
     }
 
@@ -102,7 +102,7 @@ class ProjectController extends Controller
      */
     public function show(int $id)
     {
-        $project = Project::where('id', '=', $id)->first();
+        $project = Project::find($id);
 
         if($project === null){
             return redirect('project_new')->with('error', 'Please create a project');
