@@ -6,8 +6,17 @@ use App\Helpers\DateHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Class ProjectService
+ * @package App\Services
+ */
 class ProjectService
 {
+    /**
+     * Create a new project
+     * @param Request $request
+     * @return mixed
+     */
     public function processNewProject(Request $request)
     {
         $project = new Project();
@@ -22,12 +31,21 @@ class ProjectService
         return $project->id;
     }
 
+    /**
+     * Get project by ID
+     * @param int $id
+     * @return mixed
+     */
     public function getProjectDetails(int $id)
     {
         $projectInfo = Project::findOrFail($id);
         return $projectInfo;
     }
 
+    /**
+     * Get all projects
+     * @return Project[]|\Illuminate\Database\Eloquent\Collection
+     */
     public function getOpenProjects()
     {
         $projects = Project::all();

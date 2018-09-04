@@ -10,9 +10,19 @@ use App\Site;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
+/**
+ * Class ProjectController
+ * @package App\Http\Controllers
+ */
 class ProjectController extends Controller
 {
+    /**
+     * @var ProjectService
+     */
     protected $projectService;
+    /**
+     * @var CycleService
+     */
     protected $cycleService;
 
     /**
@@ -25,6 +35,10 @@ class ProjectController extends Controller
         $this->cycleService = $cycleService;
     }
 
+    /**
+     * All projects route
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function index()
     {
         $projects = Project::all();
@@ -34,6 +48,11 @@ class ProjectController extends Controller
         return view('admin.projects.index');
     }
 
+    /**
+     * Create new project
+     * @param int $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create($id = 0)
     {
         if($id !== 0){
@@ -45,6 +64,11 @@ class ProjectController extends Controller
         return view('admin.projects.new', ['cycleListAll' => $cycleListAll, 'cycle' => $cycle]);
     }
 
+    /**
+     * Save data from new project form
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function save(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -71,7 +95,12 @@ class ProjectController extends Controller
         }
     }
 
-    public function show($id)
+    /**
+     * Get a project by id
+     * @param int $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
+    public function show(int $id)
     {
         $project = Project::where('id', '=', $id)->first();
 
@@ -82,6 +111,10 @@ class ProjectController extends Controller
         return view('admin.projects.view')->with(['project' => $project]);
     }
 
+    /**
+     * Get all projects
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function all()
     {
         $projects = Project::all();

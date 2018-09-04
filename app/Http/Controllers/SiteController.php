@@ -26,6 +26,9 @@ class SiteController extends Controller
         $this->siteService = $siteService;
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create()
     {
         $id = Auth::user( )->id;
@@ -65,6 +68,7 @@ class SiteController extends Controller
     }
 
     /**
+     * Update cycle
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function updateCycle(Request $request)
@@ -93,6 +97,7 @@ class SiteController extends Controller
     }
 
     /**
+     * Get all cycles
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function all()

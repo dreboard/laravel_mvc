@@ -143,6 +143,7 @@ class TaskController extends Controller
      *
      * @param  \App\Task  $task
      * @return \Illuminate\Http\Response
+     * @todo create an authorized guard for deleting
      */
     public function destroy(Task $task)
     {

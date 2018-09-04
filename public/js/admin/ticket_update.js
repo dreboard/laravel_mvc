@@ -293,7 +293,7 @@ $(document).ready(function () {
         }, 1000);
     }
 
-    function ajaxError(xhr, status, errorThrown);{
+    function ajaxError(xhr, status, errorThrown){
         $("div.edited").text("Sorry, there was a problem!").show();
         if (ENVIRONMENT === "local") {
             console.log("Error: " + errorThrown);
