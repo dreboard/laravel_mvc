@@ -88,8 +88,8 @@ class TicketController extends Controller
         }
 
         try{
-            $ticket = $this->ticketService->processNewTicket($request);
-            return view('admin.tickets.view')->with(['ticket' => $ticket]);
+            $ticket_id = $this->ticketService->processNewTicket($request);
+            return redirect()->route('ticket_view', ['id' => $ticket_id]);
 
         }catch (\Throwable $e){
             if(getenv('APP_ENV') === 'production'){
@@ -126,6 +126,7 @@ class TicketController extends Controller
     public function edit(int $id)
     {
         $ticket = Ticket::find($id);
+
         return view('admin.tickets.edit', ['ticket' => $ticket]);
 
 

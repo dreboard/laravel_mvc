@@ -30,6 +30,6 @@ class TicketService
         $ticket->created_by = Auth::user()->id;
         $ticket->save();
 
-        return $ticket;
+        return $ticket->id;
     }
 }
