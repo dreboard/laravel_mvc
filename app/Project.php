@@ -18,7 +18,7 @@ class Project extends Model
 
     public function site()
     {
-        return $this->belongsTo('App\Site', 'site_id');
+        return $this->belongsTo(Site::class);
     }
 
     public function tickets()

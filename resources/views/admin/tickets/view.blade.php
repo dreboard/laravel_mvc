@@ -30,7 +30,7 @@
             token: "{!! csrf_token() !!}"
         };
     </script>
-    <script src="{{ asset('js/admin/ticket_update.js?v=1001') }}"></script>
+    <script src="{{ asset('js/admin/ticket_update.js?v=rt') }}"></script>
 @endpush
 
 @section('content')

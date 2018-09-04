@@ -6,6 +6,7 @@ use App\Cycle;
 use App\Project;
 use App\Services\ProjectService;
 use App\Services\CycleService;
+use App\Site;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -58,9 +59,8 @@ class ProjectController extends Controller
         }
 
         try{
-            $projectSave = $this->projectService->processNewProject($request);
-            $project = $this->projectService->getProjectDetails($projectSave->id);
-            return view('admin.projects.view')->with(['project' => $project]);
+            $project_id = $this->projectService->processNewProject($request);
+            return redirect()->route('project_view', ['id' => $project_id]);
 
         }catch (\Throwable $e){
             if(getenv('APP_ENV') === 'production'){
@@ -73,13 +73,12 @@ class ProjectController extends Controller
 
     public function show($id)
     {
-        //$project = Project::where('id', '=', $id)->first();
-        $project = Project::find($id);
-        //$cycleTitle = $project->cycle()->title;
-        //dd($project);
+        $project = Project::where('id', '=', $id)->first();
+
         if($project === null){
             return redirect('project_new')->with('error', 'Please create a project');
         }
+
         return view('admin.projects.view')->with(['project' => $project]);
     }
 

@@ -19,7 +19,7 @@ class ProjectService
         $project->created_by = Auth::user( )->id;
         $project->save();
 
-        return $project;
+        return $project->id;
     }
 
     public function getProjectDetails(int $id)

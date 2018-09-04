@@ -48,12 +48,7 @@ $(document).ready(function () {
             })
 
             .fail(function (xhr, status, errorThrown) {
-                $("div.edited").text("Sorry, there was a problem!").show();
-                if (ENVIRONMENT === "local") {
-                    console.log("Error: " + errorThrown);
-                    console.log("Status: " + status);
-                    console.dir(xhr);
-                }
+                ajaxError(xhr, status, errorThrown);
             })
 
             .always(function (xhr, status) {
@@ -117,6 +112,9 @@ $(document).ready(function () {
                 );
 
                 $('#taskListTable').append(form);
+
+                scrollDiv();
+
                 $(form).on('click', '.task_check', function (e) {
                     var el = $(this);
                     taskChecked(el);
@@ -124,12 +122,7 @@ $(document).ready(function () {
             })
 
             .fail(function (xhr, status, errorThrown) {
-                $("div.edited").text("Sorry, there was a problem!").show();
-                if (ENVIRONMENT === "local") {
-                    console.log("Error: " + errorThrown);
-                    console.log("Status: " + status);
-                    console.dir(xhr);
-                }
+                ajaxError(xhr, status, errorThrown);
             })
 
             .always(function (xhr, status, json) {
@@ -151,9 +144,12 @@ $(document).ready(function () {
 
     $(".editTaskInputs").blur(function () {
         var task_id = $(this).data("task_id");
-        var new_task_title = $(this).val();
-        console.log(task_id);
-        console.log(new_task_title);
+        var new_task_title;
+        if ($(this).val() === '') {
+            new_task_title = $('#editTaskInput' + task_id).html();
+        }else {
+            new_task_title = $(this).val();
+        }
         $('span#taskText' + task_id).html($(this).val()).show();
         $(this).hide();
         saveTaskData(task_id, new_task_title);
@@ -192,13 +188,7 @@ $(document).ready(function () {
             })
 
             .fail(function (xhr, status, errorThrown) {
-                $("div.edited").text("Sorry, there was a problem!").show();
-                if (ENVIRONMENT === "local") {
-                    console.log("Error: " + errorThrown);
-                    console.log("Status: " + status);
-                    console.dir(xhr);
-                }
-
+                ajaxError(xhr, status, errorThrown);
             })
 
             .always(function (xhr, status, json) {
@@ -250,13 +240,7 @@ $(document).ready(function () {
             })
 
             .fail(function (xhr, status, errorThrown) {
-                $("div.edited").text("Sorry, there was a problem!").show();
-                if (ENVIRONMENT === "local") {
-                    console.log("Error: " + errorThrown);
-                    console.log("Status: " + status);
-                    console.dir(xhr);
-                }
-
+                ajaxError(xhr, status, errorThrown);
             })
 
             .always(function (xhr, status, json) {
@@ -291,12 +275,7 @@ $(document).ready(function () {
             })
 
             .fail(function (xhr, status, errorThrown) {
-                $("div.edited").text("Sorry, there was a problem!").show();
-                if (ENVIRONMENT === "local") {
-                    console.log("Error: " + errorThrown);
-                    console.log("Status: " + status);
-                    console.dir(xhr);
-                }
+                ajaxError(xhr, status, errorThrown);
             })
 
             .always(function (xhr, status, json) {
@@ -304,6 +283,22 @@ $(document).ready(function () {
                     console.log(status);
                 }
             });
+
+
     }
 
+    function scrollDiv(){
+        $(".table-wrapper").animate({
+            scrollTop: $('.table-wrapper')[0].scrollHeight - $('.table-wrapper')[0].clientHeight
+        }, 1000);
+    }
+
+    function ajaxError(xhr, status, errorThrown);{
+        $("div.edited").text("Sorry, there was a problem!").show();
+        if (ENVIRONMENT === "local") {
+            console.log("Error: " + errorThrown);
+            console.log("Status: " + status);
+            console.dir(xhr);
+        }
+    }
 });
