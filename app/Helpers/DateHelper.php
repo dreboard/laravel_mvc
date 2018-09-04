@@ -65,8 +65,7 @@ class DateHelper
         $current = new DateTime();
         if (empty($date) || $date === null) {
             $current->modify('+2 weeks');
-            $current->format('Y-m-d');
-            return $current;
+            return (string)$current->format('Y-m-d');
         }
         return date("Y-m-d", strtotime($date));
     }
