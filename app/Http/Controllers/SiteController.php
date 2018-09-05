@@ -1,6 +1,6 @@
 <?php
 /**
- * Class        SiteController
+ * @class        SiteController
  * @package     App\Http\Controllers
  * @since       v0.1.0
  * @author      Andre Board <dre.board@gmail.com>
@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 
 /**
- * Class SiteController
+ * @class SiteController
  * @package App\Http\Controllers
  */
 class SiteController extends Controller

@@ -1,6 +1,6 @@
 <?php
 /**
- * Class        SiteCreatedMailable
+ * @class        SiteCreatedMailable
  * @package     App\Mail
  * @since       v0.1.0
  * @author      Andre Board <dre.board@gmail.com>

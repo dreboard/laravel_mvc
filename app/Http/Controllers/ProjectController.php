@@ -1,6 +1,6 @@
 <?php
 /**
- * Class        ProjectController
+ * @class        ProjectController
  * @package     App\Http\Controllers
  * @since       v0.1.0
  * @author      Andre Board <dre.board@gmail.com>
@@ -19,7 +19,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 /**
- * Class ProjectController
+ * @class ProjectController
  * @package App\Http\Controllers
  */
 class ProjectController extends Controller

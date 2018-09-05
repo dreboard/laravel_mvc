@@ -1,6 +1,6 @@
 <?php
 /**
- * Class        PostController
+ * @class        PostController
  * @package     App\Http\Controllers
  * @since       v0.1.0
  * @author      Andre Board <dre.board@gmail.com>
@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 /**
- * Class PostController
+ * @class PostController
  * @package App\Http\Controllers
  * @uses CommentRequest for validation
  */

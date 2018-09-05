@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 
 /**
- * Class TicketController
+ * @class TicketController
  * @package App\Http\Controllers
  */
 class TicketController extends Controller

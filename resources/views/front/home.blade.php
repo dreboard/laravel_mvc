@@ -7,47 +7,61 @@
 <div class="row">
     <div class="col-md-9">
         <!-- Portfolio Item Heading -->
-        <h1 class="my-4">Project Home
-            <small>Welcome to {{getenv('APP_ENV')}}</small>
-        </h1>
-        <h3 class="my-3">Laravel MVC Portfolio</h3>
-        <p>Loremenim.</p>
+        <h1 class="my-3">Laravel MVC Portfolio</h1>
+        <p></p>
         <h3 class="my-3">Project Details</h3>
-        <p>Loremenim.</p>
-        <ul>
-            <li>Loresum</li>
-            <li>Doloet</li>
-            <li>Consectetur</li>
-            <li>Adipisclit</li>
-        </ul>
+        <p>This is a project management site that allows you to create and track development issues along with projects and subtasks to demonstrate my proficiency with the laravel framework.</p>
 
-        <table class="table">
+        <p>The list below outlines some of the advanced features used to create the site along with links to the repository for code review.</p>
+        <p></p>
+
+        <table class="table reviewTbl">
             <thead class="thead-dark">
             <tr>
                 <th scope="col">Section</th>
-                <th scope="col">Demonstrates</th>
                 <th scope="col">Code</th>
-                <th scope="col">Test</th>
             </tr>
             </thead>
             <tbody>
             <tr>
-                <th scope="row">Login</th>
-                <td>Events/logging</td>
+                <th scope="row">Registering Events & Listeners</th>
                 <td><a href="https://github.com/dreboard/laravel_mvc/blob/master/app/Listeners/LogNewSiteListner.php">Link</a> </td>
-                <td>@mdo</td>
             </tr>
             <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
+                <th scope="row">Custom Log Channels</th>
+                <td><a href="https://github.com/dreboard/laravel_mvc/blob/master/config/logging.php">Link</a> </td>
             </tr>
             <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
+                <th scope="row">Unit Testing</th>
+                <td><a href="https://github.com/dreboard/laravel_mvc/blob/master/tests/Unit/ProjectTest.php">Link</a> </td>
+            </tr>
+            <tr>
+                <th scope="row">Model Repositories</th>
+                <td><a href="https://github.com/dreboard/laravel_mvc/tree/master/app/Repositories">Link</a> </td>
+            </tr>
+            <tr>
+                <th scope="row">Custom Responses & Validations</th>
+                <td><a href="https://github.com/dreboard/laravel_mvc/tree/master/app/Http/Requests">Link</a> </td>
+            </tr>
+            <tr>
+                <th scope="row">Guards & Policies</th>
+                <td><a href="https://github.com/dreboard/laravel_mvc/tree/master/app/Policies">Link</a> </td>
+            </tr>
+            <tr>
+                <th scope="row">Helpers</th>
+                <td><a href="https://github.com/dreboard/laravel_mvc/tree/master/app/Helpers">Link</a> </td>
+            </tr>
+            <tr>
+                <th scope="row">Service Classes</th>
+                <td><a href="https://github.com/dreboard/laravel_mvc/tree/master/app/Services">Link</a> </td>
+            </tr>
+            <tr>
+                <th scope="row">Model Relationships</th>
+                <td><a href="https://github.com/dreboard/laravel_mvc/blob/master/app/Project.php">Link</a> </td>
+            </tr>
+            <tr>
+                <th scope="row">Mailables</th>
+                <td><a href="https://github.com/dreboard/laravel_mvc/tree/master/app/Mail">Link</a> </td>
             </tr>
             </tbody>
         </table>

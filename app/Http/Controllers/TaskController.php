@@ -1,6 +1,6 @@
 <?php
 /**
- * Class        TaskController
+ * @class        TaskController
  * @package     App\Http\Controllers
  * @since       v0.1.0
  * @author      Andre Board <dre.board@gmail.com>
@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
 /**
- * Class TaskController
+ * @class TaskController
  * @package App\Http\Controllers
  */
 class TaskController extends Controller

@@ -1,6 +1,6 @@
 <?php
 /**
- * Class        SiteService
+ * @class        SiteService
  * @package     App\Services
  * @since       v0.1.0
  * @author      Andre Board <dre.board@gmail.com>

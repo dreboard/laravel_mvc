@@ -4,7 +4,7 @@ namespace App\Helpers;
 use DateTime;
 
 /**
- * Class DateHelper
+ * @class DateHelper
  *
  * Format and check user input dates
  *

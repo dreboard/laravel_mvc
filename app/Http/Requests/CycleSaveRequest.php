@@ -1,6 +1,6 @@
 <?php
 /**
- * Class        CycleSaveRequest
+ * @class        CycleSaveRequest
  * @package     App\Requests
  * @since       v0.1.0
  * @author      Andre Board <dre.board@gmail.com>

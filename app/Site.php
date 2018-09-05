@@ -1,6 +1,6 @@
 <?php
 /**
- * Class        Site
+ * @class        Site
  * @package     App
  * @since       v0.1.0
  * @author      Andre Board <dre.board@gmail.com>

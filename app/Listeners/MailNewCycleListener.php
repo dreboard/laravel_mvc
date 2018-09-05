@@ -1,6 +1,6 @@
 <?php
 /**
- * Class        MailNewCycleListener
+ * @class        MailNewCycleListener
  * @package     App\Listeners
  * @since       v0.1.0
  * @author      Andre Board <dre.board@gmail.com>

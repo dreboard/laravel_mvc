@@ -7,10 +7,10 @@
                 <div class="col-lg-6">
                     <ul class="list-unstyled mb-0">
                         <li>
-                            <a href="{{ url('/controllers') }}">Controllers</a>
+                            <a href="https://github.com/dreboard/laravel_mvc/tree/master/app/Http/Controllers">Controllers</a>
                         </li>
                         <li>
-                            <a href="#">Validation</a>
+                            <a href="https://github.com/dreboard/laravel_mvc/tree/master/app/Http/Requests">Validation</a>
                         </li>
                         <li>
                             <a href="#">Security</a>
@@ -20,13 +20,13 @@
                 <div class="col-lg-6">
                     <ul class="list-unstyled mb-0">
                         <li>
-                            <a href="#">Database</a>
+                            <a href="https://github.com/dreboard/laravel_mvc/tree/master/app">Database</a>
                         </li>
                         <li>
-                            <a href="#">Middleware</a>
+                            <a href="https://github.com/dreboard/laravel_mvc/tree/master/app/Http/Middleware">Middleware</a>
                         </li>
                         <li>
-                            <a href="#">HTTP</a>
+                            <a href="https://github.com/dreboard/laravel_mvc/tree/master/app/Http">HTTP</a>
                         </li>
                     </ul>
                 </div>
@@ -36,9 +36,14 @@
 
     <!-- Side Widget -->
     <div class="card my-4">
-        <h5 class="card-header">Side Widget</h5>
+        <h5 class="card-header">Tech Used</h5>
         <div class="card-body">
-            You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
+            <ul>
+                <li>Laravel 5.6</li>
+                <li>Bootstrap 4</li>
+                <li>PHP 7.1</li>
+                <li>Node/NPM</li>
+            </ul>
         </div>
     </div>
 </div>

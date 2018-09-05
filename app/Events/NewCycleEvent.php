@@ -12,7 +12,7 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 /**
- * Class NewCycleEvent
+ * @class NewCycleEvent
  * @package App\Events
  */
 class NewCycleEvent

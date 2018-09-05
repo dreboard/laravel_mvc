@@ -1,6 +1,6 @@
 <?php
 /**
- * Class        Repository
+ * @class        Repository
  * @package     App\Repositories
  * @since       v0.1.0
  * @author      Andre Board <dre.board@gmail.com>

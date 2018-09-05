@@ -1,6 +1,6 @@
 <?php
 /**
- * Class        FrontController
+ * @class        FrontController
  * @package     App\Http\Controllers
  * @since       v0.1.0
  * @author      Andre Board <dre.board@gmail.com>
