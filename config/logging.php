@@ -45,6 +45,11 @@ return [
         ],
         'project' => [
             'driver' => 'single',
+            'path' => storage_path('logs/site/log.log'),
+            'level' => 'info',
+        ],
+        'site' => [
+            'driver' => 'single',
             'path' => storage_path('logs/projects/log.log'),
             'level' => 'info',
         ],

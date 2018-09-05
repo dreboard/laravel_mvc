@@ -1,13 +1,17 @@
 <?php
-
+/**
+ * Class        Task
+ * @package     App
+ * @since       v0.1.0
+ * @author      Andre Board <dre.board@gmail.com>
+ * @version     v1.0
+ * @access      public
+ * @see         https://github.com/dreboard
+ */
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * Class Task
- * @package App
- */
 class Task extends Model
 {
 

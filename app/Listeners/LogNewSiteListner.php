@@ -1,5 +1,13 @@
 <?php
-
+/**
+ * Class        LogNewSiteListner
+ * @package     App\Listeners
+ * @since       v0.1.0
+ * @author      Andre Board <dre.board@gmail.com>
+ * @version     v1.0
+ * @access      public
+ * @see         https://github.com/dreboard
+ */
 namespace App\Listeners;
 
 use App\Events\NewSiteEvent;
@@ -27,6 +35,6 @@ class LogNewSiteListner
      */
     public function handle(NewSiteEvent $event)
     {
-        \Log::channel('cycle')->info('A new site was created on'.date('Y-m-d h:i:s').' by '.Auth::user( )->email);
+        \Log::channel('site')->info('A new site was created on'.date('Y-m-d h:i:s').' by '.Auth::user( )->email);
     }
 }

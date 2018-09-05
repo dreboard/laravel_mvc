@@ -1,13 +1,17 @@
 <?php
-
+/**
+ * Class        Ticket
+ * @package     App
+ * @since       v0.1.0
+ * @author      Andre Board <dre.board@gmail.com>
+ * @version     v1.0
+ * @access      public
+ * @see         https://github.com/dreboard
+ */
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * Class Ticket
- * @package App
- */
 class Ticket extends Model
 {
     /**
@@ -23,6 +27,9 @@ class Ticket extends Model
         return $this->belongsTo('App\Project');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function tasks()
     {
         return $this->hasMany('App\Task');

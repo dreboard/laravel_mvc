@@ -1,7 +1,7 @@
 <?php
 /**
- * Trait        TicketTrait
- * @package     App\Http\Traits
+ * Class        TestController
+ * @package     App\Http\Controllers
  * @since       v0.1.0
  * @author      Andre Board <dre.board@gmail.com>
  * @version     v1.0
@@ -9,11 +9,10 @@
  * @see         https://github.com/dreboard
  */
 
-namespace App\Http\Traits;
+namespace App\Http\Controllers;
 
 
-trait TicketTrait
+class TestController
 {
-    protected $allowed = 'Ticket not assigned';
 
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Class        CommentRequest
+ * Class        SiteSaveRequest
  * @package     App\Requests
  * @since       v0.1.0
  * @author      Andre Board <dre.board@gmail.com>
@@ -12,7 +12,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CommentRequest extends FormRequest
+class SiteSaveRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -32,11 +32,10 @@ class CommentRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|max:20',
-            'comment' => 'required'
+            'title' => 'required|max:191',
+            'url' => 'required|max191'
         ];
     }
-
     /**
      * Get the error messages for the defined validation rules.
      *
@@ -45,8 +44,8 @@ class CommentRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required' => 'Forgot the title',
-            'comment.required' => 'Fill in all of the form'
+            'title.required' => 'A site must have a title',
+            'url.required' => 'A site must have a url'
         ];
     }
 }

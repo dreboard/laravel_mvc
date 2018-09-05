@@ -1,5 +1,13 @@
 <?php
-
+/**
+ * Class        SiteController
+ * @package     App\Http\Controllers
+ * @since       v0.1.0
+ * @author      Andre Board <dre.board@gmail.com>
+ * @version     v1.0
+ * @access      public
+ * @see         https://github.com/dreboard
+ */
 namespace App\Http\Controllers;
 
 use App\Cycle;
@@ -13,8 +21,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 
+/**
+ * Class SiteController
+ * @package App\Http\Controllers
+ */
 class SiteController extends Controller
 {
+    /**
+     * @var SiteService
+     */
     protected $siteService;
 
     /**
@@ -106,6 +121,7 @@ class SiteController extends Controller
         $count = Site::count();
         return view("admin.sites.all", ["allSites" => $allSites, 'count' => $count]);
     }
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -115,11 +131,20 @@ class SiteController extends Controller
         return view("admin.sites.projects", ["siteInfo" => $siteInfo]);
     }
 
+    /**
+     * @param int $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function calendar(int $id)
     {
         $siteInfo = Site::find($id);
         return view("admin.sites.calendar", ["siteInfo" => $siteInfo]);
     }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show($id)
     {
         $siteInfo = Site::find($id);

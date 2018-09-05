@@ -1,5 +1,12 @@
 <?php
-
+/**
+ * @since       v0.1.0
+ * @package     Dev-PHP
+ * @author      Andre Board <dre.board@gmail.com>
+ * @version     v1.0
+ * @access      public
+ * @see         https://github.com/dreboard
+ */
 namespace App\Http\Controllers;
 
 use App\Cycle;
@@ -44,6 +51,7 @@ class TicketController extends Controller
     }
 
     /**
+     * Ticket home page
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function index()
@@ -56,6 +64,7 @@ class TicketController extends Controller
     }
 
     /**
+     * Show create ticket form
      * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -71,6 +80,7 @@ class TicketController extends Controller
     }
 
     /**
+     * Save a new ticket
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
      */
@@ -101,6 +111,7 @@ class TicketController extends Controller
     }
 
     /**
+     * Get ticket by id
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
@@ -114,6 +125,7 @@ class TicketController extends Controller
     }
 
     /**
+     * Show all tickets
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function all()
@@ -123,16 +135,19 @@ class TicketController extends Controller
         return view('admin.projects.all', ['projects' => $projects]);
     }
 
+    /**
+     * Edit Ticket by id
+     * @param int $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit(int $id)
     {
         $ticket = Ticket::find($id);
-
         return view('admin.tickets.edit', ['ticket' => $ticket]);
-
-
     }
 
     /**
+     * Update ticket status
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
@@ -151,6 +166,11 @@ class TicketController extends Controller
         ], 200);
     }
 
+    /**
+     * Update ticket percent complete
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function changeCompleted(Request $request)
     {
         $ticket = Ticket::find($request->ticket_id);

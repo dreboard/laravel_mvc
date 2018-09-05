@@ -1,5 +1,13 @@
 <?php
-
+/**
+ * Class        CycleService
+ * @package     App\Services
+ * @since       v0.1.0
+ * @author      Andre Board <dre.board@gmail.com>
+ * @version     v1.0
+ * @access      public
+ * @see         https://github.com/dreboard
+ */
 namespace App\Services;
 
 use App\Cycle;
@@ -7,10 +15,6 @@ use App\Events\NewCycleEvent;
 use App\Helpers\DateHelper;
 use Illuminate\Http\Request;
 
-/**
- * Class CycleService
- * @package App\Services
- */
 class CycleService
 {
 

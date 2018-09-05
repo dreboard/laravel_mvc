@@ -1,6 +1,6 @@
 <?php
 /**
- * Class        CycleCreatedMailable
+ * Class        SiteCreatedMailable
  * @package     App\Mail
  * @since       v0.1.0
  * @author      Andre Board <dre.board@gmail.com>
@@ -10,31 +10,31 @@
  */
 namespace App\Mail;
 
-use App\Cycle;
+use App\Site;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
-class CycleCreatedMailable extends Mailable
+
+class SiteCreatedMailable extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * The cycle instance.
      *
-     * @var Cycle
+     * @var Site
      */
-    public $cycle;
+    public $site;
 
     /**
      * Create a new message instance.
      *
-     * @param Cycle $cycle
+     * @param Site $site
      */
-    public function __construct(Cycle $cycle)
+    public function __construct(Site $site)
     {
-        $this->cycle = $cycle;
+        $this->site = $site;
     }
 
     /**
@@ -45,10 +45,11 @@ class CycleCreatedMailable extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.cycle_create')
+        return $this->view('emails.site_create')
             ->with([
-                'start_date' => $this->cycle->start_date,
-                'end_date' => $this->cycle->end_date
+                'title' => $this->site->title,
+                'url' => $this->site->url,
+                'end_date' => $this->site->git_url
             ]);
     }
 }

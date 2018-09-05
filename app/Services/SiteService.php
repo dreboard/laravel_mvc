@@ -1,5 +1,13 @@
 <?php
-
+/**
+ * Class        SiteService
+ * @package     App\Services
+ * @since       v0.1.0
+ * @author      Andre Board <dre.board@gmail.com>
+ * @version     v1.0
+ * @access      public
+ * @see         https://github.com/dreboard
+ */
 namespace App\Services;
 
 use App\Site;
@@ -8,10 +16,6 @@ use App\Helpers\DateHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-/**
- * Class SiteService
- * @package App\Services
- */
 class SiteService
 {
 
