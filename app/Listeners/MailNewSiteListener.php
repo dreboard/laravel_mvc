@@ -34,11 +34,13 @@ class MailNewSiteListener
      *
      * @param  NewSiteEvent  $event
      * @return void
+     * @todo fix smtp timeout, log for now
      */
     public function handle(NewSiteEvent $event)
     {
         if(getenv('APP_ENV') === 'production'){
-            Mail::to(Auth::user( )->email)->send(new SiteCreatedMailable($event->site));
+            //Mail::to(Auth::user( )->email)->send(new SiteCreatedMailable($event->site));
+            \Log::info('Cycle created');
         } else {
             \Log::info('Cycle created');
         }
