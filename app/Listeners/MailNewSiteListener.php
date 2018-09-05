@@ -14,6 +14,7 @@ use App\Events\NewSiteEvent;
 use App\Mail\SiteCreatedMailable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class MailNewSiteListener
