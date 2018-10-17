@@ -13,11 +13,22 @@ namespace App\Services;
 use App\Site;
 use App\Events\NewSiteEvent;
 use App\Helpers\DateHelper;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class SiteService
 {
+    protected $model;
+
+    /**
+     * SiteService constructor.
+     * @param Site $model
+     */
+    public function __construct(Site $model)
+    {
+        $this->model = $model;
+    }
 
     /**
      * Process New Site
@@ -42,6 +53,11 @@ class SiteService
         $siteInfo = Site::where('id', '=', $insertedId)->first();
 
         return $siteInfo;
+    }
+
+    public function getUsersSites(int $id)
+    {
+
     }
 
 }

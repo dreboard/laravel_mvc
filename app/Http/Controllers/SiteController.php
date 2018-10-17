@@ -14,6 +14,7 @@ use App\Cycle;
 use App\Events\NewCycleEvent;
 use App\Helpers\DateHelper;
 use App\Http\Requests\CycleSaveRequest;
+use App\Http\Traits\MessageTrait;
 use App\Services\SiteService;
 use App\Site;
 use Illuminate\Http\Request;
@@ -27,6 +28,7 @@ use Illuminate\Support\Facades\Validator;
  */
 class SiteController extends Controller
 {
+    use MessageTrait;
     /**
      * @var SiteService
      */
@@ -127,8 +129,12 @@ class SiteController extends Controller
      */
     public function projects(int $id)
     {
-        $siteInfo = Site::find($id);
-        return view("admin.sites.projects", ["siteInfo" => $siteInfo]);
+        try{
+            $siteInfo = Site::findOrFail($id);
+            return view("admin.sites.projects", ["siteInfo" => $siteInfo]);
+        } catch (\Throwable $e){
+            return redirect()->back()->with('error', $this->envMessage($e));
+        }
     }
 
     /**
