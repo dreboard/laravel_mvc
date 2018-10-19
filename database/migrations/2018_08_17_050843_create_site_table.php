@@ -24,6 +24,20 @@ class CreateSiteTable extends Migration
             $table->integer('created_by');
             $table->timestamps();
         });
+
+        if(getenv('APP_ENV') === 'testing'){
+            DB::table('site')->insert(
+                [
+                    'title' => "New Site",
+                    'description' => "This is a site",
+                    'url' => 'www.test.com',
+                    'ga' => 'UA12345678',
+                    'submitted' => 1,
+                    'git_url' => 'github.com/tester',
+                    'created_by' => 1
+                ]
+            );
+        }
     }
 
     /**
