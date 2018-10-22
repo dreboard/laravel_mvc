@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->integer('isAdmin')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });
@@ -26,7 +27,8 @@ class CreateUsersTable extends Migration
             array(
                 'name' => 'namm',
                 'email' => 'dreboard@yahoo.com',
-                'password' => bcrypt('test1234')
+                'password' => bcrypt('test1234'),
+                'isAdmin' => 1
             )
         );
     }
