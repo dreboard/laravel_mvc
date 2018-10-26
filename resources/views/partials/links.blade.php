@@ -1,3 +1,4 @@
+{{--
 <div class="col-md-3">
     <!-- Categories Widget -->
     <div class="card my-4">
@@ -46,4 +47,6 @@
             </ul>
         </div>
     </div>
-</div>
+</div>--}}
+
+<app-front-links></app-front-links>

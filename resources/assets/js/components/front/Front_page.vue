@@ -1,11 +1,5 @@
-@extends('layouts.front')
-
-@section('content')
-
-
-<!-- Portfolio Item Row -->
-<div class="row" id="app">
-    {{--<div class="col-md-9">
+<template>
+    <div class="col-md-9">
         <!-- Portfolio Item Heading -->
         <h1 class="my-3">Laravel MVC Portfolio</h1>
         <p></p>
@@ -65,9 +59,9 @@
             </tr>
             </tbody>
         </table>
-    </div>--}}
-    <app-front-page></app-front-page>
-    @include('partials.links')
-</div>
-<!-- /.row -->
-@endsection
+    </div>
+</template>
+
+<script>
+    export default {}
+</script>

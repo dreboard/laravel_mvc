@@ -8,6 +8,7 @@
 <!-- Bootstrap core JavaScript -->
 <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
 <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 <script>
     $( document ).ready(function() {
         $('table.reviewTbl a').attr({ target: "_blank" });

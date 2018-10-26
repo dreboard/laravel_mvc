@@ -8,6 +8,7 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+window.axios = require('axios');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -16,6 +17,8 @@ window.Vue = require('vue');
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('app-front-page', require('./components/front/Front_page.vue'));
+Vue.component('app-front-links', require('./components/front/Links.vue'));
 
 const app = new Vue({
     el: '#app'
