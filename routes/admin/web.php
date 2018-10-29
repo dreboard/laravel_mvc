@@ -35,7 +35,7 @@ Route::middleware(['auth'])->group(function () {
     require_once __DIR__.'/tasks.php';
 });
 
-
+Route::get('/links', 'FrontController@getTechText');
 
 
 Route::get('/mailable', function () {

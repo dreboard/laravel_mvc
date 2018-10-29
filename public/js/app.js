@@ -47864,8 +47864,41 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            url: 'http://localhost/_dev-php/site1/public/',
+            techs: [],
+            tech: {
+                laravel: '',
+                bootstrap: '',
+                php: '',
+                js_front: '',
+                js_tech: ''
+            }
+        };
+    },
+    mounted: function mounted() {
+        this.getFrontLinks();
+    },
+
+    methods: {
+        getFrontLinks: function getFrontLinks() {
+
+            axios.get('http://localhost/_dev-php/site1/public/links').then(function (response) {
+                // handle success
+                console.log(response);
+            }).catch(function (error) {
+                // handle error
+                console.log(error);
+            }).then(function () {
+                // always executed
+            });
+        }
+    }
+});
 
 /***/ }),
 /* 48 */

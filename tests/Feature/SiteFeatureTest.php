@@ -97,7 +97,7 @@ class SiteFeatureTest extends TestCase
             'created_by' => 1
         ];
         //$user = factory(\App\User::class)->create();
-        $user = User::where('email', '=', 'dre.board@gmail.com')->where('isAdmin', '=', 1)->first();
+        $user = User::where('isAdmin', '=', 1)->first();
         $response = $this->actingAs($user, 'web')->json('POST', '/site_save',$data);
         $this->assertDatabaseHas($this->table, ['title' => $titleNum]);
         $response->assertViewIs('admin.sites.view');
