@@ -29,7 +29,7 @@ Route::middleware(['auth'])->group(function () {
     require_once __DIR__.'/tickets.php';
 
     // Sites routes
-    require_once __DIR__.'/sites.php';
+    //require_once __DIR__.'/sites.php';
 
     // Task routes
     require_once __DIR__.'/tasks.php';

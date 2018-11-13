@@ -133,7 +133,7 @@ class SiteController extends Controller
             $siteInfo = Site::findOrFail($id);
             return view("admin.sites.projects", ["siteInfo" => $siteInfo]);
         } catch (\Throwable $e){
-            return redirect()->back()->with('error', $this->envMessage($e));
+            return redirect()->back()->with('errors', $this->envMessage($e));
         }
     }
 

@@ -22,14 +22,14 @@
 
         <div class="col-9">
             <h2>#{{$siteInfo->id}} {{$siteInfo->title}}</h2>
-            @if($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
+            @if(!empty($errors))
+                @if($errors->any())
+                    <ul class="alert alert-danger" style="list-style-type: none">
                         @foreach($errors->all() as $error)
-                            <li>{{$error}}</li>
+                            <li>{!! $error !!}</li>
                         @endforeach
                     </ul>
-                </div>
+                @endif
             @endif
 
             <table class="table table-bordered">
