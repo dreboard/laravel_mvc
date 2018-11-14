@@ -34,7 +34,8 @@ class HomeController extends Controller
     {
         //return view('home');
         $tasks = Ticket::all();
-        return view('admin.dash', ['tasks' => $tasks]);
+        return view('admin.home', ['tasks' => $tasks]);
+        //return view('admin.dash', ['tasks' => $tasks]);
     }
     /**
      * Show the front page.

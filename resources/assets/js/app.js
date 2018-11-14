@@ -9,7 +9,18 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 window.axios = require('axios');
+import VueRouter from 'vue-router'
+Vue.use(VueRouter)
 
+const routes = [
+    { path: '/home', component: require('./components/admin/Dashboard.vue') },
+    { path: '/profile', component: require('./components/admin/Profile.vue') },
+    { path: '/users', component: require('./components/admin/Users.vue') },
+]
+const router = new VueRouter({
+    mode: 'history',
+    routes // short for `routes: routes`
+})
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -21,5 +32,6 @@ Vue.component('app-front-page', require('./components/front/Front_page.vue'));
 Vue.component('app-front-links', require('./components/front/Links.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    router
 });

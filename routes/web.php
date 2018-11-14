@@ -40,3 +40,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/page2', 'HomeController@pageTwo')->name('page2')->middleware('auth');
 
 Route::post('/create', 'PostController@create')->name('create');
+
+//Route::get('{path}', 'HomeController@index')->where('path', '([a-z\d-\/_.]+)?');
+Route::resource('user', 'Api\UsersController');
