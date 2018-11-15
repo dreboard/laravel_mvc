@@ -20,6 +20,7 @@ class UsersController extends Controller
 
         return response()->json(
             [
+                'success' => true,
                 'users' => $users->toArray()
             ], 200);
     }
@@ -35,12 +36,6 @@ class UsersController extends Controller
         return response()->json(['users' => $users]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -48,14 +43,42 @@ class UsersController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ]);
-        if($validator->fails()){
+        if ($validator->passes()) {
+            $user = new User();
+            $user->name = $request->userName;
+            $user->email = $request->email;
+            $user->password = bcrypt($request->password);
+            $user->save();
+
+            return response()->json([
+                'user' => $user,
+                'created' => true,
+            ], 201);
+        }
+        return response()->json(['error' => $validator->errors()->all(), 'created' => false,]);
+    }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store2(Request $request)
+    {
+        $validator = $request->validate([
+            'userName' => 'required',
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+        if(!$request->validated()){
             return response()->json(['errors'=>$validator->errors()],422);
         }
-        $user = User::create([
-            'name' => $request->input('userName'),
-            'email' => $request->input('email'),
-            'password' => bcrypt($request->input('password'))
-        ]);
+        $user = new User();
+        $user->name = $request->userName;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->save();
 
         return response()->json([
             'user' => $user,

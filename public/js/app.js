@@ -14012,6 +14012,16 @@ var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
     mode: 'history',
     routes: routes // short for `routes: routes`
 });
+
+Vue.filter('adminText', function (text) {
+    if (text == 0) {
+        return 'No';
+    }
+    return 'Yes';
+});
+Vue.filter('upText', function (text) {
+    return text.charAt(0).toUpperCase() + text.slice(1);
+});
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -51534,8 +51544,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         createUser: function createUser() {
             var _this = this;
 
-            axios.post('http://localhost/_dev-php/site1/public/user', this.newUser).then(function (response) {
+            axios.post('http://localhost/_dev-php/site1/public/api/user', this.newUser).then(function (response) {
                 _this.getUsers();
+                $('#modalUserForm').modal('hide');
+                $('.modal-backdrop').remove();
+                $(body).removeClass("modal-open");
+                //this.$refs.modalUserForm.hide();
                 console.log(response);
             }).catch(function (error) {
                 console.log(error.response.data);
@@ -51544,7 +51558,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getUsers: function getUsers() {
             var _this2 = this;
 
-            var uri = 'http://localhost/_dev-php/site1/public/user';
+            var uri = 'http://localhost/_dev-php/site1/public/api/user';
             axios.get(uri).then(function (_ref) {
                 var data = _ref.data;
 
@@ -51557,6 +51571,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         console.log(this.users);
+    },
+
+    filters: {
+        capitalize: function capitalize(value) {
+            if (!value) return '';
+            value = value.toString();
+            return value.charAt(0).toUpperCase() + value.slice(1);
+        }
     }
 });
 
@@ -51615,7 +51637,11 @@ var render = function() {
                                 _vm._v(" "),
                                 _c("td", [_vm._v(_vm._s(user.email))]),
                                 _vm._v(" "),
-                                _c("td", [_vm._v(_vm._s(user.isAdmin))]),
+                                _c("td", [
+                                  _vm._v(
+                                    _vm._s(_vm._f("adminText")(user.isAdmin))
+                                  )
+                                ]),
                                 _vm._v(" "),
                                 _vm._m(3, true)
                               ]
@@ -51640,6 +51666,7 @@ var render = function() {
     _c(
       "div",
       {
+        ref: "modalUserForm",
         staticClass: "modal fade",
         attrs: {
           id: "modalUserForm",

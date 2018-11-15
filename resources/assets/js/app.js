@@ -21,6 +21,16 @@ const router = new VueRouter({
     mode: 'history',
     routes // short for `routes: routes`
 })
+
+Vue.filter('adminText', function(text){
+    if(text == 0){
+        return 'No';
+    }
+    return 'Yes';
+});
+Vue.filter('upText', function(text){
+    return text.charAt(0).toUpperCase() + text.slice(1);
+});
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

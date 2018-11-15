@@ -44,7 +44,7 @@
                                             <td class="sorting_1">{{user.id}}</td>
                                             <td>{{user.name}}</td>
                                             <td>{{user.email}}</td>
-                                            <td>{{user.isAdmin}}</td>
+                                            <td>{{user.isAdmin | adminText}}</td>
                                             <td><a href=""><i class="fa fa-edit"></i> </a> |
                                                 <a href=""><i class="fa fa-trash"></i> </a></td>
                                         </tr>
@@ -116,7 +116,7 @@
 
         <!-- Modal -->
         <div class="modal fade" id="modalUserForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-             aria-hidden="true">
+             aria-hidden="true" ref="modalUserForm">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header text-center">
@@ -171,16 +171,20 @@
         },
         methods: {
             createUser() {
-                axios.post('http://localhost/_dev-php/site1/public/user',this.newUser)
+                axios.post('http://localhost/_dev-php/site1/public/api/user',this.newUser)
                     .then((response)=>{
                         this.getUsers();
+                        $('#modalUserForm').modal('hide')
+                        $('.modal-backdrop').remove();
+                        $(body).removeClass("modal-open");
+                        //this.$refs.modalUserForm.hide();
                     console.log(response)
                 }).catch((error)=>{
                     console.log(error.response.data)
                 });
             },
             getUsers(){
-                let uri ='http://localhost/_dev-php/site1/public/user';
+                let uri ='http://localhost/_dev-php/site1/public/api/user';
                 axios.get(uri).then(({data}) => {
                     (this.users = data.users);
                 });
@@ -191,6 +195,13 @@
         },
         mounted() {
             console.log(this.users);
+        },
+        filters: {
+            capitalize: function (value) {
+                if (!value) return ''
+                value = value.toString()
+                return value.charAt(0).toUpperCase() + value.slice(1)
+            }
         }
     }
 </script>
