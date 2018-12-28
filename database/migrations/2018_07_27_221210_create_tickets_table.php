@@ -25,6 +25,7 @@ class CreateTicketsTable extends Migration
             $table->integer('created_by');
             $table->enum('status',['new','working','complete','closed']); // Place the default value as the first element in the array
             $table->enum('priority', ['low','medium','high','urgent']);
+            $table->integer('open_edit')->default(1);
             $table->timestamps();
         });
     }

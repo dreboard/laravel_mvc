@@ -43,7 +43,7 @@
 @include('partials.side_nav')
 
 <div class="content-wrapper">
-    <div class="container-fluid">
+    <div id="app" class="container-fluid">
         @yield('content')
     </div>
 

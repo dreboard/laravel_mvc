@@ -17,7 +17,7 @@ class Ticket extends Model
     /**
      * @var array
      */
-    protected $fillable = ['title', 'description', 'create_date', 'due_date', 'status', 'project_id', 'created_by'];
+    protected $fillable = ['title', 'description', 'create_date', 'due_date', 'status', 'project_id', 'created_by', 'open_edit'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

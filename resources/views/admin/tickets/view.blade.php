@@ -27,6 +27,7 @@
             url_status: "{{ route('ticket_edit_status') }}",
             task_new_url: "{{ route('task_new') }}",
             task_url: "{{ route('task_update') }}",
+            note_url: "{{route('new_note')}}",
             token: "{!! csrf_token() !!}"
         };
     </script>
@@ -167,7 +168,7 @@
                 </div>
 
                 <div class="col-sm-9">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalNotesForm" data-backdrop="false">
                         Add Note
                     </button>
                     <hr />
@@ -175,22 +176,12 @@
                     <h4>History</h4>
                     <div class="row">
                         <div class="col-sm-12">
-                            <table class="table table-bordered">
-                                <tr>
-                                    <th>Number</th>
-                                    <th>Name</th>
-                                    <th>URL</th>
-                                </tr>
+                           <ticket-notes
+                                   ticket_id="{{$ticket->id}}"
+                                   ticket_url="{{ route('new_note') }}"
+                                   resource="{{ route('ticket_notes', ['ticket_id' => $ticket->id]) }}">
 
-                                @foreach($ticket->notes as $t)
-                                    <tr>
-                                        <td>#{{ $t->id }}</td>
-                                        <td>{{ $t->note_date }}</td>
-                                        <td>{{ $t->note }}</td>
-                                    </tr>
-                                @endforeach
-
-                            </table>
+                           </ticket-notes>
 
                         </div>
                     </div>
@@ -200,35 +191,6 @@
 
 
 
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form>
-                                <div class="form-group">
-                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Title">
-                                </div>
-                                <div class="form-group">
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <input type="file" name="file" />
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button id="saveTicketNoteBtn" type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
 
         </div>
