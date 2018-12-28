@@ -37,9 +37,13 @@ Vue.filter('upText', function(text){
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+//Front
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('app-front-page', require('./components/front/Front_page.vue'));
 Vue.component('app-front-links', require('./components/front/Links.vue'));
+
+//Admin
+Vue.component('user_profile', require('./components/admin/Profile.vue'));
 
 const app = new Vue({
     el: '#app',

@@ -34,4 +34,12 @@ class Ticket extends Model
     {
         return $this->hasMany('App\Task');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function notes()
+    {
+        return $this->hasMany('App\Notes');
+    }
 }

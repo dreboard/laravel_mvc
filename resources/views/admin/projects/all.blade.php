@@ -13,6 +13,7 @@
 
         <div class="col-9">
             <h2>All Projects</h2>
+
             <table class="table table-bordered">
                 <tr>
                     <th>Number</th>

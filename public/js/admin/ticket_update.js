@@ -287,6 +287,12 @@ $(document).ready(function () {
 
     }
 
+    $('#saveTicketNoteBtn').on('click', function () {
+        console.log("Note Saved");
+
+    });
+
+
     function scrollDiv(){
         $(".table-wrapper").animate({
             scrollTop: $('.table-wrapper')[0].scrollHeight - $('.table-wrapper')[0].clientHeight

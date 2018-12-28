@@ -45,8 +45,8 @@
                                             <td>{{user.name}}</td>
                                             <td>{{user.email}}</td>
                                             <td>{{user.isAdmin | adminText}}</td>
-                                            <td><a href=""><i class="fa fa-edit"></i> </a> |
-                                                <a href=""><i class="fa fa-trash"></i> </a></td>
+                                            <td><button @click="deleteUser(user.id)"><i class="fa fa-edit"></i> </button> |
+                                                <button @click="deleteUser(user.id)"><i class="fa fa-trash"></i> </button></td>
                                         </tr>
 
 
@@ -125,7 +125,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form @submit.prevent="createUser">
+                    <form id="newUserForm" @submit.prevent="createUser">
                     <div class="modal-body mx-3">
                         <div class="form-group">
                             <label for="userName">Name</label>
@@ -171,24 +171,42 @@
         },
         methods: {
             createUser() {
-                axios.post('http://localhost/_dev-php/site1/public/api/user',this.newUser)
+                axios.post('http://localhost/_dev-php/site1/public/user',this.newUser)
                     .then((response)=>{
                         this.getUsers();
                         $('#modalUserForm').modal('hide')
                         $('.modal-backdrop').remove();
                         $(body).removeClass("modal-open");
-                        //this.$refs.modalUserForm.hide();
                     console.log(response)
                 }).catch((error)=>{
+
                     console.log(error.response.data)
                 });
             },
             getUsers(){
-                let uri ='http://localhost/_dev-php/site1/public/api/user';
+                let uri ='http://localhost/_dev-php/site1/public/user';
                 axios.get(uri).then(({data}) => {
                     (this.users = data.users);
                 });
-            }
+            },
+            deleteUser(id) {
+                var r = confirm("Delete This User");
+                if (r == true) {
+                    axios.delete('http://localhost/_dev-php/site1/public/user/'+id, {
+                        params: { id: id }
+                    })
+                        .then((response)=>{
+                            this.getUsers();
+                            console.log(response)
+                        }).catch((error)=>{
+                        console.log(error.response.data)
+                    });
+                } else {
+
+                }
+
+
+            },
         },
         created(){
             this.getUsers()

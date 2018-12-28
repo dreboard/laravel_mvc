@@ -124,7 +124,7 @@
             <hr/>
 
             <div class="row">
-                <div class="col-sm-4 table-wrapper">
+                <div class="col-sm-3 table-wrapper">
                     <h4>Tasks</h4>
                     <form class="form-inline" method="POST" action="{{route('task_update')}}" id="new_task_form">
                         <input type="hidden" id="task_user_id" name="user_id" value="{{$ticket->user_id}}">
@@ -166,102 +166,67 @@
                     </table>
                 </div>
 
-                <div class="col-sm-8">
-                    <h4>Notes</h4>
-                    <form>
-                        <div class="form-group">
-                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Title">
+                <div class="col-sm-9">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        Add Note
+                    </button>
+                    <hr />
+
+                    <h4>History</h4>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>Number</th>
+                                    <th>Name</th>
+                                    <th>URL</th>
+                                </tr>
+
+                                @foreach($ticket->notes as $t)
+                                    <tr>
+                                        <td>#{{ $t->id }}</td>
+                                        <td>{{ $t->note_date }}</td>
+                                        <td>{{ $t->note }}</td>
+                                    </tr>
+                                @endforeach
+
+                            </table>
+
                         </div>
-                        <div class="form-group">
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary mb-2">Save</button>
-                        </div>
-                    </form>
-                    <table class="table table-bordered">
-                        <tr>
-                            <th>Title</th>
-                            <th>Created</th>
-                            <th>created_by</th>
-                        </tr>
-
-                        @foreach($ticket->tasks as $t)
-                            <tr>
-                                <td>#{{ $t->id }}</td>
-                                <td>{{ $t->title }}</td>
-                                <td>
-                                    <form class="form-inline" method="POST" action="{{route('task_update')}}">
-                                        @csrf
-                                        <div class="form-check mb-2 mr-sm-2">
-                                            <input
-                                                    class="status_check"
-                                                    type="checkbox"
-                                                    id="taskStatus{{$t->id}}"
-                                                    name="taskStatus"
-                                                    data-task="{{$t->id}}"
-                                                    value="{{ $t->complete }}"
-                                                    @if($t->complete == 1) checked @endif
-                                            >
-                                            <label class="form-check-label" for="taskStatus">
-                                                Complete
-                                            </label>
-                                        </div>
-                                    </form>
-
-
-                                </td>
-
-                            </tr>
-                        @endforeach
-
-                    </table>
+                    </div>
                 </div>
             </div>
 
-            <h4>History</h4>
-            <div class="row">
-                <div class="col-sm-12">
-                    <table class="table table-bordered">
-                        <tr>
-                            <th>Number</th>
-                            <th>Name</th>
-                            <th>URL</th>
-                            <th>created_by</th>
-                        </tr>
-
-                        @foreach($ticket->tasks as $t)
-                            <tr>
-                                <td>#{{ $t->id }}</td>
-                                <td>{{ $t->title }}</td>
-                                <td>{{ $t->assigned }}</td>
-                                <td>
-                                    <form class="form-inline" method="POST" action="{{route('task_update')}}">
-                                        @csrf
-                                        <div class="form-check mb-2 mr-sm-2">
-                                            <input
-                                                    class="status_check"
-                                                    type="checkbox"
-                                                    id="taskStatus{{$t->id}}"
-                                                    name="taskStatus"
-                                                    data-task="{{$t->id}}"
-                                                    value="{{ $t->complete }}"
-                                                    @if($t->complete == 1) checked @endif
-                                            >
-                                            <label class="form-check-label" for="taskStatus">
-                                                Complete
-                                            </label>
-                                        </div>
-                                    </form>
 
 
-                                </td>
 
-                            </tr>
-                        @endforeach
-
-                    </table>
-
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Title">
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <input type="file" name="file" />
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button id="saveTicketNoteBtn" type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
