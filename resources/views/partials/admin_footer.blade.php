@@ -19,6 +19,7 @@
 <script src={{asset("vendor/bootstrap/js/bootstrap.bundle.min.js")}}></script>
 <!-- Core plugin JavaScript-->
 <script src={{asset("vendor/jquery-easing/jquery.easing.min.js")}}></script>
+<script src="{{asset('js/app.js')}}"></script>
 <!-- Custom scripts for all pages-->
 <script src={{asset("js/admin.js")}}></script>
 <script src={{asset("js/ga.js")}}></script>

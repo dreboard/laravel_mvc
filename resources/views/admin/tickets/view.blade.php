@@ -27,6 +27,7 @@
             url_status: "{{ route('ticket_edit_status') }}",
             task_new_url: "{{ route('task_new') }}",
             task_url: "{{ route('task_update') }}",
+            note_url: "{{route('new_note')}}",
             token: "{!! csrf_token() !!}"
         };
     </script>
@@ -124,7 +125,7 @@
             <hr/>
 
             <div class="row">
-                <div class="col-sm-4 table-wrapper">
+                <div class="col-sm-3 table-wrapper">
                     <h4>Tasks</h4>
                     <form class="form-inline" method="POST" action="{{route('task_update')}}" id="new_task_form">
                         <input type="hidden" id="task_user_id" name="user_id" value="{{$ticket->user_id}}">
@@ -166,104 +167,30 @@
                     </table>
                 </div>
 
-                <div class="col-sm-8">
-                    <h4>Notes</h4>
-                    <form>
-                        <div class="form-group">
-                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Title">
+                <div class="col-sm-9">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalNotesForm" data-backdrop="false">
+                        Add Note
+                    </button>
+                    <hr />
+
+                    <h4>History</h4>
+                    <div class="row">
+                        <div class="col-sm-12">
+                           <ticket-notes
+                                   ticket_id="{{$ticket->id}}"
+                                   ticket_url="{{ route('new_note') }}"
+                                   resource="{{ route('ticket_notes', ['ticket_id' => $ticket->id]) }}">
+
+                           </ticket-notes>
+
                         </div>
-                        <div class="form-group">
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary mb-2">Save</button>
-                        </div>
-                    </form>
-                    <table class="table table-bordered">
-                        <tr>
-                            <th>Title</th>
-                            <th>Created</th>
-                            <th>created_by</th>
-                        </tr>
-
-                        @foreach($ticket->tasks as $t)
-                            <tr>
-                                <td>#{{ $t->id }}</td>
-                                <td>{{ $t->title }}</td>
-                                <td>
-                                    <form class="form-inline" method="POST" action="{{route('task_update')}}">
-                                        @csrf
-                                        <div class="form-check mb-2 mr-sm-2">
-                                            <input
-                                                    class="status_check"
-                                                    type="checkbox"
-                                                    id="taskStatus{{$t->id}}"
-                                                    name="taskStatus"
-                                                    data-task="{{$t->id}}"
-                                                    value="{{ $t->complete }}"
-                                                    @if($t->complete == 1) checked @endif
-                                            >
-                                            <label class="form-check-label" for="taskStatus">
-                                                Complete
-                                            </label>
-                                        </div>
-                                    </form>
-
-
-                                </td>
-
-                            </tr>
-                        @endforeach
-
-                    </table>
+                    </div>
                 </div>
             </div>
 
-            <h4>History</h4>
-            <div class="row">
-                <div class="col-sm-12">
-                    <table class="table table-bordered">
-                        <tr>
-                            <th>Number</th>
-                            <th>Name</th>
-                            <th>URL</th>
-                            <th>created_by</th>
-                        </tr>
-
-                        @foreach($ticket->tasks as $t)
-                            <tr>
-                                <td>#{{ $t->id }}</td>
-                                <td>{{ $t->title }}</td>
-                                <td>{{ $t->assigned }}</td>
-                                <td>
-                                    <form class="form-inline" method="POST" action="{{route('task_update')}}">
-                                        @csrf
-                                        <div class="form-check mb-2 mr-sm-2">
-                                            <input
-                                                    class="status_check"
-                                                    type="checkbox"
-                                                    id="taskStatus{{$t->id}}"
-                                                    name="taskStatus"
-                                                    data-task="{{$t->id}}"
-                                                    value="{{ $t->complete }}"
-                                                    @if($t->complete == 1) checked @endif
-                                            >
-                                            <label class="form-check-label" for="taskStatus">
-                                                Complete
-                                            </label>
-                                        </div>
-                                    </form>
 
 
-                                </td>
 
-                            </tr>
-                        @endforeach
-
-                    </table>
-
-                </div>
-            </div>
 
 
         </div>

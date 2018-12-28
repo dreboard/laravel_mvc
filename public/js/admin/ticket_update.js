@@ -287,6 +287,49 @@ $(document).ready(function () {
 
     }
 
+    $('#saveTicketNoteBtn').on('click', function () {
+        //
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: ticket.note_url,
+
+            data: {
+                ticket_id: $("#ticket_id").val(),
+                note: $("#note").val(),
+                _token: ticket.token,
+            },
+
+            type: "POST",
+            dataType: "json",
+        })
+
+            .done(function (json) {
+
+                $(".edited").text(json.allowed).show();
+
+                if (json.allowed == 'Note Not Added') {
+                    $(".edited").addClass('text-danger');
+                } else {
+                    $(".edited").removeClass('text-danger');
+                    $('#modalNotesForm').modal('hide')
+                }
+            })
+
+            .fail(function (xhr, status, errorThrown) {
+                ajaxError(xhr, status, errorThrown);
+            })
+
+            .always(function (xhr, status, json) {
+                if (ENVIRONMENT === "local") {
+                    console.log(status);
+                }
+            });
+
+    });
+
+
     function scrollDiv(){
         $(".table-wrapper").animate({
             scrollTop: $('.table-wrapper')[0].scrollHeight - $('.table-wrapper')[0].clientHeight

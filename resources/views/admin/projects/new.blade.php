@@ -68,14 +68,14 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleFormControlSelect1">For Cycle:</label>
+                    <label for="exampleFormControlSelect1">For Site:</label>
 
-                    @if($cycle)
+                    @if($site)
                         <input name="cycle_id" type="text" class="form-control" placeholder="title" value="{{$cycle->title}}" id="cycle_id" disabled>
                     @else
                         <select class="form-control" name="site_id">
-                            @foreach($cycleListAll as $cycleList)
-                                <option value="{{$cycleList->id}}">{{$cycleList->title}}</option>
+                            @foreach($siteListAll as $siteList)
+                                <option value="{{$siteList->id}}">{{$siteList->title}}</option>
                             @endforeach
                         </select>
                     @endif

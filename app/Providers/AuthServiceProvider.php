@@ -36,5 +36,9 @@ class AuthServiceProvider extends ServiceProvider
             return $user->id == $ticket->user_id;
         });
 
+        Gate::define('new-note', function($ticket){
+            return $ticket->open_edit == 1;
+        });
+
     }
 }

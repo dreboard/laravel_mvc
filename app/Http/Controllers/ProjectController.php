@@ -64,12 +64,12 @@ class ProjectController extends Controller
     public function create($id = 0)
     {
         if($id !== 0){
-            $cycle = Cycle::find($id);
+            $site = Site::find($id);
         } else {
-            $cycle = null;
+            $site = null;
         }
-        $cycleListAll = $this->projectService->getOpenProjects();
-        return view('admin.projects.new', ['cycleListAll' => $cycleListAll, 'cycle' => $cycle]);
+        $siteListAll = $this->projectService->getSites();
+        return view('admin.projects.new', ['siteListAll' => $siteListAll, 'site' => $site]);
     }
 
     /**

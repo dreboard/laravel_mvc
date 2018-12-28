@@ -12,6 +12,7 @@ namespace App\Services;
 
 use App\Project;
 use App\Helpers\DateHelper;
+use App\Site;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,7 +30,6 @@ class ProjectService
         $project->description = $request->description;
         $project->due_date = DateHelper::formatStartDate($request->input('due_date'));
         $project->create_date = DateHelper::formatStartDate($request->input('due_date'));
-        $project->cycle_id = $request->cycle_id ?? 0;
         $project->site_id = $request->site_id ?? 0;
         $project->user_id = Auth::user( )->id;
         $project->created_by = Auth::user( )->id;
@@ -49,6 +49,14 @@ class ProjectService
         return $projectInfo;
     }
 
+    /**
+     * Get all projects
+     * @return Project[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function getSites()
+    {
+        return Site::all();
+    }
     /**
      * Get all projects
      * @return Project[]|\Illuminate\Database\Eloquent\Collection
