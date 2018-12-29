@@ -6,11 +6,14 @@
             <tr>
                 <th>Note</th>
                 <th>Added</th>
+                <th></th>
             </tr>
 
             <tr v-for="project_note in notes">
                 <td class="w-75">{{ project_note.note }}</td>
-                <td class="w-25">{{ project_note.note_date }}</td>
+                <td class="w-20">{{ project_note.note_date }}</td>
+                <td class="w-5"><button @click="deleteTicketNote(project_note.id)" type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i>
+                </button></td>
             </tr>
         </table>
 
@@ -73,6 +76,20 @@
                 });
             },
             saveTicketNote(){
+                axios
+                    .post(this.ticket_url, {
+                        note: this.note_form.note,
+                        ticket_id: this.ticket_id
+                    }).then((response)=>{
+                    $('#modalNotesForm').modal('hide');
+                    this.getNotes();
+                }).catch((error)=>{
+                    if (ENVIRONMENT === "local") {
+                        console.log(error);
+                    }
+                });
+            },
+            deleteTicketNote(id){
                 axios
                     .post(this.ticket_url, {
                         note: this.note_form.note,

@@ -14029,6 +14029,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(15);
+(function webpackMissingModule() { throw new Error("Cannot find module \"C:\\_SITES\\_dev-php\\site1\\resources\\js\\app.js\""); }());
 __webpack_require__(63);
 module.exports = __webpack_require__(64);
 
@@ -52265,6 +52266,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['resource', 'ticket_id', 'ticket_url'],
@@ -52305,6 +52309,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     console.log(error);
                 }
             });
+        },
+        deleteTicketNote: function deleteTicketNote(id) {
+            var _this3 = this;
+
+            axios.post(this.ticket_url, {
+                note: this.note_form.note,
+                ticket_id: this.ticket_id
+            }).then(function (response) {
+                $('#modalNotesForm').modal('hide');
+                _this3.getNotes();
+            }).catch(function (error) {
+                if (ENVIRONMENT === "local") {
+                    console.log(error);
+                }
+            });
         }
     },
     created: function created() {
@@ -52338,8 +52357,29 @@ var render = function() {
               _vm._v(_vm._s(project_note.note))
             ]),
             _vm._v(" "),
-            _c("td", { staticClass: "w-25" }, [
+            _c("td", { staticClass: "w-20" }, [
               _vm._v(_vm._s(project_note.note_date))
+            ]),
+            _vm._v(" "),
+            _c("td", { staticClass: "w-5" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-danger",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      _vm.deleteTicketNote(project_note.id)
+                    }
+                  }
+                },
+                [
+                  _c("i", {
+                    staticClass: "fa fa-trash",
+                    attrs: { "aria-hidden": "true" }
+                  })
+                ]
+              )
             ])
           ])
         })
@@ -52436,7 +52476,9 @@ var staticRenderFns = [
     return _c("tr", [
       _c("th", [_vm._v("Note")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Added")])
+      _c("th", [_vm._v("Added")]),
+      _vm._v(" "),
+      _c("th")
     ])
   },
   function() {
