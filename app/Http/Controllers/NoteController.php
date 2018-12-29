@@ -47,4 +47,18 @@ class NoteController extends Controller
         }
 
     }
+
+    public function deleteTicketNote(Request $request)
+    {
+        try{
+            $note = Notes::find($request->note_id);
+            $note->delete();
+            $this->allowed = 'Note deleted';
+            return response()->json(['allowed' => $this->allowed, 'note_id' =>$note->id], 200);
+        }catch (\Throwable $e){
+            \Log::error($e->getMessage());
+            return response()->json(['allowed' => 'Note Not Deleted']);
+        }
+
+    }
 }

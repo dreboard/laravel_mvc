@@ -92,8 +92,7 @@ $(document).ready(function () {
         })
 
             .done(function (json) {
-                $(".edited").text(json.allowed).show();
-
+                showMessage(json.allowed);
                 if (json.allowed == 'Not assigned this task') {
                     $(".edited").addClass('text-danger');
                 } else {
@@ -175,9 +174,7 @@ $(document).ready(function () {
         })
 
             .done(function (json) {
-
-                $(".edited").text(json.allowed).show();
-
+                showMessage(son.allowed)
                 if (json.allowed == 'Not assigned this task') {
                     $(".edited").addClass('text-danger');
 
@@ -223,9 +220,7 @@ $(document).ready(function () {
         })
 
             .done(function (json) {
-
-                $(".edited").text(json.allowed).show();
-
+                showMessage(json.allowed)
                 if (json.allowed == 'Not assigned this task') {
                     $(".edited").addClass('text-danger');
                 } else {
@@ -271,7 +266,7 @@ $(document).ready(function () {
             .done(function (json) {
                 $('.progress-bar').css('width', json.completed + '%').attr('aria-valuenow', json.completed);
                 $('#progressbarText').text(json.completed);
-                $(".edited").text(json.allowed).show();
+                showMessage(json.allowed);
             })
 
             .fail(function (xhr, status, errorThrown) {
@@ -306,8 +301,7 @@ $(document).ready(function () {
         })
 
             .done(function (json) {
-
-                $(".edited").text(json.allowed).show();
+                showMessage(json.allowed);
 
                 if (json.allowed == 'Note Not Added') {
                     $(".edited").addClass('text-danger');
@@ -329,6 +323,12 @@ $(document).ready(function () {
 
     });
 
+    function showMessage(msg){
+        $(".edited").text(msg).show();
+        setTimeout(function(){
+            $(".edited").text('');
+        }, 3000);
+    }
 
     function scrollDiv(){
         $(".table-wrapper").animate({
@@ -337,7 +337,7 @@ $(document).ready(function () {
     }
 
     function ajaxError(xhr, status, errorThrown){
-        $("div.edited").text("Sorry, there was a problem!").show();
+        showMessage("Sorry, there was a problem!");
         if (ENVIRONMENT === "local") {
             console.log("Error: " + errorThrown);
             console.log("Status: " + status);

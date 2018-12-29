@@ -173,14 +173,13 @@
                     </button>
                     <hr />
 
-                    <h4>History</h4>
                     <div class="row">
                         <div class="col-sm-12">
                            <ticket-notes
                                    ticket_id="{{$ticket->id}}"
-                                   ticket_url="{{ route('new_note') }}"
+                                   note_save_url="{{ route('new_note') }}"
+                                   note_delete_url="{{ route('note_delete') }}"
                                    resource="{{ route('ticket_notes', ['ticket_id' => $ticket->id]) }}">
-
                            </ticket-notes>
 
                         </div>

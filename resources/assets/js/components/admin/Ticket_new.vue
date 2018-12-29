@@ -53,7 +53,7 @@
 
 <script>
     export default {
-        props: ['resource', 'ticket_id', 'ticket_url'],
+        props: ['resource', 'ticket_id', 'note_save_url', 'note_delete_url'],
         data() {
             return {
                 notes: [],
@@ -77,12 +77,13 @@
             },
             saveTicketNote(){
                 axios
-                    .post(this.ticket_url, {
+                    .post(this.note_save_url, {
                         note: this.note_form.note,
                         ticket_id: this.ticket_id
                     }).then((response)=>{
                     $('#modalNotesForm').modal('hide');
                     this.getNotes();
+                    showMessage('Note Added');
                 }).catch((error)=>{
                     if (ENVIRONMENT === "local") {
                         console.log(error);
@@ -90,19 +91,22 @@
                 });
             },
             deleteTicketNote(id){
-                axios
-                    .post(this.ticket_url, {
-                        note: this.note_form.note,
-                        ticket_id: this.ticket_id
-                    }).then((response)=>{
-                    $('#modalNotesForm').modal('hide');
-                    this.getNotes();
-                }).catch((error)=>{
-                    if (ENVIRONMENT === "local") {
-                        console.log(error);
-                    }
-                });
+                if (window.confirm("Delete Note?")) {
+                    axios
+                        .post(this.note_delete_url, {
+                            note_id: id
+                        }).then((response)=>{
+                        this.getNotes();
+                        showMessage('Note Deleted');
+                    }).catch((error)=>{
+                        showMessage("Sorry, there was a problem!");
+                        if (ENVIRONMENT === "local") {
+                            console.log(error);
+                        }
+                    });
+                }
             }
+
         },
         created(){
             this.getNotes()
