@@ -50384,6 +50384,61 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
@@ -50406,129 +50461,263 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "content-header" }, [
-        _c("div", { staticClass: "container-fluid" }, [
-          _c("div", { staticClass: "row mb-2" }, [
-            _c("div", { staticClass: "col-sm-6" }, [
-              _c("h1", { staticClass: "m-0 text-dark" }, [
-                _vm._v("Profile Page")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-6" }, [
-              _c("ol", { staticClass: "breadcrumb float-sm-right" }, [
-                _c("li", { staticClass: "breadcrumb-item" }, [
-                  _c("a", { attrs: { href: "#" } }, [_vm._v("Home")])
-                ]),
-                _vm._v(" "),
-                _c("li", { staticClass: "breadcrumb-item active" }, [
-                  _vm._v("Starter Page")
-                ])
-              ])
+    return _c("div", { staticClass: "emp-profile" }, [
+      _c("form", { attrs: { method: "post" } }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-8" }, [
+            _c("div", { staticClass: "profile-head" }, [
+              _c("h5", [
+                _vm._v(
+                  "\n                        Kshiti Ghelani\n                    "
+                )
+              ]),
+              _vm._v(" "),
+              _c("h6", [
+                _vm._v(
+                  "\n                        Web Developer and Designer\n                    "
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "proile-rating" }, [
+                _vm._v("RANKINGS : "),
+                _c("span", [_vm._v("8/10")])
+              ]),
+              _vm._v(" "),
+              _c(
+                "ul",
+                {
+                  staticClass: "nav nav-tabs",
+                  attrs: { id: "myTab", role: "tablist" }
+                },
+                [
+                  _c("li", { staticClass: "nav-item" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link active",
+                        attrs: {
+                          id: "home-tab",
+                          "data-toggle": "tab",
+                          href: "#home",
+                          role: "tab",
+                          "aria-controls": "home",
+                          "aria-selected": "true"
+                        }
+                      },
+                      [_vm._v("About")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", { staticClass: "nav-item" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link",
+                        attrs: {
+                          id: "profile-tab",
+                          "data-toggle": "tab",
+                          href: "#profile",
+                          role: "tab",
+                          "aria-controls": "profile",
+                          "aria-selected": "false"
+                        }
+                      },
+                      [_vm._v("Timeline")]
+                    )
+                  ])
+                ]
+              )
             ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-4" }, [
+            _c("input", {
+              staticClass: "profile-edit-btn",
+              attrs: {
+                type: "button",
+                name: "btnAddMore",
+                value: "Edit Profile"
+              }
+            })
           ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "content" }, [
-        _c("div", { staticClass: "container-fluid" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-lg-6" }, [
-              _c("div", { staticClass: "card" }, [
-                _c("div", { staticClass: "card-body" }, [
-                  _c("h5", { staticClass: "card-title" }, [
-                    _vm._v("Card title")
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "card-text" }, [
-                    _vm._v(
-                      "\n                                Some quick example text to build on the card title and make up the bulk of the card's\n                                content.\n                            "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("a", { staticClass: "card-link", attrs: { href: "#" } }, [
-                    _vm._v("Card link")
-                  ]),
-                  _vm._v(" "),
-                  _c("a", { staticClass: "card-link", attrs: { href: "#" } }, [
-                    _vm._v("Another link")
-                  ])
-                ])
-              ]),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-4" }, [
+            _c("div", { staticClass: "profile-work" }, [
+              _c("p", [_vm._v("WORK LINK")]),
               _vm._v(" "),
-              _c("div", { staticClass: "card card-primary card-outline" }, [
-                _c("div", { staticClass: "card-body" }, [
-                  _c("h5", { staticClass: "card-title" }, [
-                    _vm._v("Card title")
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "card-text" }, [
-                    _vm._v(
-                      "\n                                Some quick example text to build on the card title and make up the bulk of the card's\n                                content.\n                            "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("a", { staticClass: "card-link", attrs: { href: "#" } }, [
-                    _vm._v("Card link")
-                  ]),
-                  _vm._v(" "),
-                  _c("a", { staticClass: "card-link", attrs: { href: "#" } }, [
-                    _vm._v("Another link")
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-lg-6" }, [
-              _c("div", { staticClass: "card" }, [
-                _c("div", { staticClass: "card-header" }, [
-                  _c("h5", { staticClass: "m-0" }, [_vm._v("Featured")])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body" }, [
-                  _c("h6", { staticClass: "card-title" }, [
-                    _vm._v("Special title treatment")
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "card-text" }, [
-                    _vm._v(
-                      "With supporting text below as a natural lead-in to additional content."
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    { staticClass: "btn btn-primary", attrs: { href: "#" } },
-                    [_vm._v("Go somewhere")]
-                  )
-                ])
-              ]),
+              _c("a", { attrs: { href: "" } }, [_vm._v("Website Link")]),
+              _c("br"),
               _vm._v(" "),
-              _c("div", { staticClass: "card card-primary card-outline" }, [
-                _c("div", { staticClass: "card-header" }, [
-                  _c("h5", { staticClass: "m-0" }, [_vm._v("Featured")])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body" }, [
-                  _c("h6", { staticClass: "card-title" }, [
-                    _vm._v("Special title treatment")
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "card-text" }, [
-                    _vm._v(
-                      "With supporting text below as a natural lead-in to additional content."
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    { staticClass: "btn btn-primary", attrs: { href: "#" } },
-                    [_vm._v("Go somewhere")]
-                  )
-                ])
-              ])
+              _c("a", { attrs: { href: "" } }, [_vm._v("Bootsnipp Profile")]),
+              _c("br"),
+              _vm._v(" "),
+              _c("a", { attrs: { href: "" } }, [_vm._v("Bootply Profile")]),
+              _vm._v(" "),
+              _c("p", [_vm._v("SKILLS")]),
+              _vm._v(" "),
+              _c("a", { attrs: { href: "" } }, [_vm._v("Web Designer")]),
+              _c("br"),
+              _vm._v(" "),
+              _c("a", { attrs: { href: "" } }, [_vm._v("Web Developer")]),
+              _c("br"),
+              _vm._v(" "),
+              _c("a", { attrs: { href: "" } }, [_vm._v("WordPress")]),
+              _c("br"),
+              _vm._v(" "),
+              _c("a", { attrs: { href: "" } }, [_vm._v("WooCommerce")]),
+              _c("br"),
+              _vm._v(" "),
+              _c("a", { attrs: { href: "" } }, [_vm._v("PHP, .Net")]),
+              _c("br")
             ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-8" }, [
+            _c(
+              "div",
+              {
+                staticClass: "tab-content profile-tab",
+                attrs: { id: "myTabContent" }
+              },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass: "tab-pane fade show active",
+                    attrs: {
+                      id: "home",
+                      role: "tabpanel",
+                      "aria-labelledby": "home-tab"
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("label", [_vm._v("User Id")])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("p", [_vm._v("Kshiti123")])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("label", [_vm._v("Name")])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("p", [_vm._v("Kshiti Ghelani")])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("label", [_vm._v("Email")])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("p", [_vm._v("kshitighelani@gmail.com")])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("label", [_vm._v("Phone")])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("p", [_vm._v("123 456 7890")])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("label", [_vm._v("Profession")])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("p", [_vm._v("Web Developer and Designer")])
+                      ])
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "tab-pane fade",
+                    attrs: {
+                      id: "profile",
+                      role: "tabpanel",
+                      "aria-labelledby": "profile-tab"
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("label", [_vm._v("Experience")])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("p", [_vm._v("Expert")])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("label", [_vm._v("Hourly Rate")])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("p", [_vm._v("10$/hr")])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("label", [_vm._v("Total Projects")])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("p", [_vm._v("230")])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("label", [_vm._v("English Level")])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("p", [_vm._v("Expert")])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("label", [_vm._v("Availability")])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("p", [_vm._v("6 months")])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-12" }, [
+                        _c("label", [_vm._v("Your Bio")]),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [_vm._v("Your detail description")])
+                      ])
+                    ])
+                  ]
+                )
+              ]
+            )
           ])
         ])
       ])

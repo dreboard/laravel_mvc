@@ -55,9 +55,22 @@ class SiteService
         return $siteInfo;
     }
 
-    public function getUsersSites(int $id)
+    public function getUsersSites(User $user)
     {
+        $sites = $user->sites;
+        $userSites = [];
+        foreach ($sites as $site){
+            $site = Site::find($site->id);
+            $userSites[] = [
+                'id' => $site->id,
+                'title' => $site->title,
+                'description' => $site->description,
+                'projects' => count($site->projects),
+                'rate' => $site->rate,
 
+            ];
+        }
+        return collect($userSites);
     }
 
 }

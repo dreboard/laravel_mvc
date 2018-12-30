@@ -154,7 +154,8 @@ class SiteController extends Controller
     public function show($id)
     {
         $siteInfo = Site::find($id);
-        return view("admin.sites.view", ["siteInfo" => $siteInfo]);
+        $projects = $siteInfo->projects;
+        return view("admin.sites.view", ["siteInfo" => $siteInfo, 'projects' => $projects]);
     }
 
 }

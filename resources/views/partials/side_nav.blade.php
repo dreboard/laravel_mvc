@@ -64,7 +64,7 @@
                 </a>
                 <ul class="sidenav-second-level collapse" id="collapseComponents">
                     <li>
-                        <a href="{{route('home')}}">Current</a>
+                        <a href="{{route('user_profile')}}">Profile</a>
                     </li>
                     <li>
                         <a href="{{route('site_all')}}">All</a>

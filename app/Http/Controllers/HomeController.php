@@ -10,21 +10,23 @@
  */
 namespace App\Http\Controllers;
 
-use App\Ticket;
+use App\{Services\SiteService, User, Site};
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
+    protected $siteService;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(SiteService $siteService)
     {
+        $this->siteService = $siteService;
         $this->middleware('auth');
     }
-
     /**
      * Show the application dashboard.
      *
@@ -32,11 +34,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //return view('home');
-        $tasks = Ticket::all();
-        return view('admin.home', ['tasks' => $tasks]);
-        //return view('admin.dash', ['tasks' => $tasks]);
+        $user = User::find(Auth::user()->id);
+        $projects = count($user->projects);
+        $userSites = $this->siteService->getUsersSites($user);
+        //For adminlte
+        //return view('admin.home', ['tasks' => $tasks]);
+        return view('admin.dash', ['user' => $user, 'projects' => $projects, 'userSites' => $userSites]);
     }
+
     /**
      * Show the front page.
      *

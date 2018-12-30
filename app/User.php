@@ -48,7 +48,7 @@ class User extends Authenticatable
      */
     public function sites()
     {
-        return $this->hasMany('App\Site');
+        return $this->hasMany('App\Site', 'created_by');
     }
 
     /**
