@@ -1,97 +1,96 @@
 @extends('layouts.admin_dash')
+@push('css')
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+@endpush
 
+@push('scripts')
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="{{asset('js/datepickers.js')}}"></script>
+@endpush
 @section('content')
     <!-- Breadcrumbs-->
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
             <a href="{{route('home')}}">Home</a>
         </li>
-        <li class="breadcrumb-item"><a href="{{route('project_all')}}">All</a></li>
+        <li class="breadcrumb-item"><a href="{{route("site_view", ['id' => $project->site->id])}}"> {{$project->site->title}}</a></li>
         <li class="breadcrumb-item active">{{$project->title}}</li>
     </ol>
-    <div class="row">
 
-        <div class="col-9">
+    <div id="invoice">
 
-            <h2>Project #{{$project->id}} </h2>
-            <small>{{$project->title}}</small>
-            <p>
-                <a href="{{route("site_view", ['id' => $project->site->id])}}"> {{ $project->site->title }}</a>
-            </p>
-            @if($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach($errors->all() as $error)
-                            <li>{{$error}}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-            <form id="projectEditForm" method="POST" action="{{route('updateCycle')}}">
-                @csrf
-                {{ method_field('post') }}
-                <input type="hidden" name="created_by" value="{{$project->created_by}}">
-                <input type="hidden" name="id" value="{{$project->id}}">
-                <div class="form-group row">
-                    <label for="title" class="col-sm-2 col-form-label">Title</label>
-                    <div class="col-sm-10">
-                        <input name="title" type="text" class="form-control" placeholder="title"
-                               value="{{$project->title}}" id="cycle_title">
+        <div class="invoice overflow-auto">
+            <div style="min-width: 600px">
+                <main>
+                    <div class="row contacts">
+                        <project-view
+                            title="{{$project->title}}"
+                            description="{{$project->description}}"
+                            project_id="{{$project->id}}"
+                            project_edit_url="{{route('project_edit')}}"
+                            project_get_url="{{route('project_get', ['id' => $project->id])}}"
+                        >
+                        </project-view>
+
                     </div>
-                </div>
 
+                    <h3>Tickets</h3>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newTicketForm">
+                        New Ticket
+                    </button>
+                    <table border="0" cellspacing="0" cellpadding="0">
+                        <thead>
+                        <tr>
+                            <th class="text-left">Name</th>
+                            <th class="text-right">Created</th>
+                            <th class="text-right">Due</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($project->tickets as $ticket)
+                            <tr>
+                                <td class="w-75 text-left"><a href="{{route('ticket_view', ['id' => $ticket->id])}}"> {{ $ticket->title }}</a></td>
+                                <td class="unit">{{ Carbon\Carbon::parse($ticket->create_date)->format('M d Y H:i:s a') }}</td>
+                                <td class="qty">{{ Carbon\Carbon::parse($ticket->due_date)->format('M d Y H:i:s a') }}</td>
+                            </tr>
+                        @endforeach
 
-                <div class="form-group row">
-                    <label for="start_date" class="col-sm-2 col-form-label">Dates</label>
-                    <div class="col-sm-10">
-                        <div class="form-group row">
-                            <div class="col">
-                                <input type="text" class="form-control datepicker" placeholder="start date"
-                                       name="start_date" value="{{$project->due_date}}"
-                                       id="cycle_start_date">
-                            </div>
-                            <div class="col">
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th class="text-left">Info Name</th>
+                            <th class="text-right">Created</th>
+                            <th class="text-right">Due</th>
+                        </tr>
+                        </tfoot>
+                    </table>
 
-                            </div>
+                </main>
+
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="newTicketForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Create A New Ticket</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
                         </div>
                     </div>
                 </div>
-
-
-                <div class="form-group row">
-                    <div class="col-sm-10">
-                        <button id="projectEditFormBtn" type="submit" class="btn btn-primary">Edit</button>
-                    </div>
-                </div>
-            </form>
+            </div>
 
         </div>
-
-        <hr />
-        <div class="col-9">
-            <h3>Project Tickets <a href="{{route('ticket_new')}}" class="btn btn-primary">New</a> </h3>
-            <table class="table table-bordered">
-                <tr>
-                    <th>Number</th>
-                    <th>Status</th>
-                    <th>Created</th>
-                    <th>Due</th>
-                </tr>
-
-                @foreach($project->tickets as $ticket)
-                    <tr>
-                        <td>#{{ $ticket->id }}</td>
-                        <td><a href="{{route('ticket_view', ['id' => $ticket->id])}}"> {{ $ticket->title }}</a></td>
-                        <td>{{ $ticket->create_date }}</td>
-                        <td>{{ $ticket->due_date }}</td>
-                    </tr>
-                @endforeach
-
-            </table>
-
-
-        </div>
-
-
     </div>
+
 @endsection

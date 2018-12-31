@@ -135,6 +135,7 @@ class TicketController extends Controller
         return view('admin.projects.all', ['projects' => $projects]);
     }
 
+
     /**
      * Edit Ticket by id
      * @param int $id

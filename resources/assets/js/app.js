@@ -45,6 +45,8 @@ Vue.component('app-front-links', require('./components/front/Links.vue'));
 //Admin
 Vue.component('user_profile', require('./components/admin/Profile.vue'));
 Vue.component('ticket-notes', require('./components/admin/Ticket_new'));
+Vue.component('project-view', require('./components/admin/Project_view'));
+Vue.component('ticket-list', require('./components/admin/Ticket_list_view'));
 
 const app = new Vue({
     el: '#app',

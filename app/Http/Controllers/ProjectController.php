@@ -119,6 +119,22 @@ class ProjectController extends Controller
         return view('admin.projects.view')->with(['project' => $project]);
     }
 
+    public function getById(int $id)
+    {
+        $project = Project::find($id);
+        return response()->json(['project' => $project]);
+    }
+
+    public function ticketsForProject(int $id)
+    {
+        try{
+            $project = Project::findOrFail($id);
+
+            return response()->json(["tickets" => $project->tickets]);
+        } catch (\Throwable $e){
+            return redirect()->back()->with('errors', $this->envMessage($e));
+        }
+    }
     /**
      * Get all projects
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View

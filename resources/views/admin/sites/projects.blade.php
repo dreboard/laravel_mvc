@@ -44,7 +44,7 @@
                     <tr>
                         <td>#{{ $project->id }}</td>
                         <td><a href="{{route('project_view', ['id' => $project->id])}}"> {{ $project->title }}</a></td>
-                        <td>{{ $project->create_date }}</td>
+                        <td>{{ Carbon\Carbon::parse($project->create_date)->format('d-m-Y i') }}</td>
                         <td>{{ $project->due_date }}</td>
                     </tr>
                 @endforeach

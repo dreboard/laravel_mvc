@@ -46,8 +46,8 @@
                         @foreach($projects as $project)
                             <tr>
                                 <td class="w-75 text-left"><h3><a href="{{route('project_view', ['id' => $project->id])}}"> {{ $project->title }}</a></h3>{{$project->description}}</td>
-                                <td class="unit">{{ $project->create_date }}</td>
-                                <td class="qty">{{ $project->due_date }}</td>
+                                <td class="unit">{{ Carbon\Carbon::parse($project->create_date)->format('M d Y H:i:s a') }}</td>
+                                <td class="qty">{{ Carbon\Carbon::parse($project->due_date)->format('M d Y H:i:s a') }}</td>
                             </tr>
                         @endforeach
 

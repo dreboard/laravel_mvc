@@ -137,6 +137,7 @@ class SiteController extends Controller
         }
     }
 
+
     /**
      * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View

@@ -22,9 +22,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('project_home', 'ProjectController@index')->name('project_home');
     Route::get('project_new/{id?}', 'ProjectController@create')->name('project_new');
     Route::post('project_save', 'ProjectController@save')->name('project_save');
+    Route::post('project_edit', 'ProjectController@edit')->name('project_edit');
     Route::get('project_view/{id?}', 'ProjectController@show')->name('project_view');
+    Route::get('project_get/{id?}', 'ProjectController@getById')->name('project_get');
     Route::get('project_all', 'ProjectController@all')->name('project_all');
-
+    Route::get('ticket_get_all/{id}', 'ProjectController@ticketsForProject');
     // Ticket routes
     require_once __DIR__.'/tickets.php';
 
