@@ -24,12 +24,17 @@ class CreateUsersTable extends Migration
         });
 
         DB::table('users')->insert(
-            array(
+            [
                 'name' => 'namm',
                 'email' => 'dreboard@yahoo.com',
                 'password' => bcrypt('test1234'),
                 'isAdmin' => 1
-            )
+            ],[
+                'name' => 'guest',
+                'email' => 'guest@guest.com',
+                'password' => bcrypt('temp1234'),
+                'isAdmin' => 0
+            ]
         );
     }
 

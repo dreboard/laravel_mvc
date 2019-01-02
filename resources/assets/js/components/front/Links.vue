@@ -41,9 +41,9 @@
             <div class="card-body">
                 <ul>
 
-                    <li>Laravel 5.6</li>
+                    <li>Laravel 5.7</li>
                     <li>Bootstrap 4</li>
-                    <li>PHP 7.1</li>
+                    <li>PHP 7.3</li>
                     <li>VueJS</li>
                     <li>Node/NPM</li>
                 </ul>

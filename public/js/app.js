@@ -52329,11 +52329,11 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
           _c("ul", [
-            _c("li", [_vm._v("Laravel 5.6")]),
+            _c("li", [_vm._v("Laravel 5.7")]),
             _vm._v(" "),
             _c("li", [_vm._v("Bootstrap 4")]),
             _vm._v(" "),
-            _c("li", [_vm._v("PHP 7.1")]),
+            _c("li", [_vm._v("PHP 7.3")]),
             _vm._v(" "),
             _c("li", [_vm._v("VueJS")]),
             _vm._v(" "),
@@ -53389,7 +53389,88 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function(){},staticRenderFns:[]}
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("h3", [_vm._v("Tickets")]),
+    _vm._v(" "),
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-primary",
+        attrs: {
+          type: "button",
+          "data-toggle": "modal",
+          "data-target": "#newTicketForm"
+        }
+      },
+      [_vm._v("\n        New Ticket\n    ")]
+    ),
+    _vm._v(" "),
+    _c(
+      "table",
+      { attrs: { border: "0", cellspacing: "0", cellpadding: "0" } },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.tickets, function(ticket) {
+            return _c("tr", [
+              _c("td", { staticClass: "w-75 text-left" }, [
+                _vm._v(_vm._s(ticket.title))
+              ]),
+              _vm._v(" "),
+              _c("td", { staticClass: "unit" }, [
+                _vm._v(_vm._s(ticket.create_date))
+              ]),
+              _vm._v(" "),
+              _c("td", { staticClass: "qty" }, [
+                _vm._v(_vm._s(ticket.due_date))
+              ])
+            ])
+          })
+        ),
+        _vm._v(" "),
+        _vm._m(1)
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticClass: "text-left" }, [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-right" }, [_vm._v("Created")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-right" }, [_vm._v("Due")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tfoot", [
+      _c("tr", [
+        _c("th", { staticClass: "text-left" }, [_vm._v("Info Name")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-right" }, [_vm._v("Created")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-right" }, [_vm._v("Due")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {

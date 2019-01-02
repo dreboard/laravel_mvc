@@ -22,6 +22,7 @@ class CreateSiteTable extends Migration
             $table->integer('submitted');
             $table->string('git_url');
             $table->integer('created_by');
+            $table->decimal('rate')->default(40.00);
             $table->timestamps();
         });
 

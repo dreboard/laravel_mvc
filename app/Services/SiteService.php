@@ -1,6 +1,6 @@
 <?php
 /**
- * @class        SiteService
+ * @class       SiteService
  * @package     App\Services
  * @since       v0.1.0
  * @author      Andre Board <dre.board@gmail.com>
@@ -55,6 +55,11 @@ class SiteService
         return $siteInfo;
     }
 
+    /**
+     * Get all sites and projects count
+     * @param User $user
+     * @return \Illuminate\Support\Collection
+     */
     public function getUsersSites(User $user)
     {
         $sites = $user->sites;

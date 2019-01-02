@@ -14,7 +14,7 @@
             </thead>
             <tbody>
             <tr v-for="ticket in tickets">
-                <td class="w-75 text-left"><a href="{{this.get_ticket_url}}"> {{ ticket.title }}</a></td>
+                <td class="w-75 text-left">{{ ticket.title }}</td>
                 <td class="unit">{{ticket.create_date }}</td>
                 <td class="qty">{{ ticket.due_date }}</td>
             </tr>

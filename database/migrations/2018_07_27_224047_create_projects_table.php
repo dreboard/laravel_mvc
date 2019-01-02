@@ -21,6 +21,7 @@ class CreateProjectsTable extends Migration
             $table->date('due_date');
             $table->integer('cycle_id');
             $table->integer('site_id');
+            $table->integer('active')->default(0);
             $table->integer('created_by');
             $table->timestamps();
         });
