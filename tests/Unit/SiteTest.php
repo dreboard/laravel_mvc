@@ -2,9 +2,11 @@
 
 namespace Tests\Unit;
 
+use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Site;
 
 class SiteTest extends TestCase
 {
@@ -61,25 +63,27 @@ class SiteTest extends TestCase
             'git_url' => 'github.com/tester',
             'created_by' => 1
         ];
+
         $user = factory(\App\User::class)->create();
-        $response = $this->actingAs($user, 'web')->json('POST', '/site_save',$data);
+        $response = $this->actingAs($user, 'web')->json('POST', route('site_save'),$data);
         $this->assertDatabaseHas($this->table, ['title' => $titleNum]);
         $response->assertViewIs('admin.sites.view');
     }
 
-    public function testNoUserCanCreateSite()
+    public function testCanCreateSite()
     {
         $this->withoutMiddleware();
-        $data = [
-            'title' => "New Site Tested",
-            'description' => "This is a site",
-            'url' => 'www.tested.com',
-            'ga' => '111111111',
-            'submitted' => 1,
-            'git_url' => 'github.com/tester',
-            'created_by' => 1
-        ];
-        $response = $this->json('POST', '/site_save',$data);
-        $this->assertDatabaseMissing($this->table, $data);
+        $user = User::find(1);
+        $site = factory(\App\Site::class)->make();
+        $response = $this->actingAs($user, 'web')->json('POST', route('site_save'),$site->toArray());
+        $response->assertStatus(200);
+    }
+
+    public function testNoUserCanCreateSite()
+    {
+        $data = factory(\App\Site::class)->make();
+        $response = $this->json('POST', route('site_save'),$data->toArray());
+        $this->assertDatabaseMissing($this->table, $data->toArray());
+        $response->assertStatus(419);
     }
 }

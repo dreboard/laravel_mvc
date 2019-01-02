@@ -12,6 +12,12 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class ProjectTest extends TestCase
 {
+    private $user;
+
+    public function __construct()
+    {
+        $this->user = User::find(1);
+    }
     //use WithoutMiddleware;
     /**
      * A basic test example.
