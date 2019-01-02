@@ -30,7 +30,7 @@ class TicketService
         $ticket->description = $request->description;
         $ticket->due_date = DateHelper::formatTicketEndDate($request->input('due_date'));
         $ticket->create_date = date('Y-m-d h:i:s');
-        $ticket->project_id = $request->project_id ?? 0;
+        $ticket->project_id = $request->project_id;
         $ticket->created_by = Auth::user()->id;
         $ticket->save();
 

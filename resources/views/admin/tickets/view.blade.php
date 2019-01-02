@@ -40,7 +40,7 @@
         <li class="breadcrumb-item">
             <a href="{{route('home')}}">Home</a>
         </li>
-        <li class="breadcrumb-item"><a href="{{route('ticket_all')}}">All</a></li>
+        <li class="breadcrumb-item"><a href="{{route('project_view', ['id' => $ticket->project->id])}}"> {{$ticket->project->title}}</a></li>
         <li class="breadcrumb-item active">{{$ticket->title}}</li>
     </ol>
     <div class="row">

@@ -43,7 +43,7 @@
                         </thead>
                         <tbody>
 
-                        @foreach($projects as $project)
+                        @foreach($siteInfo->projects as $project)
                             <tr>
                                 <td class="w-75 text-left"><h3><a href="{{route('project_view', ['id' => $project->id])}}"> {{ $project->title }}</a></h3>{{$project->description}}</td>
                                 <td class="unit">{{ Carbon\Carbon::parse($project->create_date)->format('M d Y H:i:s a') }}</td>

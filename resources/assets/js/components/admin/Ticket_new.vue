@@ -83,7 +83,7 @@
                     }).then((response)=>{
                     $('#modalNotesForm').modal('hide');
                     this.getNotes();
-                    showMessage('Note Added');
+                    this.showMessage('Note Added');
                 }).catch((error)=>{
                     if (ENVIRONMENT === "local") {
                         console.log(error);
@@ -97,14 +97,20 @@
                             note_id: id
                         }).then((response)=>{
                         this.getNotes();
-                        showMessage('Note Deleted');
+                        this.showMessage('Note Deleted');
                     }).catch((error)=>{
-                        showMessage("Sorry, there was a problem!");
+                        this.showMessage("Sorry, there was a problem!");
                         if (ENVIRONMENT === "local") {
                             console.log(error);
                         }
                     });
                 }
+            },
+            showMessage(msg){
+                $(".edited").text(msg).show();
+                setTimeout(function(){
+                    $(".edited").text('');
+                }, 3000);
             }
 
         },

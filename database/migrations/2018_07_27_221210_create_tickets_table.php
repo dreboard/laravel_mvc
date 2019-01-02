@@ -27,6 +27,7 @@ class CreateTicketsTable extends Migration
             $table->enum('priority', ['low','medium','high','urgent']);
             $table->integer('open_edit')->default(1);
             $table->timestamps();
+            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
         });
     }
 

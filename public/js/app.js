@@ -52494,7 +52494,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).then(function (response) {
                 $('#modalNotesForm').modal('hide');
                 _this2.getNotes();
-                showMessage('Note Added');
+                _this2.showMessage('Note Added');
             }).catch(function (error) {
                 if (ENVIRONMENT === "local") {
                     console.log(error);
@@ -52509,14 +52509,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     note_id: id
                 }).then(function (response) {
                     _this3.getNotes();
-                    showMessage('Note Deleted');
+                    _this3.showMessage('Note Deleted');
                 }).catch(function (error) {
-                    showMessage("Sorry, there was a problem!");
+                    _this3.showMessage("Sorry, there was a problem!");
                     if (ENVIRONMENT === "local") {
                         console.log(error);
                     }
                 });
             }
+        },
+        showMessage: function showMessage(msg) {
+            $(".edited").text(msg).show();
+            setTimeout(function () {
+                $(".edited").text('');
+            }, 3000);
         }
     },
     created: function created() {

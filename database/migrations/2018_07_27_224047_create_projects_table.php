@@ -19,11 +19,12 @@ class CreateProjectsTable extends Migration
             $table->text('description');
             $table->date('create_date');
             $table->date('due_date');
-            $table->integer('cycle_id');
+            $table->integer('user_id');
             $table->integer('site_id');
             $table->integer('active')->default(0);
             $table->integer('created_by');
             $table->timestamps();
+            $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade');
         });
     }
 
