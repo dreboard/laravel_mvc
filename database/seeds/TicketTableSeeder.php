@@ -1,9 +1,9 @@
 <?php
 
+use App\Ticket;
 use Illuminate\Database\Seeder;
-use App\Site;
 
-class SiteSeeder extends Seeder
+class TicketTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +12,6 @@ class SiteSeeder extends Seeder
      */
     public function run()
     {
-
+        factory(Ticket::class, 15)->make();
     }
 }

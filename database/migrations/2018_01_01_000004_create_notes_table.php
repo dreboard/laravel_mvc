@@ -14,13 +14,14 @@ class CreateNotesTable extends Migration
     public function up()
     {
         Schema::create('notes', function (Blueprint $table) {
-            $table->increments('id');
+            $table->engine = 'InnoDB';
+            $table->increments('id')->unsigned();
             $table->dateTime('note_date')->default(date('Y-m-d H:i:s'));
             $table->text('note');
-            $table->integer('ticket_id')->default(0);
-            $table->integer('project_id')->default(0);
-            $table->integer('site_id')->default(0);
-            $table->integer('created_by')->default(1);
+            $table->integer('ticket_id')->unsigned()->default(0);
+            $table->integer('project_id')->unsigned()->default(0);
+            $table->integer('site_id')->unsigned()->default(0);
+            $table->integer('created_by')->unsigned()->default(1);
             $table->timestamps();
         });
     }

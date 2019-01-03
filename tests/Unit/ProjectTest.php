@@ -26,11 +26,9 @@ class ProjectTest extends TestCase
      */
     public function testGetProject()
     {
-        $user = new User(array('name' => 'John'));
-        $this->be($user);
-
+        $user = User::find(1);
         $projects = Project::Find(1);
-        $response = $this->get(route('project_view', ['id' => $projects->id]));
+        $response = $this->actingAs($user, 'web')->get(route('project_view', ['id' => $projects->id]));
         $response->assertStatus(200);
     }
 
