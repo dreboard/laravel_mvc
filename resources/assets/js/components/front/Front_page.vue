@@ -18,6 +18,10 @@
             </thead>
             <tbody>
             <tr>
+                <th scope="row">Nested Routing</th>
+                <td><a href="https://github.com/dreboard/laravel_mvc/blob/master/app/Providers/RouteServiceProvider.php">Link</a> </td>
+            </tr>
+            <tr>
                 <th scope="row">Registering Events & Listeners</th>
                 <td><a href="https://github.com/dreboard/laravel_mvc/blob/master/app/Listeners/LogNewSiteListner.php">Link</a> </td>
             </tr>
@@ -56,6 +60,14 @@
             <tr>
                 <th scope="row">Mailables</th>
                 <td><a href="https://github.com/dreboard/laravel_mvc/tree/master/app/Mail">Link</a> </td>
+            </tr>
+            <tr>
+                <th scope="row">Seeders</th>
+                <td><a href="https://github.com/dreboard/laravel_mvc/tree/master/database/seedsl">Link</a> </td>
+            </tr>
+            <tr>
+                <th scope="row">Factories</th>
+                <td><a href="https://github.com/dreboard/laravel_mvc/tree/master/database/factories">Link</a> </td>
             </tr>
             </tbody>
         </table>

@@ -21,7 +21,7 @@
                     <div class="col-lg-6">
                         <ul class="list-unstyled mb-0">
                             <li>
-                                <a href="https://github.com/dreboard/laravel_mvc/tree/master/app">Database</a>
+                                <a href="https://github.com/dreboard/laravel_mvc/tree/master/database/migrations">Database</a>
                             </li>
                             <li>
                                 <a href="https://github.com/dreboard/laravel_mvc/tree/master/app/Http/Middleware">Middleware</a>

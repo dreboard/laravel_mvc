@@ -1,6 +1,6 @@
 <?php
 /**
- * @class        SiteController
+ * @class       SiteController
  * @package     App\Http\Controllers
  * @since       v0.1.0
  * @author      Andre Board <dre.board@gmail.com>
@@ -44,6 +44,7 @@ class SiteController extends Controller
     }
 
     /**
+     * New site form view
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
@@ -53,7 +54,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Create a new cycle.
+     * Create a new Site.
      * This method uses Manually Created Validators
      * @see https://laravel.com/docs/5.6/validation#manually-creating-validators
      *
@@ -85,36 +86,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Update cycle
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function updateCycle(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'title' => 'required|max:191',
-        ]);
-
-        if ($validator->fails()){
-            return redirect('allCycle')
-                ->withErrors($validator)
-                ->withInput();
-        }
-        Cycle::where('id', $request->input('id'))
-            ->update([
-                    'title' => $request->input('title'),
-                    'start_date' => $request->input('start_date'),
-                    'end_date' => $request->input('end_date'),
-                    'git_tag' => $request->input('git_tag'),
-                ]
-
-            );
-
-        $cycleInfo = Cycle::where('id', '=', $request->input('id'))->first();
-        return view("admin.sites.view", ["cycleInfo" => $cycleInfo]);
-    }
-
-    /**
-     * Get all cycles
+     * Get all Sites
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function all()
@@ -125,7 +97,9 @@ class SiteController extends Controller
     }
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @codeCoverageIgnore
+     * @deprecated v2.0.0
+     * @todo remove as of version 2.0.0
      */
     public function projects(int $id)
     {
@@ -139,8 +113,9 @@ class SiteController extends Controller
 
 
     /**
-     * @param int $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @codeCoverageIgnore
+     * @deprecated v2.0.0
+     * @todo remove as of version 2.0.0
      */
     public function calendar(int $id)
     {
@@ -149,6 +124,7 @@ class SiteController extends Controller
     }
 
     /**
+     * Get requested site by ID
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */

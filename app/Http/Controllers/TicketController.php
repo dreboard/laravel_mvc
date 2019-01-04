@@ -40,6 +40,7 @@ class TicketController extends Controller
 
 
     /**
+     * @codeCoverageIgnore
      * CycleController constructor.
      * @param ProjectService $projectService
      * @param TicketService $ticketService

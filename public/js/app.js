@@ -51837,6 +51837,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
@@ -51886,6 +51898,23 @@ var staticRenderFns = [
         ]),
         _vm._v(" "),
         _c("tbody", [
+          _c("tr", [
+            _c("th", { attrs: { scope: "row" } }, [_vm._v("Nested Routing")]),
+            _vm._v(" "),
+            _c("td", [
+              _c(
+                "a",
+                {
+                  attrs: {
+                    href:
+                      "https://github.com/dreboard/laravel_mvc/blob/master/app/Providers/RouteServiceProvider.php"
+                  }
+                },
+                [_vm._v("Link")]
+              )
+            ])
+          ]),
+          _vm._v(" "),
           _c("tr", [
             _c("th", { attrs: { scope: "row" } }, [
               _vm._v("Registering Events & Listeners")
@@ -52061,6 +52090,40 @@ var staticRenderFns = [
                   attrs: {
                     href:
                       "https://github.com/dreboard/laravel_mvc/tree/master/app/Mail"
+                  }
+                },
+                [_vm._v("Link")]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("th", { attrs: { scope: "row" } }, [_vm._v("Seeders")]),
+            _vm._v(" "),
+            _c("td", [
+              _c(
+                "a",
+                {
+                  attrs: {
+                    href:
+                      "https://github.com/dreboard/laravel_mvc/tree/master/database/seedsl"
+                  }
+                },
+                [_vm._v("Link")]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("th", { attrs: { scope: "row" } }, [_vm._v("Factories")]),
+            _vm._v(" "),
+            _c("td", [
+              _c(
+                "a",
+                {
+                  attrs: {
+                    href:
+                      "https://github.com/dreboard/laravel_mvc/tree/master/database/factories"
                   }
                 },
                 [_vm._v("Link")]
@@ -52286,7 +52349,7 @@ var staticRenderFns = [
                     {
                       attrs: {
                         href:
-                          "https://github.com/dreboard/laravel_mvc/tree/master/app"
+                          "https://github.com/dreboard/laravel_mvc/tree/master/database/migrations"
                       }
                     },
                     [_vm._v("Database")]
