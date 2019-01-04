@@ -1,7 +1,5 @@
 <?php
 /**
- * @class       SiteController
- * @package     App\Http\Controllers
  * @since       v0.1.0
  * @author      Andre Board <dre.board@gmail.com>
  * @version     v1.0
@@ -17,9 +15,11 @@ use App\Http\Requests\CycleSaveRequest;
 use App\Http\Traits\MessageTrait;
 use App\Services\SiteService;
 use App\Site;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 /**
@@ -33,6 +33,7 @@ class SiteController extends Controller
      * @var SiteService
      */
     protected $siteService;
+    private $user;
 
     /**
      * CycleController constructor.
@@ -41,6 +42,7 @@ class SiteController extends Controller
     public function __construct(SiteService $siteService)
     {
         $this->siteService = $siteService;
+        $this->user = Auth::user();
     }
 
     /**
@@ -49,8 +51,7 @@ class SiteController extends Controller
      */
     public function create()
     {
-        $id = Auth::user( )->id;
-        return view('admin.sites.new', ['created_by' => $id]);
+        return view('admin.sites.new');
     }
 
     /**
@@ -130,9 +131,21 @@ class SiteController extends Controller
      */
     public function show($id)
     {
-        $siteInfo = Site::find($id);
-        $projects = $siteInfo->projects;
-        return view("admin.sites.view", ["siteInfo" => $siteInfo, 'projects' => $projects]);
+        try {
+            $site = Site::findOrFail($id);
+            if(Auth::user()->can('view', $site)){
+                $projects = $site->projects;
+                return view("admin.sites.view", ["siteInfo" => $site, 'projects' => $projects]);
+            }
+        } catch (ModelNotFoundException $exception) {
+            if (getenv('APP_ENV') === 'local') {
+                $msg = $exception->getMessage();
+            } else {
+                $msg = 'Site Not Found';
+                Log::channel('site')->error($exception->getMessage());
+            }
+            return back()->withErrors(['errors' => [$msg]]);
+        }
     }
 
 }

@@ -34,6 +34,7 @@ class SiteService
      * Process New Site
      * @param Request $request
      * @return mixed
+     * @throws \Exception
      */
     public function processNewSite(Request $request)
     {
@@ -45,14 +46,13 @@ class SiteService
         $site->submitted = $request->submitted;
         $site->git_url = $request->url;
         $site->created_by = Auth::user()->id;
-        $site->save();
+
+        if(!$site->save()){
+            throw new \Exception('Site not saved');
+        }
 
         event(new NewSiteEvent($site));
-
-        $insertedId = $site->id;
-        $siteInfo = Site::where('id', '=', $insertedId)->first();
-
-        return $siteInfo;
+        return $site;
     }
 
     /**

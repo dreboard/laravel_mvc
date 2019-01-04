@@ -50,7 +50,7 @@ return [
         ],
         'site' => [
             'driver' => 'single',
-            'path' => storage_path('logs/projects/log.log'),
+            'path' => storage_path('logs/projects/site.log'),
             'level' => 'info',
         ],
         'single' => [

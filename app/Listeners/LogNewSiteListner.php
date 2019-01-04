@@ -14,6 +14,7 @@ use App\Events\NewSiteEvent;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class LogNewSiteListner
 {
@@ -35,6 +36,9 @@ class LogNewSiteListner
      */
     public function handle(NewSiteEvent $event)
     {
-        \Log::channel('site')->info('A new site was created on'.date('Y-m-d h:i:s').' by '.Auth::user( )->email);
+        if (getenv('APP_ENV') === 'production') {
+
+        }
+        Log::channel('site')->info('A new site was created on' . date('Y-m-d h:i:s') . ' by ' . Auth::user()->email);
     }
 }

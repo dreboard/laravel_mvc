@@ -75,5 +75,11 @@ class UserTest extends TestCase
             ]);
     }
 
+    public function test_it_validates_login() {
 
+        $this->visit('/login')
+            ->press('Login')
+            ->see('The password field is required')
+            ->see('The email field is required');
+    }
 }
