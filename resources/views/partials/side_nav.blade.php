@@ -66,9 +66,16 @@
                     <li>
                         <a href="{{route('user_profile')}}">Profile</a>
                     </li>
+                    @if( Session::has('admin_user') )
+                        <li>
+                            <a href="{{route('admin_login')}}">Admin</a>
+                        </li>
+                    @endif
+                    @if(Auth::user()->isAdmin == 1)
                     <li>
-                        <a href="{{route('site_all')}}">All</a>
+                        <a href="{{route('user_all')}}">Users</a>
                     </li>
+                    @endif
                 </ul>
             </li>
 

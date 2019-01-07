@@ -79,7 +79,7 @@ class SiteController extends Controller
 
         }catch (\Throwable $e){
             if(getenv('APP_ENV') === 'production'){
-                \Log::error($e->getMessage());
+                Log::error($e->getMessage());
                 return back()->withErrors(['field_name' => ['Your data could not be saved.']]);
             }
             return back()->withErrors(['exception' => [$e->getMessage()]]);
@@ -92,9 +92,9 @@ class SiteController extends Controller
      */
     public function all()
     {
-        $allSites = Site::all();
+        $sites = Site::all();
         $count = Site::count();
-        return view("admin.sites.all", ["allSites" => $allSites, 'count' => $count]);
+        return view("admin.sites.all", ["allSites" => $sites, 'count' => $count]);
     }
 
     /**
@@ -137,6 +137,7 @@ class SiteController extends Controller
                 $projects = $site->projects;
                 return view("admin.sites.view", ["siteInfo" => $site, 'projects' => $projects]);
             }
+            return back()->withErrors(['errors' => ['Not Authorized']]);
         } catch (ModelNotFoundException $exception) {
             if (getenv('APP_ENV') === 'local') {
                 $msg = $exception->getMessage();

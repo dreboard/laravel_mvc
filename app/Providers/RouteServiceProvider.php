@@ -46,6 +46,8 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapSiteRoutes();
 
         $this->mapUserRoutes();
+
+        $this->mapAdminRoutes();
     }
 
     /**
@@ -89,5 +91,12 @@ class RouteServiceProvider extends ServiceProvider
         Route::prefix('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/admin/sites.php'));
+    }
+
+    protected function mapAdminRoutes()
+    {
+        Route::prefix('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/admin/admin.php'));
     }
 }
