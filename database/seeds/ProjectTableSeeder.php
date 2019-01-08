@@ -13,12 +13,12 @@ class ProjectTableSeeder extends Seeder
      */
     public function run()
     {
-        //factory(App\Project::class, 5)->make();
+        factory(App\Project::class, 3)->create();
 
-        $projects = factory(Project::class, 3)
+        /*$projects = factory(Project::class, 3)
             ->create()
             ->each(function ($project) {
                 $project->tickets()->save(factory(Ticket::class)->make());
-            });
+            });*/
     }
 }

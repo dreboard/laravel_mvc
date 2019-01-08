@@ -13,7 +13,7 @@
         <li class="breadcrumb-item">
             <a href="{{route('home')}}">Home</a>
         </li>
-        <li class="breadcrumb-item active">{{$siteInfo->title}}</li>
+        <li class="breadcrumb-item active">{{$site->title}}</li>
     </ol>
 
     <div id="invoice">
@@ -24,8 +24,8 @@
                     <div class="row contacts">
                         <div class="col invoice-to">
                             <div class="text-gray-light">Site:</div>
-                            <h2 class="to"><a href="{{route("site_view", ['id' => $siteInfo->id])}}"> {{$siteInfo->title}}</a></h2>
-                            <div class="address">{{$siteInfo->description}}</div>
+                            <h2 class="to"><a href="{{route("site_view", ['id' => $site->id])}}"> {{$site->title}}</a></h2>
+                            <div class="address">{{$site->description}}</div>
                         </div>
                         <div class="col invoice-details">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
@@ -43,7 +43,7 @@
                         </thead>
                         <tbody>
 
-                        @foreach($siteInfo->projects as $project)
+                        @foreach($site->projects as $project)
                             <tr>
                                 <td class="w-75 text-left"><h3><a href="{{route('project_view', ['id' => $project->id])}}"> {{ $project->title }}</a></h3>{{$project->description}}</td>
                                 <td class="unit">{{ Carbon\Carbon::parse($project->create_date)->format('M d Y H:i:s a') }}</td>
@@ -111,7 +111,7 @@
                                         <input name="git_tag" type="text" class="form-control" placeholder="v0.0.0" value="{{old('git_tag')}}" id="git_tag">
                                     </div>
                                 </div>
-                                <input type="hidden" name="site_id" value="{{$siteInfo->id}}">
+                                <input type="hidden" name="site_id" value="{{$site->id}}">
                                 @csrf
                                 <button type="submit" class="btn btn-primary">Create</button>
                             </form>

@@ -126,16 +126,14 @@ class SiteController extends Controller
 
     /**
      * Get requested site by ID
-     * @param $id
+     * @param Site $site
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show($id)
+    public function show(Site $site)
     {
         try {
-            $site = Site::findOrFail($id);
             if(Auth::user()->can('view', $site)){
-                $projects = $site->projects;
-                return view("admin.sites.view", ["siteInfo" => $site, 'projects' => $projects]);
+                return view("admin.sites.view", compact('site'));
             }
             return back()->withErrors(['errors' => ['Not Authorized']]);
         } catch (ModelNotFoundException $exception) {

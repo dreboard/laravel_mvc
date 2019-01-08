@@ -8,9 +8,10 @@ use Illuminate\Database\Migrations\Migration;
 class CreateProjectsTable extends Migration
 {
     /**
-     * Run the migrations.
+     * Run the migrations and seeder.
      *
      * @return void
+     * @throws Exception
      */
     public function up()
     {
@@ -31,8 +32,8 @@ class CreateProjectsTable extends Migration
 
         DB::table('projects')->insert(
             [
-                'title' => "New Site",
-                'description' => "This is a site",
+                'title' => "New Project",
+                'description' => "This is a project",
                 'create_date' => (new DateTime)->format('Y-m-d'),
                 'due_date' => (new DateTime)->modify('+1 month')->format('Y-m-d'),
                 'user_id' => 2,
@@ -41,6 +42,9 @@ class CreateProjectsTable extends Migration
                 'active' => 1
             ]
         );
+
+        $seeder = new ProjectTableSeeder();
+        $seeder->run();
     }
 
     /**

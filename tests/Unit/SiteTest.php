@@ -15,15 +15,22 @@ use App\Site;
  * Class SiteTest
  * @package Tests\Unit
  * @see https://www.5balloons.info/config-laravel-run-phpunit-test-sqlite-database/
+ * @see https://stackoverflow.com/questions/34454081/undefined-variable-errors-in-laravel
  */
 class SiteTest extends TestCase
 {
-    use WithoutMiddleware;
+    //use WithoutMiddleware;
 
     protected $table = 'sites';
 
     private $user;
 
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->user = factory(User::class)->make(['id' => 2]);
+    }
 
     /**
      * Test for database table
@@ -55,10 +62,24 @@ class SiteTest extends TestCase
     {
         $this->withExceptionHandling();
         $user = User::find(2);
-        $response = $this->actingAs($user, 'web')->json('GET', route('site_view', ['id' => 1]));
+        $response = $this->actingAs($this->user, 'web')->json('GET', route('site_view', ['id' => 1]));
         $response->assertSessionHasNoErrors();
+        $response->assertSee('New Site');
     }
+    /**
+     * Assert that the user policy is enforced.
+     *
+     */
+    public function testUserSeeSite()
+    {
+        $this->withExceptionHandling();
+        $user = User::find(2);
+        $site = Site::find(1);
 
+        $response = $this->actingAs($this->user, 'web')->json('GET', route('site_view', ['id' => 1]));
+        $response->assertSee($site->title);
+
+    }
     /**
      * Assert that the user policy is enforced.
      *
@@ -98,15 +119,17 @@ class SiteTest extends TestCase
      *
      * Authorized user can save a site
      * Database testing for factory post data
-     * View testing for correct view loaded
+     * View testing for no errors
      *
      */
     public function testCanCreateSite()
     {
+        $this->withoutMiddleware();
         $this->withExceptionHandling();
         $user = User::find(1);
         $site = factory(\App\Site::class)->make();
         $response = $this->actingAs($user, 'web')->json('POST', route('site_save'),$site->toArray());
+        $response->assertSessionMissing('errors');
         $this->assertDatabaseHas($this->table, ['title' => $site->title]);
     }
 
@@ -119,11 +142,12 @@ class SiteTest extends TestCase
      */
     public function testCanCreateSiteException()
     {
+        $this->withoutMiddleware();
         $this->withExceptionHandling();
         $user = User::find(1);
-        $site = factory(\App\Site::class)->make()->toArray();
+        $site = factory(\App\Site::class)->raw(['field' => 'value']);
         $response = $this->actingAs($user, 'web')->json('POST', route('site_save'),$site);
-        $this->assertDatabaseHas($this->table, ['title' => $site->title]);
+        $this->expectException(\Exception::class);
     }
 
     /**
@@ -135,10 +159,16 @@ class SiteTest extends TestCase
      */
     public function testCanCreateSiteFail()
     {
+        $this->withExceptionHandling();
+        $this->withoutMiddleware();
         $user = User::find(1);
         $site = factory(\App\Site::class)->make(['title' => '']);
         $response = $this->actingAs($user, 'web')->json('POST', route('site_save'),$site->toArray());
-        $response->assertSessionHasErrors(['title']);
+        $response->assertStatus(302);
+        //$response->assertRedirect(route('site_new'));
+        $response->assertSessionHasErrors([
+            'title' => 'The title field is required.'
+        ]);
     }
     /**
      *
@@ -147,10 +177,11 @@ class SiteTest extends TestCase
      */
     public function testNoUserCanCreateSite()
     {
+        $this->withMiddleware();
         $data = factory(\App\Site::class)->make();
         $response = $this->json('POST', route('site_save'),$data->toArray());
         $this->assertDatabaseMissing($this->table, $data->toArray());
-        $response->assertStatus(302);
+        //$response->assertStatus(302);
     }
 
 
