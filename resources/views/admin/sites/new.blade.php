@@ -14,31 +14,30 @@
     <div class="row">
         <div class="col-9">
             <h2>Create A New Site</h2>
-            <p>This is an example of a blank page that you can use as a starting point for creating new ones.</p>
-
-            @if($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach($errors->all() as $error)
-                            <li>{{$error}}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+            <p>Starting point for creating new sites.</p>
 
             <form id="newSiteForm" method="post" action="{{route('site_save')}}">
                 @csrf
                 <div class="form-group row">
-                    <label for="title" class="col-sm-2 col-form-label">Title</label>
+                    <label for="siteTitle" class="col-sm-2 col-form-label @if ($errors->has('title')) text-danger @endif">Title</label>
                     <div class="col-sm-10">
-                        <input name="title" type="text" class="form-control" placeholder="title" value="{{old('title')}}" id="cycle_title">
+                        <input
+                                name="title"
+                                type="text"
+                                class="form-control @if ($errors->has('title')) is-invalid @endif"
+                                placeholder="title"
+                                value="{{old('title')}}"
+                                id="siteTitle"
+                        >
                     </div>
+
                 </div>
                 <div class="form-group row">
-                    <label for="description" class="col-sm-2 col-form-label">Description</label>
+                    <label for="siteDescription" class="col-sm-2 col-form-label @if ($errors->has('description')) text-danger @endif">Description</label>
                     <div class="col-sm-10">
-                        <textarea class="form-control" name="description" rows="3"></textarea>
+                        <textarea id="siteDescription" class="form-control @if ($errors->has('description')) is-invalid @endif" name="description" rows="3"></textarea>
                     </div>
+
                 </div>
 
                 <div class="form-group row">

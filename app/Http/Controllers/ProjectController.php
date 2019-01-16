@@ -80,14 +80,19 @@ class ProjectController extends Controller
     public function save(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'title' => 'required| max:100',
-            'description' => 'required'
-        ]);
+            'title' => 'required|max:191',
+            'description' => 'required',
 
-        if($validator->fails()){
-            return redirect('project_new')
-                ->withErrors($validator)
-                ->withInput();
+        ]);
+        if ($validator->fails()) {
+            if($request->ajax())
+            {
+                return response()->json(array(
+                    'success' => false,
+                    'message' => 'There are incorect values in the form!',
+                    'errors' => $validator->getMessageBag()->toArray()
+                ), 200);
+            }
         }
 
         try{

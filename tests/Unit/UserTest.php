@@ -82,4 +82,22 @@ class UserTest extends TestCase
             ->see('The password field is required')
             ->see('The email field is required');
     }
+
+    /** @test */
+    public function authors_name_must_be_unique_to_store_an_author()
+    {
+        $author = factory(User::class)->create([
+            'name' => 'Robert',
+            'email' => 'Jordan'
+        ]);
+
+        $author = factory(User::class)->make([
+            'name' => 'Robert',
+            'email' => 'Jordan'
+        ]);
+
+        $this->post('/authors', $author->toArray())->assertSessionHasErrors(['first_name' => 'Author name not unique']);
+
+        $this->assertEquals(1, User::count());
+    }
 }

@@ -26,6 +26,9 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'note' => 'required'
+        ]);
         try{
             $note = new Notes();
             $ticket = Ticket::find($request->ticket_id);

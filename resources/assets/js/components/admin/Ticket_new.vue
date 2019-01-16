@@ -28,6 +28,9 @@
                         </button>
                     </div>
                     <div class="modal-body">
+                        <div v-if="noteErrors.note" class="alert alert-danger" role="alert">
+                            {{ noteErrors.note[0] }}
+                        </div>
                         <form>
                             <div class="form-group">
                                 <textarea class="form-control" v-model="note_form.note" name="note" id="note" rows="3"></textarea>
@@ -57,6 +60,7 @@
         data() {
             return {
                 notes: [],
+                noteErrors: [],
                 note_form: {
                     note: '',
                     id: ''
@@ -70,6 +74,7 @@
                         this.notes = response.data.notes;
                         //console.log(this.notes);
                     }).catch((error)=>{
+
                     if (ENVIRONMENT === "local") {
                         console.log(error);
                     }
@@ -85,6 +90,9 @@
                     this.getNotes();
                     this.showMessage('Note Added');
                 }).catch((error)=>{
+
+                    this.noteErrors = error.response.data.errors;
+                    console.log(noteErrors);
                     if (ENVIRONMENT === "local") {
                         console.log(error);
                     }

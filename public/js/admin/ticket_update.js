@@ -174,7 +174,7 @@ $(document).ready(function () {
         })
 
             .done(function (json) {
-                showMessage(son.allowed)
+                showMessage(json.allowed)
                 if (json.allowed == 'Not assigned this task') {
                     $(".edited").addClass('text-danger');
 

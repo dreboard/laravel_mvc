@@ -30,13 +30,13 @@
                             <div class="form-group row">
                                 <label for="title" class="col-sm-2 col-form-label">Title</label>
                                 <div class="col-sm-10">
-                                    <input name="title" type="text" class="form-control" v-model="project.title" value="">
+                                    <input id="title" name="title" type="text" class="form-control" v-model="project.title" value="">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="description" class="col-sm-2 col-form-label">Description</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="description" rows="3" v-model="project.description">project.description</textarea>
+                                    <textarea class="form-control" id="description"  name="description" rows="3" v-model="project.description">project.description</textarea>
                                 </div>
                             </div>
 
@@ -45,7 +45,7 @@
                                 <div class="col-sm-10">
                                     <div class="form-group row">
                                         <div class="col">
-                                            <input type="text" class="form-control datepicker" name="create_date" v-model="project.create_date">
+                                            <input type="text" class="form-control datepicker" id="create_date" name="create_date" v-model="project.create_date">
                                         </div>
                                         <div class="col">
                                             <input type="text" class="form-control datepicker" name="due_date" v-model="project.due_date">
@@ -57,7 +57,7 @@
                             <div class="form-group row">
                                 <label for="git_tag" class="col-sm-2 col-form-label">Git Tag</label>
                                 <div class="col-sm-10">
-                                    <input name="git_tag" type="text" class="form-control" placeholder="v0.0.0" v-bind="project.git_tag">
+                                    <input id="git_tag" name="git_tag" type="text" class="form-control" placeholder="v0.0.0" v-bind="project.git_tag">
                                 </div>
                             </div>
 

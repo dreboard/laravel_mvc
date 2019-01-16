@@ -11,6 +11,18 @@ class SitePolicy
     use HandlesAuthorization;
 
     /**
+     * @param $user
+     * @param $ability
+     * @return bool
+     */
+    public function before($user, $ability): ?bool
+    {
+        if ($user->isAdmin == 1) {
+            return true;
+        }
+    }
+
+    /**
      * Determine whether the user can view the site.
      *
      * @param  \App\User  $user

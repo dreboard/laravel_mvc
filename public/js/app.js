@@ -14048,6 +14048,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
  */
 
 __webpack_require__(16);
+__webpack_require__(93);
 
 window.Vue = __webpack_require__(39);
 window.axios = __webpack_require__(6);
@@ -52522,12 +52523,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['resource', 'ticket_id', 'note_save_url', 'note_delete_url'],
     data: function data() {
         return {
             notes: [],
+            noteErrors: [],
             note_form: {
                 note: '',
                 id: ''
@@ -52543,6 +52548,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.notes = response.data.notes;
                 //console.log(this.notes);
             }).catch(function (error) {
+
                 if (ENVIRONMENT === "local") {
                     console.log(error);
                 }
@@ -52559,6 +52565,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this2.getNotes();
                 _this2.showMessage('Note Added');
             }).catch(function (error) {
+
+                _this2.noteErrors = error.response.data.errors;
+                console.log(noteErrors);
                 if (ENVIRONMENT === "local") {
                     console.log(error);
                 }
@@ -52670,6 +52679,23 @@ var render = function() {
               _vm._m(1),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
+                _vm.noteErrors.note
+                  ? _c(
+                      "div",
+                      {
+                        staticClass: "alert alert-danger",
+                        attrs: { role: "alert" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(_vm.noteErrors.note[0]) +
+                            "\n                    "
+                        )
+                      ]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
                 _c("form", [
                   _c("div", { staticClass: "form-group" }, [
                     _c("textarea", {
@@ -53049,7 +53075,12 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
-                          attrs: { name: "title", type: "text", value: "" },
+                          attrs: {
+                            id: "title",
+                            name: "title",
+                            type: "text",
+                            value: ""
+                          },
                           domProps: { value: _vm.project.title },
                           on: {
                             input: function($event) {
@@ -53090,7 +53121,11 @@ var render = function() {
                               }
                             ],
                             staticClass: "form-control",
-                            attrs: { name: "description", rows: "3" },
+                            attrs: {
+                              id: "description",
+                              name: "description",
+                              rows: "3"
+                            },
                             domProps: { value: _vm.project.description },
                             on: {
                               input: function($event) {
@@ -53133,7 +53168,11 @@ var render = function() {
                                 }
                               ],
                               staticClass: "form-control datepicker",
-                              attrs: { type: "text", name: "create_date" },
+                              attrs: {
+                                type: "text",
+                                id: "create_date",
+                                name: "create_date"
+                              },
                               domProps: { value: _vm.project.create_date },
                               on: {
                                 input: function($event) {
@@ -53198,6 +53237,7 @@ var render = function() {
                             {
                               staticClass: "form-control",
                               attrs: {
+                                id: "git_tag",
                                 name: "git_tag",
                                 type: "text",
                                 placeholder: "v0.0.0"
@@ -53558,6 +53598,41 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 71 */,
+/* 72 */,
+/* 73 */,
+/* 74 */,
+/* 75 */,
+/* 76 */,
+/* 77 */,
+/* 78 */,
+/* 79 */,
+/* 80 */,
+/* 81 */,
+/* 82 */,
+/* 83 */,
+/* 84 */,
+/* 85 */,
+/* 86 */,
+/* 87 */,
+/* 88 */,
+/* 89 */,
+/* 90 */,
+/* 91 */,
+/* 92 */,
+/* 93 */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+
+    //Remove error classes from forms
+    $('textarea, input').click(function () {
+        $(this).removeClass('is-invalid');
+        $("label[for='" + $(this).attr("id") + "']").removeClass('text-danger');
+    });
+});
 
 /***/ })
 /******/ ]);

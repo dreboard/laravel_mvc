@@ -20,7 +20,7 @@ class CreateTicketsTable extends Migration
             $table->text('description');
             $table->date('create_date')->default(date("Y-m-d"));
             $table->date('due_date')->default((new DateTime)->modify('+1 month')->format('Y-m-d'));
-            $table->integer('completed');
+            $table->integer('completed')->default(0);
             $table->integer('project_id')->unsigned();
             $table->integer('user_id')->default(2);
             $table->integer('created_by')->default(2);

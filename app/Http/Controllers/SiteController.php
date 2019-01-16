@@ -64,18 +64,24 @@ class SiteController extends Controller
      */
     public function save(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'title' => 'required|max:191',
+            'description' => 'required',
+        ]);
+
+        /*$validator = Validator::make($request->all(), [
+            'title' => 'required|max:191',
+            'description' => 'required',
         ]);
 
         if ($validator->fails()){
             return redirect('site_new')
                 ->withErrors($validator)
                 ->withInput();
-        }
+        }*/
         try{
-            $siteInfo = $this->siteService->processNewSite($request);
-            return view("admin.sites.view", ["siteInfo" => $siteInfo]);
+            $site = $this->siteService->processNewSite($request);
+            return view("admin.sites.view", ["site" => $site]);
 
         }catch (\Throwable $e){
             if(getenv('APP_ENV') === 'production'){

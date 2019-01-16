@@ -6,6 +6,7 @@
  */
 
 require('./bootstrap');
+require('./admin');
 
 window.Vue = require('vue');
 window.axios = require('axios');

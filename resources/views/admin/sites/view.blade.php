@@ -6,6 +6,87 @@
 @push('scripts')
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="{{asset('js/datepickers.js')}}"></script>
+    <script>
+        $( document ).ready(function() {
+            var newTicketUrl = '{{route('project_save')}}';
+
+            $('#newProjectFormBtn').click(function (e) {
+                e.preventDefault();
+                $(".print-error-msg").hide().find("ul").html('');
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: '{{route('project_save')}}',
+
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content'),
+                        title: $('input[name=title]').val(),
+                        description: $('#projectDesc').val(),
+                        create_date: $('input[name=create_date]').val(),
+                        due_date: $('input[name=due_date]').val(),
+                        site_id: $('input[name=site_id]').val()
+                    },
+
+                    type: "POST",
+                    dataType: "json",
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8'
+                })
+                    .done(function (result) {
+                        console.log(result.errors);
+                        if (result.errors) {
+                            console.log(result.errors);
+                            $(".print-error-msg").show().find("ul").html('').css('display', 'block');
+                            $.each(result.errors, function (key, value) {
+                                $(".print-error-msg").find("ul").append('<li>' + value + '</li>');
+                            });
+                        }
+                    })
+
+                    .fail(function (xhr, status, errorThrown) {
+                        console.log(xhr, status, errorThrown);
+                    });
+            });
+
+            $('#newProjectFormBtn2').click(function(e){
+                e.preventDefault();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: '{{route('project_save')}}',
+                    method: 'post',
+                    data: {
+                        title: $('#projectTitle').val(),
+                        description: $('#projectDesc').val(),
+                        create_date: $('#projectStartDate').val(),
+                        due_date: $('#projectDueDate').val(),
+                    },
+                    success: function(result){
+                        console.log(result);
+                        if(result.errors)
+                        {
+
+
+                            $('.alert-danger').html('');
+
+                            $.each(result.errors, function(key, value){
+                                $('.alert-danger').show();
+                                $('.alert-danger').append('<li>'+value+'</li>');
+                            });
+                        }
+                        else
+                        {
+                            $('.alert-danger').hide();
+                            $('#open').hide();
+                            $('#myModal').modal('hide');
+                        }
+                    }});
+            });
+        });
+    </script>
 @endpush
 @section('content')
     <!-- Breadcrumbs-->
@@ -76,44 +157,45 @@
                             </button>
                         </div>
                         <div class="modal-body">
+
+                            <div class="alert alert-danger print-error-msg" style="display:none">
+
+                                <ul></ul>
+
+                            </div>
+
                             <form id="newProjectForm" method="POST" action="{{route('project_save')}}">
                                 @csrf
                                 <div class="form-group row">
-                                    <label for="title" class="col-sm-2 col-form-label">Title</label>
+                                    <label for="projectTitle" class="col-sm-2 col-form-label">Title</label>
                                     <div class="col-sm-10">
-                                        <input name="title" type="text" class="form-control" placeholder="title" value="{{old('title')}}" id="cycle_title">
+                                        <input name="title" type="text" class="form-control" placeholder="title" value="{{old('title')}}" id="projectTitle">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="description" class="col-sm-2 col-form-label">Description</label>
+                                    <label for="projectDesc" class="col-sm-2 col-form-label">Description</label>
                                     <div class="col-sm-10">
-                                        <textarea class="form-control" name="description" rows="3"></textarea>
+                                        <textarea class="form-control" name="description" rows="3" id="projectDesc"></textarea>
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="start_date" class="col-sm-2 col-form-label">Dates</label>
+                                    <label for="projectStartDate" class="col-sm-2 col-form-label">Dates</label>
                                     <div class="col-sm-10">
                                         <div class="form-group row">
                                             <div class="col">
-                                                <input type="text" class="form-control datepicker" placeholder="start date" name="start_date" value="{{old('start_date')}}" id="cycle_start_date">
+                                                <input type="text" class="form-control datepicker" placeholder="start date" name="create_date" value="{{old('create_date')}}" id="projectStartDate">
                                             </div>
                                             <div class="col">
-                                                <input type="text" class="form-control datepicker" placeholder="end date" name="end_date" value="{{old('end_date')}}" id="cycle_end_date">
+                                                <input type="text" class="form-control datepicker" placeholder="end date" name="due_date" value="{{old('due_date')}}" id="projectDueDate">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="form-group row">
-                                    <label for="git_tag" class="col-sm-2 col-form-label">Git Tag</label>
-                                    <div class="col-sm-10">
-                                        <input name="git_tag" type="text" class="form-control" placeholder="v0.0.0" value="{{old('git_tag')}}" id="git_tag">
-                                    </div>
-                                </div>
-                                <input type="hidden" name="site_id" value="{{$site->id}}">
+                                <input type="hidden" id="site_id" name="site_id" value="{{$site->id}}">
                                 @csrf
-                                <button type="submit" class="btn btn-primary">Create</button>
+                                <button type="submit" id="newProjectFormBtn" class="btn btn-primary">Create</button>
                             </form>
                         </div>
                         <div class="modal-footer">

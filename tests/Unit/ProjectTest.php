@@ -12,10 +12,12 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class ProjectTest extends TestCase
 {
+    protected $table = 'projects';
     private $user;
 
-    public function __construct()
+    public function setUp()
     {
+        parent::setUp();
         $this->user = User::find(1);
     }
     //use WithoutMiddleware;
@@ -24,7 +26,7 @@ class ProjectTest extends TestCase
      *
      * @return void
      */
-    public function testGetProject()
+    public function test_get_any_project_route()
     {
         $user = User::find(1);
         $projects = Project::Find(1);
@@ -32,7 +34,10 @@ class ProjectTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testCreateProject()
+    /**
+     *
+     */
+    public function test_user_can_create_a_project()
     {
         $this->withoutMiddleware();
 

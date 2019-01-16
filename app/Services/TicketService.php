@@ -25,15 +25,14 @@ class TicketService
      */
     public function processNewTicket(Request $request)
     {
-        $ticket = new Ticket();
-        $ticket->title = $request->title;
-        $ticket->description = $request->description;
-        $ticket->due_date = DateHelper::formatTicketEndDate($request->input('due_date'));
-        $ticket->create_date = date('Y-m-d h:i:s');
-        $ticket->project_id = $request->project_id;
-        $ticket->created_by = Auth::user()->id;
-        $ticket->save();
-
+        $ticket = Ticket::create([
+            'title' => request('title'),
+            'description' => request('description'),
+            'due_date' => DateHelper::formatTicketEndDate(request('due_date')),
+            'create_date' => date('Y-m-d h:i:s'),
+            'project_id' => request('project_id'),
+            'created_by' => Auth::user()->id,
+        ]);
         return $ticket->id;
     }
 }
