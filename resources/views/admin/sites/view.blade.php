@@ -40,6 +40,8 @@
                             $.each(result.errors, function (key, value) {
                                 $(".print-error-msg").find("ul").append('<li>' + value + '</li>');
                             });
+                        }else {
+                            window.location = result.url;
                         }
                     })
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * @class        ProjectController
+ * @class       ProjectController
  * @package     App\Http\Controllers
  * @since       v0.1.0
  * @author      Andre Board <dre.board@gmail.com>
@@ -25,22 +25,17 @@ use Illuminate\Support\Facades\Validator;
 class ProjectController extends Controller
 {
     /**
-     * @var ProjectService
+     * @var object ProjectService
      */
     protected $projectService;
-    /**
-     * @var CycleService
-     */
-    protected $cycleService;
 
     /**
-     * CycleController constructor.
+     * ProjectController constructor.
      * @param ProjectService $projectService
      */
-    public function __construct(ProjectService $projectService, CycleService $cycleService)
+    public function __construct(ProjectService $projectService)
     {
         $this->projectService = $projectService;
-        $this->cycleService = $cycleService;
     }
 
     /**
@@ -97,7 +92,10 @@ class ProjectController extends Controller
 
         try{
             $project_id = $this->projectService->processNewProject($request);
-            return redirect()->route('project_view', ['id' => $project_id]);
+            return response()->json(array(
+                'id' => $project_id,
+                'url' => route('project_view', ['id' => $project_id])
+            ), 200);
 
         }catch (\Throwable $e){
             if(getenv('APP_ENV') === 'production'){
@@ -124,6 +122,10 @@ class ProjectController extends Controller
         return view('admin.projects.view')->with(['project' => $project]);
     }
 
+    /**
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getById(int $id)
     {
         $project = Project::find($id);
