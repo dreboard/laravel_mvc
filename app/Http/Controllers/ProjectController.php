@@ -91,6 +91,7 @@ class ProjectController extends Controller
         }
 
         try{
+
             $project_id = $this->projectService->processNewProject($request);
             return response()->json(array(
                 'id' => $project_id,
